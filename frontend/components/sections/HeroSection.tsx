@@ -3,34 +3,32 @@
 import { useEffect, useRef, useState } from "react";
 import Carousel from "./Carousel";
 
-type Props = {
-  videoUrl?: string;
-  images?: string[];
-};
-
-export default function HeroMedia({ videoUrl, images }: Props) {
+export default function HeroMedia() {
   const [showCarousel, setShowCarousel] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const lastTimeRef = useRef(0);
   const timeoutRef = useRef<number | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const placeholderVideo =
-    videoUrl ||
-    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+  /* --------------------------------------------
+      FILES (video + carousel images)
+  --------------------------------------------- */
+  const videoUrl = "/videos/DemoVideos.mp4";
 
-  const carouselImages =
-    images && images.length > 0
-      ? images
-      : [
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80&auto=format&fit=crop",
-        ];
+  const carouselImages = [
+    "/images/carousel/carousel1.jpg",
+    "/images/carousel/carousel2.jpg",
+    "/images/carousel/carousel3.jpg",
+  ];
 
+  /* --------------------------------------------
+      TRANSITION TO CAROUSEL
+  --------------------------------------------- */
   function transitionToCarousel(animate = true) {
     if (animate) {
       setIsTransitioning(true);
+
       try {
         videoRef.current?.pause();
       } catch {}
@@ -49,6 +47,9 @@ export default function HeroMedia({ videoUrl, images }: Props) {
     }
   }
 
+  /* --------------------------------------------
+      AUTO TRANSITION AFTER 60s
+  --------------------------------------------- */
   useEffect(() => {
     timeoutRef.current = window.setTimeout(
       () => transitionToCarousel(true),
@@ -60,6 +61,9 @@ export default function HeroMedia({ videoUrl, images }: Props) {
     };
   }, []);
 
+  /* --------------------------------------------
+      VIDEO EVENTS
+  --------------------------------------------- */
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
@@ -83,16 +87,20 @@ export default function HeroMedia({ videoUrl, images }: Props) {
     };
   }, []);
 
+  /* --------------------------------------------
+      RENDER
+  --------------------------------------------- */
   return (
-    <section className="w-full px-4 md:px-8 lg:px-20 py-10">
+    <section className="w-full px-4 md:px-8 lg:px-20 py-8">
+
       <div
-        className={`relative mx-auto max-w-7xl h-[540px] ${
+        className={`relative mx-auto max-w-7xl h-[540px] md:h-[600px] ${
           isTransitioning ? "opacity-60" : "opacity-100"
         } transition-opacity duration-500`}
       >
         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl">
 
-          {/* VIDEO */}
+          {/* ===================== VIDEO ===================== */}
           {!showCarousel && (
             <div
               className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
@@ -101,17 +109,25 @@ export default function HeroMedia({ videoUrl, images }: Props) {
             >
               <video
                 ref={videoRef}
-                src={placeholderVideo}
+                src={videoUrl}
                 autoPlay
                 muted
                 playsInline
                 controls={false}
                 className="w-full h-full object-cover"
               />
+
+              {/* ==== BUTTON LEWATI VIDEO ==== */}
+              <button
+                onClick={() => transitionToCarousel(true)}
+                className="absolute bottom-6 right-6 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-md text-sm md:text-base hover:bg-black/60 transition"
+              >
+                Lewati Video
+              </button>
             </div>
           )}
 
-          {/* CAROUSEL */}
+          {/* ===================== CAROUSEL ===================== */}
           {showCarousel && (
             <div
               className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${

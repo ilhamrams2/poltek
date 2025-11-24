@@ -20,21 +20,33 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        {/* CDN Remix Icon */}
-        <link
-          href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-          rel="stylesheet"
-        />
-      </head>
+  {/* Remix Icon */}
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  {/* AOS */}
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+
+  {/* Swiper */}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
+
+  {/* Font Awesome */}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  {/* Tabler Icons Webfont (WAJIB untuk ti ti-badge-check) */}
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+  />
+
+  {/* Lucide (kalau tetap ingin pakai data-lucide) */}
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
 
       <body className={inter.className}>
-        {/* 🔥 Global Navbar */}
         <Navbar />
-
-        {/* Halaman dinamis */}
         <main>{children}</main>
-
-        {/* 🔥 Global Footer */}
         <Footer />
       </body>
     </html>

@@ -48,14 +48,14 @@ export default function Footer() {
         {/* Logo */}
         <div className="relative flex items-center gap-3 md:gap-4 pr-4 md:pr-10 z-20">
           <Image
-            src="/logo-smk.png"
+            src="/images/logo_politeknik.png"
             alt="Logo Sekolah"
             width={60}
             height={60}
             className="w-10 h-10 md:w-16 md:h-16 rounded-full border-4 border-white shadow-lg"
           />
           <Image
-            src="/jaringan.png"
+            src="/patern/jaringan.png"
             alt="Icon Network"
             width={110}
             height={110}
@@ -90,7 +90,7 @@ export default function Footer() {
           {/* Logo + Caption */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 text-center lg:text-left">
             <Image
-              src="/logo-smk.png"
+              src="/images/logo_politeknik.png"
               width={90}
               height={90}
               alt="Logo"
@@ -111,17 +111,35 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div className="flex items-center gap-4">
-            {["facebook-fill", "instagram-line", "youtube-fill"].map((icon) => (
-              <a
-                key={icon}
-                href="#"
-                className="bg-[#6924FF] hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-md group"
-              >
-                <i className={`ri-${icon} text-white group-hover:text-[#6924FF] text-lg`} />
-              </a>
-            ))}
-          </div>
+<div className="flex items-center gap-4">
+  {/* Facebook */}
+  <a
+    href="https://www.facebook.com/p/Politeknik-Prestasi-Prima/"
+    target="_blank"
+    className="bg-[#6924FF] hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-md group"
+  >
+    <i className="ri-facebook-fill text-white group-hover:text-[#6924FF] text-lg" />
+  </a>
+
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/poltekpresma/"
+    target="_blank"
+    className="bg-[#6924FF] hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-md group"
+  >
+    <i className="ri-instagram-line text-white group-hover:text-[#6924FF] text-lg" />
+  </a>
+
+  {/* YouTube */}
+  <a
+    href="https://www.youtube.com/@poltekpresma"
+    target="_blank"
+    className="bg-[#6924FF] hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-md group"
+  >
+    <i className="ri-youtube-fill text-white group-hover:text-[#6924FF] text-lg" />
+  </a>
+</div>
+
         </div>
 
         {/* ====================== MENU GRID ====================== */}
@@ -233,49 +251,68 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ====================== LOKASI & FORM ====================== */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-12 
+grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
 
-          {/* Lokasi */}
-          <div>
-            <h2 className="text-lg font-semibold text-white mb-4 relative">
-              Lokasi Kami
-              <span className="absolute left-0 -bottom-1 w-10 h-0.5 bg-linear-to-r from-orange-500 to-orange-300 rounded-full" />
-            </h2>
+  {/* =================== LOKASI KAMI =================== */}
+  <div className="flex flex-col h-full">
+    <h2 className="text-lg font-semibold text-white mb-4 relative">
+      Lokasi Kami
+      <span className="absolute left-0 -bottom-1 w-10 h-[2px] bg-gradient-to-r from-orange-500 to-orange-300 rounded-full"></span>
+    </h2>
 
-            <div className="rounded-2xl overflow-hidden shadow-lg border border-white/10 h-[260px] md:h-[300px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1..."
-                width="100%"
-                height="100%"
-                className="border-0"
-                loading="lazy"
-              />
-            </div>
-          </div>
+    {/* Tinggi dibikin fleksibel agar match kolom kanan */}
+    <div className="rounded-2xl overflow-hidden shadow-lg border border-white/10 flex-1">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4748268020353!2d106.8972187!3d-6.332476499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed2681bc7c67%3A0x777152b1d3f74a62!2sSMK%20Prestasi%20Prima!5e0!3m2!1sid!2sid!4v1756647265168!5m2!1sid!2sid"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
 
-          {/* Form */}
-          <div>
-            <h2 className="text-lg font-semibold text-white mb-4 relative">
-              Hubungi Kami
-              <span className="absolute left-0 -bottom-1 w-10 h-0.5 bg-linear-to-r from-orange-500 to-orange-300 rounded-full" />
-            </h2>
+  {/* =================== HUBUNGI KAMI =================== */}
+  <div className="flex flex-col h-full">
+    <div>
+      <h2 className="text-lg font-semibold text-white mb-4 relative">
+        Hubungi Kami
+        <span className="absolute left-0 -bottom-1 w-10 h-[2px] bg-gradient-to-r from-orange-500 to-orange-300 rounded-full"></span>
+      </h2>
 
-            {/* FIX: Form sekarang ditutup */}
-            <form className="space-y-3">
-              <input type="text" placeholder="Nama Anda" className="input-contact" />
-              <input type="email" placeholder="Email" className="input-contact" />
-              <textarea rows={3} placeholder="Pesan Anda" className="input-contact" />
+      <form className="space-y-3">
+        <input
+          type="text"
+          placeholder="Nama Anda"
+          className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-200 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+        />
 
-              <button
-                type="submit"
-                className="bg-[#6924FF] hover:bg-[#5520CC] w-full py-2 rounded-lg text-sm font-medium text-white transition"
-              >
-                Kirim Pesan
-              </button>
-            </form>
-          </div>
-        </div>
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-200 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+        />
+
+        <textarea
+          rows={3}
+          placeholder="Pesan Anda"
+          className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-200 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+        ></textarea>
+
+        <button
+  type="submit"
+  className="w-full py-2 rounded-lg text-sm font-medium text-white transition 
+  bg-[#6924FF] hover:bg-[#5520CC]"
+>
+  Kirim Pesan
+</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
 
         {/* ====================== COPYRIGHT ====================== */}
         <div className="border-t border-white/20 bg-[#6924FF]/90 py-4 relative z-10">
