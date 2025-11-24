@@ -1,28 +1,44 @@
-import SubNavbar from "./components/SubNavbar";
-import Navbar from "./components/Navbar";
-import HeroMedia from "./components/HeroMedia";
-import AbaoutSection from "./components/AboutSection";
-import PmbSection from "./components/PmbSection";
-import FaktaSection from "./components/FaktaSection";
-import BlogSection from "./components/BlogSection";
+import HeroSection from "@/components/sections/HeroSection";
+import QuickActionSection from "@/components/sections/QuickActionSection";
+import AboutSection from "@/components/sections/AboutSection";
+import VisionMissionSection from "@/components/sections/VisionMissionSection";
+import AcademicProgramsSection from "@/components/sections/AcademicProgramsSection";
+import DirectorMessageSection from "@/components/sections/DirectorMessageSection";
+import VirtualTourSection from "@/components/sections/VirtualTourSection";
+import NewsSection from "@/components/sections/NewsSection";
+import FAQSection from "@/components/sections/FAQSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <SubNavbar />
-      <Navbar />
+    <main className="min-h-screen w-full">
+      
+      {/* 1. Hero / Banner */}
+      <HeroSection />
 
-      <main className="pt-0">
-        <HeroMedia />
+      {/* 2. Quick Action / Menu Singkat */}
+      <QuickActionSection />
 
-        <div className="mt-28">
-          <AbaoutSection />
+      {/* 3. Tentang Kampus */}
+      <AboutSection />
 
-          <PmbSection />
-          <FaktaSection />
-          {/* <BlogSection /> */}
-        </div>
-      </main>
-    </div>
+      {/* 4. Visi & Misi */}
+      <VisionMissionSection />
+
+      {/* 5. Program Akademik */}
+      <AcademicProgramsSection />
+
+      {/* 6. Sambutan Direktur */}
+      <DirectorMessageSection />
+
+      {/* 7. Virtual Tour */}
+      <VirtualTourSection />
+
+      {/* 8. Berita Terbaru */}
+      <NewsSection />
+
+      {/* 9. FAQ */}
+      <FAQSection />
+
+    </main>
   );
 }

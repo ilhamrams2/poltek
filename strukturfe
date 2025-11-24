@@ -1,0 +1,45 @@
+frontend/
+│
+├── app/
+│   ├── (site)/               → folder untuk halaman biasa
+│   │   ├── page.tsx          → halaman utama (Home)
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── blog/
+│   │   │   └── page.tsx
+│   │   ├── facts/
+│   │   │   └── page.tsx
+│   │   └── pmb/
+│   │       └── page.tsx
+│   │
+│   ├── (shared)/layout.tsx   → layout global
+│   ├── globals.css
+│   └── api/                  → API routes (jika ada)
+│
+├── components/
+│   ├── ui/                   → reusable UI (button, card, modal, input)
+│   ├── sections/             → hero section, about, blog, pmb, facts
+│   ├── layout/               → navbar, footer
+│   └── shared/               → komponen kecil reusable
+│
+├── lib/                       → helper function (fetcher, formatter, utils)
+│
+├── hooks/                     → zustand store, custom hooks
+│
+├── public/                    → images, icons
+│
+├── types/                     → TypeScript types
+│
+└── config/                    → config API, constants, metadata
+
+
+frontend/app/page.tsx
+frontend/app/layout.tsx
+frontend/components/sections/HeroSection-FAQSection.tsx totalnya ada 9 sections
+frontend/components/layouts/Navbar dan Footer.tsx
+public/images/sections/(untuk menaruh gambar section)
+
+
+AI, saya ingin melanjutkan pengerjaan website Politeknik saya. 
+Project ini menggunakan Next.js 14, TypeScript, dan Tailwind CSS, 
+dengan struktur folder yang sudah saya buat di app/, components/layouts/, components/sections/, dan public/images/sections/.
