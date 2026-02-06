@@ -1,21 +1,12 @@
 "use client";
 
-import Hero from "@/components/program/Hero";
-import About from "@/components/program/About";
-import Prospects from "@/components/program/Prospects";
-import Tools from "@/components/program/Tools";
-import Tour from "@/components/program/Tour";
-import FAQ from "@/components/program/FAQ";
+import { PROGRAMS_DATA } from "@/data/programs";
+import ProgramDetailTemplate from "@/components/program/ProgramDetailTemplate";
 
-export default function ProgramAdministrasiPage() {
-  return (
-    <main className="min-h-screen bg-white">
-      <Hero program="administrasi" />
-      <About program="administrasi" />
-<Prospects program="administrasi" />
-<Tools program="administrasi" />
-      <Tour program="administrasi" />
-      <FAQ program="administrasi" />
-    </main>
-  );
+export default function ProgramD3AdministrasiPage() {
+  const data = PROGRAMS_DATA["d3_administrasi_perkantoran"];
+  
+  if (!data) return null;
+
+  return <ProgramDetailTemplate data={data} />;
 }
