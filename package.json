@@ -8,6 +8,8 @@
     "lint": "npm --prefix frontend run lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "aos": "^2.3.4",
     "lucide-react": "^0.554.0"
   }
 }

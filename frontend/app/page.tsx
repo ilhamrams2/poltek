@@ -25,6 +25,9 @@ export default function Home() {
       {/* 4. Visi & Misi */}
       <VisionMissionSection />
 
+      {/* 10. Why Choose Us */}
+      <WhyChooseUsSection />
+
       {/* 5. Program Akademik */}
       <AcademicProgramsSection />
 
@@ -40,8 +43,6 @@ export default function Home() {
       {/* 9. FAQ */}
       <FAQSection />
 
-      {/* 10. Why Choose Us */}
-      <WhyChooseUsSection />
 
     </main>
   );

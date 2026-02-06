@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Carousel from "./Carousel";
+import { motion, AnimatePresence } from "framer-motion";
+import { RiArrowDownSLine, RiPlayFill, RiArrowRightSLine } from "react-icons/ri";
+import Link from "next/link";
 
 export default function HeroMedia() {
   const [showCarousel, setShowCarousel] = useState(false);
@@ -17,9 +20,9 @@ export default function HeroMedia() {
   const videoUrl = "/videos/DemoVideos.mp4";
 
   const carouselImages = [
-    "/images/carousel/image1.jpg",
-    "/images/carousel/carousel2.jpg",
-    "/images/carousel/carousel3.jpg",
+    "/images/carousel/carousel1.jpeg",
+    "/images/carousel/carousel2.jpeg",
+    "/images/carousel/carousel3.jpeg",
   ];
 
   /* --------------------------------------------
@@ -28,16 +31,13 @@ export default function HeroMedia() {
   function transitionToCarousel(animate = true) {
     if (animate) {
       setIsTransitioning(true);
-
       try {
         videoRef.current?.pause();
       } catch {}
-
       if (timeoutRef.current) {
         window.clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
       }
-
       window.setTimeout(() => {
         setShowCarousel(true);
         setIsTransitioning(false);
@@ -55,7 +55,6 @@ export default function HeroMedia() {
       () => transitionToCarousel(true),
       60_000
     );
-
     return () => {
       if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
     };
@@ -67,7 +66,6 @@ export default function HeroMedia() {
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
-
     const onEnded = () => transitionToCarousel(true);
     const onTimeUpdate = () => (lastTimeRef.current = el.currentTime);
     const onSeeking = () => {
@@ -75,11 +73,9 @@ export default function HeroMedia() {
         el.currentTime = lastTimeRef.current;
       } catch {}
     };
-
     el.addEventListener("ended", onEnded);
     el.addEventListener("timeupdate", onTimeUpdate);
     el.addEventListener("seeking", onSeeking);
-
     return () => {
       el.removeEventListener("ended", onEnded);
       el.removeEventListener("timeupdate", onTimeUpdate);
@@ -91,54 +87,128 @@ export default function HeroMedia() {
       RENDER
   --------------------------------------------- */
   return (
-    <section className="w-full px-4 md:px-8 lg:px-20 py-8">
+    <section className="relative w-full flex flex-col items-center justify-start px-4 md:px-8 lg:px-12 pt-16 md:pt-20 pb-16 overflow-hidden">
+      {/* Background Decorative Elements (Subtle) */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
+        <div className="absolute top-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-5%] left-[-5%] w-[300px] h-[300px] bg-blue-900/5 rounded-full blur-[100px]" />
+      </div>
 
-      <div
-        className={`relative mx-auto max-w-7xl h-[540px] md:h-[600px] ${
-          isTransitioning ? "opacity-60" : "opacity-100"
-        } transition-opacity duration-500`}
-      >
-        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl">
+      <div className="w-full max-w-[1350px] mx-auto">
+        {/* Media Player Container */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative"
+        >
+          <div
+            className={`relative mx-auto w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] transition-all duration-700 ${
+              isTransitioning ? "opacity-60 scale-[0.99] blur-md" : "opacity-100"
+            }`}
+          >
+            {/* ===================== VIDEO ===================== */}
+            {!showCarousel && (
+              <div
+                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${
+                  isTransitioning ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                <video
+                  ref={videoRef}
+                  src={videoUrl}
+                  autoPlay
+                  muted
+                  playsInline
+                  controls={false}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
-          {/* ===================== VIDEO ===================== */}
-          {!showCarousel && (
-            <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
-                isTransitioning ? "opacity-0" : "opacity-100"
-              }`}
-            >
-              <video
-                ref={videoRef}
-                src={videoUrl}
-                autoPlay
-                muted
-                playsInline
-                controls={false}
-                className="w-full h-full object-cover"
-              />
+            {/* ===================== CAROUSEL ===================== */}
+            {showCarousel && (
+              <div
+                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${
+                  isTransitioning ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                <Carousel images={carouselImages} interval={5000} fullHeight roundedClass="rounded-none" />
+              </div>
+            )}
 
-              {/* ==== BUTTON LEWATI VIDEO ==== */}
+            {/* Overlay Content (Matches Screenshot Layout) */}
+            <div className={`absolute inset-0 z-20 pointer-events-none select-none p-10 md:p-16 flex flex-col justify-center transition-all duration-700 ${showCarousel ? 'bg-black/40' : 'bg-transparent'}`}>
+               
+               <AnimatePresence>
+                 {showCarousel && (
+                   <motion.div 
+                     initial="hidden"
+                     animate="visible"
+                     exit="hidden"
+                     variants={{
+                        hidden: { opacity: 0, x: -30 },
+                        visible: { opacity: 1, x: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+                     }}
+                     className="max-w-2xl"
+                   >
+                      <motion.h1 
+                        variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } }}
+                        className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight uppercase"
+                      >
+                        Politeknik <br />
+                        <span className="text-orange-500 drop-shadow-[0_5px_15px_rgba(255,103,0,0.3)]">
+                           Prestasi Prima
+                        </span>
+                      </motion.h1>
+
+                      <motion.p 
+                        variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } }}
+                        className="mt-6 text-white text-sm md:text-lg lg:text-xl font-medium max-w-lg leading-relaxed shadow-sm opacity-90"
+                      >
+                        Rasakan pengalaman immersive menjelajahi seluruh fasilitas kampus kami dengan teknologi panorama 360° berkualitas tinggi.
+                      </motion.p>
+                      
+                      <motion.div
+                        variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
+                        className="mt-10"
+                      >
+                         <Link href="/site/program" className="pointer-events-auto inline-block bg-orange-600 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-900/30 hover:bg-white hover:text-orange-600 transition-all active:scale-95">
+                            Lihat Program
+                         </Link>
+                      </motion.div>
+                   </motion.div>
+                 )}
+               </AnimatePresence>
+
+               {/* Logo in Corner (Matches Screenshot) */}
+               <div className="absolute top-8 right-8 md:top-12 md:right-12 w-16 h-16 md:w-24 md:h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-3 overflow-hidden flex items-center justify-center shadow-2xl">
+                  <img src="/images/logo_politeknik.png" alt="Logo" className="w-full h-full object-contain" />
+               </div>
+            </div>
+
+            {/* Skip Video Overlay */}
+            {!showCarousel && (
               <button
                 onClick={() => transitionToCarousel(true)}
-                className="absolute bottom-6 right-6 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-md text-sm md:text-base hover:bg-black/60 transition"
+                className="absolute bottom-8 left-8 z-30 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-orange-600 transition-all group/skip"
               >
-                Lewati Video
+                Skip Vidio <RiArrowRightSLine className="inline ml-1 transition-transform group-hover/skip:translate-x-1" />
               </button>
-            </div>
-          )}
-
-          {/* ===================== CAROUSEL ===================== */}
-          {showCarousel && (
-            <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
-                isTransitioning ? "opacity-0" : "opacity-100"
-              }`}
-            >
-              <Carousel images={carouselImages} interval={4500} fullHeight />
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        className="mt-12 flex flex-col items-center gap-2 opacity-30"
+      >
+        <span className="text-[9px] uppercase tracking-[0.4em] font-black text-[#1D234E]">Scroll Explore</span>
+        <div className="w-[1.5px] h-8 bg-linear-to-b from-[#1D234E] to-transparent rounded-full" />
+      </motion.div>
     </section>
   );
 }

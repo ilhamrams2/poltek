@@ -1,116 +1,140 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Building, Play } from "lucide-react";
+import { Building, Play, Globe, Camera } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function VirtualTourSection() {
   return (
     <section
-      className="relative max-w-7xl mx-auto mt-16 px-4 sm:px-6 md:px-12 py-16 sm:py-20 md:py-24 
-                 text-white bg-gradient-to-br from-orange-400 to-[#2d1b69] 
-                 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden"
+      className="relative max-w-7xl mx-auto my-32 px-6 md:px-12 py-24
+                 text-white bg-[#1D234E]
+                 rounded-[3rem] shadow-2xl overflow-hidden group"
       aria-label="Virtual Tour Politeknik Prestasi Prima"
     >
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+      
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-      {/* Decorative Left Pattern */}
-      <div className="absolute left-0 top-[40%] -translate-x-16 opacity-30 sm:opacity-100 
-                      hidden sm:block">
-        <Image
-          src="/images/sections/360/patern-left.svg"
-          width={260}
-          height={260}
-          alt="left decorative pattern"
-          className="w-48 md:w-80"
-          priority
-        />
-      </div>
-
-      {/* Decorative Right Pattern */}
-      <div className="absolute right-0 bottom-0 translate-x-2 opacity-30 sm:opacity-100
-                      hidden sm:block">
-        <Image
-          src="/images/sections/360/patern-right.svg"
-          width={220}
-          height={220}
-          alt="right decorative pattern"
-          className="w-40 md:w-64"
-          priority
-        />
-      </div>
-
-      {/* Header */}
-      <header className="text-center max-w-xl mx-auto z-10 relative">
-        <Image
-          src="/images/logo_politeknik.png"
-          width={75}
-          height={75}
-          alt="Logo Politeknik Prestasi Prima"
-          className="mx-auto mb-3 sm:mb-4 w-16 sm:w-20 md:w-[90px]"
-          priority
-        />
-
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug">
-          Pengalaman Virtual <br /> Tour 360°
-        </h2>
-
-        <p className="text-white/90 mt-3 sm:mt-4 text-xs sm:text-sm md:text-base px-2">
-          Rasakan pengalaman immersive menjelajahi seluruh fasilitas kampus kami
-          dengan teknologi panorama 360° berkualitas tinggi.
-        </p>
-      </header>
-
-      {/* Main Card */}
-      <div className="mt-10 sm:mt-12 flex flex-col items-center relative z-10">
-        <figure className="relative bg-white w-full max-w-sm sm:max-w-md md:max-w-xl 
-                           rounded-xl sm:rounded-2xl shadow-lg overflow-hidden">
-
-          {/* Preview Image */}
-          <Image
-            src="/images/sections/360/v360-1.jpg"
-            width={900}
-            height={600}
-            alt="Preview Virtual Tour Kampus"
-            className="w-full"
-            priority
-          />
-
-          {/* Badge */}
-          <span className="absolute top-2 right-2 sm:top-3 sm:right-3 
-                           bg-black/70 text-[10px] sm:text-xs px-2 py-1 
-                           sm:px-3 sm:py-1 rounded-full">
-            HD Quality
-          </span>
-
-          {/* Bottom Info */}
-          <figcaption className="flex items-center justify-between bg-white p-3 sm:p-4">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Building size={20} className="text-gray-800" />
-              <span className="text-gray-800 font-medium text-sm sm:text-base">
-                Politeknik Prestasi Prima
-              </span>
-            </div>
-
-            {/* Play Button */}
-            <Link
-              href="#"
-              aria-label="Putar Virtual Tour"
-              className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 
-                         rounded-full bg-gray-900 text-white hover:bg-gray-700 transition"
-            >
-              <Play size={18} />
-            </Link>
-          </figcaption>
-        </figure>
-
-        {/* CTA Button */}
-        <Link
-          href="#"
-          className="mt-6 sm:mt-8 px-6 py-2.5 sm:px-8 sm:py-3 
-                     bg-orange-500 hover:bg-orange-600 rounded-lg 
-                     text-white text-sm sm:text-base font-medium 
-                     shadow-lg transition"
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Left Side: Content */}
+        <motion.div
+           initial={{ opacity: 0, x: -30 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           className="text-left"
         >
-          Mulai Virtual Tour
-        </Link>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-1 bg-orange-500 rounded-full" />
+            <span className="text-orange-500 font-black uppercase tracking-[0.2em] text-xs">Immersive Experience</span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-8">
+            Jelajahi Kampus <br /> 
+            Dari <span className="text-orange-500 italic">Mana Saja</span>
+          </h2>
+
+          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-12 max-w-xl">
+            Rasakan pengalaman virtual tour 360° interaktif. Lihat fasilitas modern dan lingkungan belajar kami seolah-olah Anda sedang berada di sini.
+          </p>
+
+          <div className="flex flex-wrap gap-8">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <Globe size={20} className="text-orange-500" />
+              </div>
+              <div>
+                <div className="text-sm font-black">Akses 24/7</div>
+                <div className="text-xs text-white/50">Online Everywhere</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <Camera size={20} className="text-orange-500" />
+              </div>
+              <div>
+                <div className="text-sm font-black">Ultra HD</div>
+                <div className="text-xs text-white/50">4K Resolution</div>
+              </div>
+            </div>
+          </div>
+
+          <Link
+            href="#"
+            className="group relative mt-16 inline-flex items-center gap-4 bg-orange-500 hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-900/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            Mulai Virtual Tour
+            <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+              <Play size={18} fill="currentColor" />
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Right Side: Virtual Preview Card */}
+        <motion.div
+           initial={{ opacity: 0, scale: 0.9 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           viewport={{ once: true }}
+           className="relative"
+        >
+          {/* Decorative Rings */}
+          <div className="absolute inset-0 -m-12 border border-white/5 rounded-full animate-ping [animation-duration:4s]" />
+          
+          <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-4 rounded-[2.5rem] shadow-2xl overflow-hidden group/card transition-all duration-700 hover:scale-[1.02]">
+             {/* Main Image Container */}
+             <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden">
+                <Image
+                  src="/images/sections/360/v360-1.jpg"
+                  fill
+                  alt="Preview Virtual Tour Kampus"
+                  className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
+                />
+                
+                {/* 360 Indicator Badge */}
+                <div className="absolute top-6 right-6 px-4 py-2 bg-black/50 backdrop-blur-md rounded-full flex items-center gap-2 border border-white/20 transition-all duration-500 group-hover/card:bg-orange-600">
+                  <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Live Preview</span>
+                </div>
+
+                {/* Center Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 bg-black/20">
+                   <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center text-[#1D234E] shadow-2xl scale-75 group-hover/card:scale-100 transition-transform duration-500">
+                      <Play size={32} fill="currentColor" />
+                   </div>
+                </div>
+             </div>
+
+             {/* Footer Info */}
+             <div className="flex items-center justify-between mt-6 px-4 pb-4">
+                <div className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                      <Building size={18} className="text-orange-500" />
+                   </div>
+                   <div>
+                      <h4 className="font-black text-sm">Main Campus</h4>
+                      <p className="text-[10px] text-white/50 uppercase tracking-widest">Politeknik Prestasi Prima</p>
+                   </div>
+                </div>
+                
+                <div className="text-right">
+                   <div className="text-xs font-bold text-orange-500">4K VR Ready</div>
+                </div>
+             </div>
+          </div>
+          
+          {/* Floating Element 1 */}
+          <motion.div 
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-10 -right-10 w-24 h-24 bg-orange-500/20 backdrop-blur-3xl rounded-3xl -rotate-12 -z-10" 
+          />
+        </motion.div>
       </div>
     </section>
   );

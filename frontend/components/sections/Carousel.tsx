@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 type CarouselProps = {
   images: string[];
@@ -65,13 +66,15 @@ export default function Carousel({
         {images.map((src, i) => (
           <div
             key={i}
-            className={`absolute inset-0 transition-opacity duration-700 ${
+            className={`absolute inset-0 transition-opacity duration-1000 ${
               i === index ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             aria-hidden={i === index ? "false" : "true"}
           >
-            {/* use img for local/remote flexibility; object-cover keeps crop */}
-            <img
+            <motion.img
+              initial={{ scale: 1 }}
+              animate={i === index ? { scale: 1.1 } : { scale: 1 }}
+              transition={{ duration: interval / 1000, ease: "linear" }}
               src={src}
               alt={`slide-${i}`}
               className="w-full h-full object-cover block"
