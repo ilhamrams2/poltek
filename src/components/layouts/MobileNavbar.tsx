@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { RiMenuLine, RiCloseLine, RiArrowDownSLine } from "react-icons/ri";
 import { MENU } from "@/data/menu";
 
 export default function MobileNavbar() {
@@ -18,7 +18,7 @@ export default function MobileNavbar() {
         </Link>
 
         <button onClick={() => setOpen(!open)}>
-          {open ? <X size={26} /> : <Menu size={26} />}
+          {open ? <RiCloseLine size={26} /> : <RiMenuLine size={26} />}
         </button>
       </div>
 
@@ -40,7 +40,8 @@ export default function MobileNavbar() {
                 className="w-full flex justify-between items-center py-2 font-medium"
               >
                 {menu.title}
-                <ChevronDown
+                <RiArrowDownSLine
+                  size={20}
                   className={`transition ${
                     dropdown === menu.id ? "rotate-180" : ""
                   }`}

@@ -200,14 +200,22 @@ export default function HeroMedia() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Enhanced & Highlighted */}
       <motion.div 
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        className="mt-12 flex flex-col items-center gap-2 opacity-30"
+        animate={{ y: [0, 5, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="mt-12 flex flex-col items-center gap-3 relative z-10"
       >
-        <span className="text-[9px] uppercase tracking-[0.4em] font-black text-[#1D234E]">Scroll Explore</span>
-        <div className="w-[1.5px] h-8 bg-linear-to-b from-[#1D234E] to-transparent rounded-full" />
+        <span className="text-[10px] uppercase tracking-[0.4em] font-black text-[#1D234E] drop-shadow-sm">
+          Scroll Explore
+        </span>
+        <div className="w-[2px] h-10 bg-[#1D234E] rounded-full relative overflow-hidden">
+          <motion.div 
+             animate={{ top: ["-100%", "100%"] }}
+             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+             className="absolute left-0 w-full h-1/2 bg-orange-500"
+          />
+        </div>
       </motion.div>
     </section>
   );

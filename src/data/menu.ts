@@ -99,8 +99,8 @@ export const MENU: MenuItem[] = [
     id: "dokumentasi",
     title: "Dokumentasi",
     items: [
-      { label: "Galeri Foto", url: "/dokumentasi/galeri-foto" },
-      { label: "Video Kegiatan", url: "/dokumentasi/video" },
+      { label: "Gallery", url: "/dokumentasi/gallery" },
+      { label: "Berita", url: "/site/news" },
     ],
   },
 

@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/layouts/Header";
 import FloatingButtons from "@/components/FloatingButtons";
 import Footer from "@/components/layouts/Footer";
+import GlobalLoader from "@/components/GlobalLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default function RootLayout({
 </head>
 
       <body className={inter.className}>
+        <GlobalLoader />
         <Header />
         <main>{children}</main>
         <FloatingButtons />

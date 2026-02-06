@@ -110,8 +110,7 @@ export default function VisionMissionSection() {
         >
           <div className="relative w-full max-w-[500px]">
             {/* Creative Backdrop */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] bg-[#1D234E] rounded-[3rem] -rotate-6 -z-10" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[85%] border-2 border-orange-500 rounded-[3rem] rotate-3 -z-10" />
+
             
             <Image
               src="/images/Model.png"

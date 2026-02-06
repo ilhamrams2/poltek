@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { MENU } from "@/data/menu";
 
 export default function Navbar() {
@@ -38,7 +38,7 @@ export default function Navbar() {
             <li key={menu.id} className="relative group">
               <button className="flex items-center gap-1 hover:text-orange-600 transition">
                 {menu.title}
-                <ChevronDown size={16} />
+                <RiArrowDownSLine size={16} />
               </button>
 
               {/* Dropdown Menu */}
@@ -65,7 +65,7 @@ export default function Navbar() {
                       className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 cursor-pointer"
                     >
                       {sub.title}
-                      <ChevronDown size={14} />
+                      <RiArrowDownSLine size={14} />
                     </span>
 
                     {/* Subgroup Dropdown */}
