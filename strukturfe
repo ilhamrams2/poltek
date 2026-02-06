@@ -45,33 +45,76 @@ Project ini menggunakan Next.js 14, TypeScript, dan Tailwind CSS,
 dengan struktur folder yang sudah saya buat di app/, components/layouts/, components/sections/, dan public/images/sections/.
 
 Beranda
+
+Profil
+├── Tentang Kampus
+├── Visi & Misi
+├── Sejarah
+├── Sambutan Direktur
+├── Struktur Organisasi
+├── Dosen & Staff
+├── Fasilitas Kampus
+│
+├── Fasilitas (Subgroup)
+│   ├── Facility
+│   └── Facility Tour
+│
+└── FAQ (Subgroup)
+    ├── Pendaftaran
+    ├── Program Studi
+    └── Sistem Pembelajaran
+
+
 Akademik
- ├── Akreditasi
- │     ├── Akreditasi Institusi
- │     └── Akreditasi Program Studi
- ├── Program
- │     ├── D3
- │     │     ├── Manajemen Pemasaran
- │     │     ├── Administrasi Perkantoran
- │     │     └── Rekayasa Perangkat Lunak
- │     └── D4
- │           ├── Bisnis Digital
- │           ├── TR Jaringan Komputer
- │           └── TR Multimedia
+├── Program Studi
+├── Kalender Akademik
+├── E-Learning / LMS
+├── Jadwal Kuliah
+├── Peraturan Akademik
+│
+├── Program D3 (Subgroup)
+│   ├── D3 Manajemen Pemasaran
+│   ├── D3 Administrasi Perkantoran
+│   └── D3 Rekayasa Perangkat Lunak
+│
+└── Program D4 (Subgroup)
+    ├── D4 Bisnis Digital
+    ├── D4 TR Jaringan Komputer
+    └── D4 TR Multimedia
+
+
 Informasi
- ├── Berita
- ├── Agenda
- └── Pengumuman
+├── Berita Kampus
+├── Pengumuman
+├── Agenda Kegiatan
+├── Beasiswa
+└── Karir & Magang
+
+
 Dokumentasi
- ├── Galeri
- ├── Video
- └── Dokumen
-Tentang
- ├── Sejarah
- ├── Visi Misi
- ├── Sambutan Direktur
- └── Fasilitas
-Download Brosur (button)
+├── Galeri Foto
+└── Video Kegiatan
+
+
+PMB
+├── Alur Pendaftaran
+├── Syarat Pendaftaran
+├── Biaya Kuliah
+├── Pendaftaran Online
+└── Cek Status Pendaftaran
+
+
+Layanan
+├── Perpustakaan
+├── Biro Administrasi
+├── Kemahasiswaan
+└── Humas
+
+
+Kerjasama
+├── Mitra Industri
+├── MOU / MOA
+└── Pengabdian Masyarakat
 
 homepage done
 about done
