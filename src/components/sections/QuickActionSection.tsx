@@ -99,7 +99,7 @@ export default function QuickActionSection() {
       <div className="absolute inset-0 -z-10 bg-slate-50/50" />
 
       <motion.div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

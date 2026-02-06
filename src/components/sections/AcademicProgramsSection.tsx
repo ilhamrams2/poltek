@@ -61,16 +61,16 @@ export default function AcademicProgramsSection() {
   };
 
   return (
-    <section className="w-full py-24 md:py-32 bg-gray-50/50 flex flex-col items-center overflow-hidden">
+    <section className="w-full py-24 lg:py-32 bg-gray-50/50 flex flex-col items-center overflow-hidden">
       {/* Title */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center px-6 mb-16 md:mb-20"
+        className="text-center px-6 mb-16 lg:mb-20"
       >
         <span className="text-orange-600 font-bold uppercase tracking-[0.4em] text-[9px] md:text-[10px] mb-4 block">Our Curriculum</span>
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#1D234E] leading-tight mb-6">
+        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-tight mb-6">
           Program <span className="text-orange-500">Akademik</span>
         </h2>
         <div className="w-16 h-1.5 bg-orange-500 mx-auto rounded-full mb-6" />

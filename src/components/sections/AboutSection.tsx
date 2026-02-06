@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-24 lg:py-32">
       {/* Background patterns */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-orange-50/30 to-transparent -z-10" />
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -z-10" />
@@ -60,7 +60,7 @@ export default function AboutSection() {
             Kenali Kami Lebih Dekat
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1D234E] mb-8 leading-[1.1]">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] mb-8 leading-[1.1]">
             Membangun Generasi <br />
             <span className="text-orange-600">Digital Berkualitas</span>
           </h2>

@@ -8,7 +8,7 @@ export default function Topbar() {
   const [currentLang, setCurrentLang] = useState<"id" | "en">("id");
 
   return (
-    <div className="w-full bg-[#0E1333] text-white text-[15px] px-6 md:px-12 hidden md:block border-b border-white/10">
+    <div className="w-full bg-[#0E1333] text-white text-[15px] px-6 lg:px-12 hidden lg:block border-b border-white/10">
       {/* Mengubah justify-between menjadi justify-end agar semua konten terdorong ke kanan */}
       <div className="max-w-7xl mx-auto flex items-center justify-end py-3">
 

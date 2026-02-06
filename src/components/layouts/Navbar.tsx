@@ -7,7 +7,7 @@ import { MENU } from "@/data/menu";
 
 export default function Navbar() {
   return (
-    <nav className="px-6 md:px-12 py-4 bg-white shadow-sm">
+    <nav className="px-6 lg:px-12 py-4 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* === LOGO === */}
@@ -24,7 +24,7 @@ export default function Navbar() {
         </Link>
 
         {/* === DESKTOP MENU === */}
-        <ul className="hidden md:flex items-center gap-8 font-medium">
+        <ul className="hidden lg:flex items-center gap-6 xl:gap-8 font-medium">
 
           {/* Beranda — tanpa dropdown */}
           <li>

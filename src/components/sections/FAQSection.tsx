@@ -31,7 +31,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-32 bg-white px-6">
+    <section className="relative w-full bg-white py-24 lg:py-32 overflow-hidden px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header content */}
         <motion.div 
@@ -44,7 +44,7 @@ export default function FAQSection() {
             <HelpCircle size={14} />
             Support Center
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1D234E] leading-tight mb-6">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
             Pertanyaan <span className="text-orange-500">Populer</span>
           </h2>
           <p className="max-w-2xl mx-auto text-gray-500 text-lg font-medium">
@@ -97,7 +97,7 @@ export default function FAQSection() {
                     >
                       <div className="px-8 pb-8">
                         <div className="h-[1px] bg-purple-100 mb-6" />
-                        <p className="text-gray-600 text-lg leading-relaxed font-medium">
+                        <p className="text-lg lg:text-xl font-medium leading-relaxed text-gray-600">
                           {item.a}
                         </p>
                       </div>
@@ -113,7 +113,7 @@ export default function FAQSection() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="mt-20 p-10 rounded-[2.5rem] bg-[#1D234E] text-white flex flex-col md:flex-row items-center justify-between gap-8"
+          className="mt-20 p-10 rounded-[2.5rem] bg-[#1D234E] text-white flex flex-col lg:flex-row items-center justify-between gap-8"
         >
           <div className="flex items-center gap-6">
             <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center text-orange-500">

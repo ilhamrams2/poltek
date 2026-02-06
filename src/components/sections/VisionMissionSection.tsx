@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function VisionMissionSection() {
   return (
-    <section className="relative w-full bg-white py-24 md:py-32 overflow-hidden">
+    <section className="relative w-full bg-white py-24 lg:py-32 overflow-hidden">
       
       {/* Subtle Background Pattern */}
       <div className="absolute top-0 right-0 w-[40%] h-full bg-orange-50/40 -skew-x-12 translate-x-32 -z-10" />
@@ -26,7 +26,7 @@ export default function VisionMissionSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
             Visi & Misi <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-amber-500">
               Politeknik
@@ -50,7 +50,7 @@ export default function VisionMissionSection() {
                  <h3 className="text-xl font-bold tracking-wide">VISI KAMI</h3>
               </div>
               
-              <p className="text-lg md:text-xl font-medium leading-relaxed text-white/90">
+              <p className="text-lg lg:text-xl font-medium leading-relaxed text-white/90">
                 &ldquo;Menjadi politeknik vokasi terdepan yang unggul, terpercaya, dan
                 mampu mencetak insan terampil berakhlak dengan penguasaan
                 teknologi serta kontribusi global.&rdquo;

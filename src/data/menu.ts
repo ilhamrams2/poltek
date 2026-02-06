@@ -23,14 +23,13 @@ export const MENU: MenuItem[] = [
       { label: "Sambutan Direktur", url: "/profil/sambutan-direktur" },
       { label: "Struktur Organisasi", url: "/profil/struktur-organisasi" },
       { label: "Dosen & Staff", url: "/profil/dosen-staff" },
-      { label: "Fasilitas Kampus", url: "/profil/fasilitas" },
     ],
     subgroups: [
       {
         title: "Fasilitas",
         items: [
           { label: "Facility", url: "/profil/fasilitas" },
-          { label: "Facility Tour", url: "/profil/fasilitas/tour" },
+          { label: "Facility Tour", url: "/profil/fasilitas/virtual 360° tour" },
         ],
       },
       {

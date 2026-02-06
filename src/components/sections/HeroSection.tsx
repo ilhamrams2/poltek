@@ -87,7 +87,7 @@ export default function HeroMedia() {
       RENDER
   --------------------------------------------- */
   return (
-    <section className="relative w-full flex flex-col items-center justify-start px-4 md:px-8 lg:px-12 pt-16 md:pt-20 pb-16 overflow-hidden">
+    <section className="relative w-full flex flex-col items-center justify-start px-4 sm:px-8 lg:px-12 pt-24 pb-16 overflow-hidden">
       {/* Background Decorative Elements (Subtle) */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
         <div className="absolute top-[-5%] right-[-5%] w-[300px] h-[300px] bg-orange-500/5 rounded-full blur-[100px]" />
@@ -103,8 +103,8 @@ export default function HeroMedia() {
           className="relative"
         >
           <div
-            className={`relative mx-auto w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] transition-all duration-700 ${
-              isTransitioning ? "opacity-60 scale-[0.99] blur-md" : "opacity-100"
+            className={`relative mx-auto w-full aspect-video lg:aspect-[21/9] rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] transition-all duration-700 ${
+              isTransitioning ? "opacity-60 scale-[0.99] blur-lg" : "opacity-100"
             }`}
           >
             {/* ===================== VIDEO ===================== */}
@@ -137,8 +137,8 @@ export default function HeroMedia() {
               </div>
             )}
 
-            {/* Overlay Content (Matches Screenshot Layout) */}
-            <div className={`absolute inset-0 z-20 pointer-events-none select-none p-10 md:p-16 flex flex-col justify-center transition-all duration-700 ${showCarousel ? 'bg-black/40' : 'bg-transparent'}`}>
+                {/* Overlay Content (Matches Screenshot Layout) */}
+                <div className={`absolute inset-0 z-20 pointer-events-none select-none p-6 sm:p-10 lg:p-16 flex flex-col justify-center transition-all duration-700 ${showCarousel ? 'bg-black/40' : 'bg-transparent'}`}>
                
                <AnimatePresence>
                  {showCarousel && (
@@ -154,7 +154,7 @@ export default function HeroMedia() {
                    >
                       <motion.h1 
                         variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } }}
-                        className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight uppercase"
+                        className="text-3xl sm:text-4xl lg:text-7xl font-black text-white leading-tight uppercase"
                       >
                         Politeknik <br />
                         <span className="text-orange-500 drop-shadow-[0_5px_15px_rgba(255,103,0,0.3)]">
@@ -164,7 +164,7 @@ export default function HeroMedia() {
 
                       <motion.p 
                         variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } }}
-                        className="mt-6 text-white text-sm md:text-lg lg:text-xl font-medium max-w-lg leading-relaxed shadow-sm opacity-90"
+                        className="mt-4 sm:mt-6 text-white text-xs sm:text-base lg:text-xl font-medium max-w-lg leading-relaxed shadow-sm opacity-90"
                       >
                         Rasakan pengalaman immersive menjelajahi seluruh fasilitas kampus kami dengan teknologi panorama 360° berkualitas tinggi.
                       </motion.p>
@@ -182,7 +182,7 @@ export default function HeroMedia() {
                </AnimatePresence>
 
                {/* Logo in Corner (Matches Screenshot) */}
-               <div className="absolute top-8 right-8 md:top-12 md:right-12 w-16 h-16 md:w-24 md:h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-3 overflow-hidden flex items-center justify-center shadow-2xl">
+               <div className="absolute top-4 right-4 sm:top-8 sm:right-8 lg:top-12 lg:right-12 w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-2 sm:p-3 overflow-hidden flex items-center justify-center shadow-2xl">
                   <img src="/images/logo_politeknik.png" alt="Logo" className="w-full h-full object-contain" />
                </div>
             </div>

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function VirtualTourSection() {
   return (
     <section
-      className="relative max-w-7xl mx-auto my-32 px-6 md:px-12 py-24
+      className="relative max-w-7xl mx-auto my-32 px-6 lg:px-12 py-24
                  text-white bg-[#1D234E]
                  rounded-[3rem] shadow-2xl overflow-hidden group"
       aria-label="Virtual Tour Politeknik Prestasi Prima"
@@ -34,12 +34,12 @@ export default function VirtualTourSection() {
             <span className="text-orange-500 font-black uppercase tracking-[0.2em] text-xs">Immersive Experience</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-8">
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.1] mb-8">
             Jelajahi Kampus <br /> 
             Dari <span className="text-orange-500 italic">Mana Saja</span>
           </h2>
 
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-12 max-w-xl">
+          <p className="text-white/70 text-lg lg:text-xl leading-relaxed mb-12 max-w-xl">
             Rasakan pengalaman virtual tour 360° interaktif. Lihat fasilitas modern dan lingkungan belajar kami seolah-olah Anda sedang berada di sini.
           </p>
 

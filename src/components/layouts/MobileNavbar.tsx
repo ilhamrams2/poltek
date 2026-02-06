@@ -10,7 +10,7 @@ export default function MobileNavbar() {
   const [dropdown, setDropdown] = useState<string | null>(null);
 
   return (
-    <div className="w-full bg-white border-b shadow-sm p-4 md:hidden">
+    <div className="w-full bg-white border-b shadow-sm p-4 lg:hidden">
       {/* Header */}
       <div className="flex items-center justify-between">
         <Link href="/" className="font-semibold text-lg text-gray-800">

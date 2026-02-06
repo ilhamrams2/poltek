@@ -98,7 +98,7 @@ export default function NewsSection() {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50/50 px-6 overflow-hidden relative">
+    <section className="py-24 lg:py-32 bg-gray-50/50 px-6 overflow-hidden relative">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-white to-transparent pointer-events-none -z-10" />
       <div className="absolute right-0 top-1/4 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl -z-10" />
@@ -115,8 +115,8 @@ export default function NewsSection() {
             <RiNewspaperLine className="text-lg" />
             Berita Terkini
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1D234E] leading-tight tracking-tight">
-            Ikuti informasi & perkembangan <br className="hidden md:block"/> terbaru seputar <span className="text-purple-600 underline decoration-purple-200 decoration-4 underline-offset-4">kampus</span>
+          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-tight tracking-tight">
+            Ikuti informasi & perkembangan <br className="hidden lg:block"/> terbaru seputar <span className="text-purple-600 underline decoration-purple-200 decoration-4 underline-offset-4">kampus</span>
           </h2>
         </motion.div>
 
@@ -127,7 +127,7 @@ export default function NewsSection() {
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Navigation Buttons (Outside on lg, inside on sm) */}
-          <div className="absolute top-1/2 left-0 md:-left-4 lg:-left-12 -translate-y-1/2 z-20 hidden md:block">
+          <div className="absolute top-1/2 left-0 lg:-left-4 xl:-left-12 -translate-y-1/2 z-20 hidden lg:block">
             <button 
               onClick={scrollLeft} 
               className="w-16 h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:border-purple-200 hover:shadow-xl hover:scale-110 transition-all duration-300"
@@ -135,7 +135,7 @@ export default function NewsSection() {
               <RiArrowLeftSLine size={32} />
             </button>
           </div>
-          <div className="absolute top-1/2 right-0 md:-right-4 lg:-right-12 -translate-y-1/2 z-20 hidden md:block">
+          <div className="absolute top-1/2 right-0 lg:-right-4 xl:-right-12 -translate-y-1/2 z-20 hidden lg:block">
             <button 
               onClick={scrollRight} 
               className="w-16 h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:border-purple-200 hover:shadow-xl hover:scale-110 transition-all duration-300"

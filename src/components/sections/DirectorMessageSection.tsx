@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function DirectorMessageSection() {
   return (
-    <section className="py-16 md:py-24 bg-white flex justify-center overflow-hidden">
+    <section className="py-16 lg:py-24 bg-white flex justify-center overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
