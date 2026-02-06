@@ -1,365 +1,275 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import React from "react";
+import React, { useRef } from "react";
+import { RiRocket2Line, RiBuilding4Line, RiGroupLine, RiFlashlightLine, RiAwardLine, RiGlobalLine } from "react-icons/ri";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-// Sample data for masonry cards. Replace `image` paths with your real images in /public/images/cards/
-const CARDS = [
+const TIMELINE_EVENTS = [
   {
-    id: 1,
-    title: "Latar Belakang Yayasan",
-    excerpt:
-      "Berasal dari Yayasan Wahana Prestasi Prima yang telah mengembangkan SMA & SMK berakreditasi A.",
-    image: "/images/cards/card1.jpg",
-    tag: "Foundation",
+    year: "2018",
+    title: "Awal Mula Visi",
+    description: "Yayasan Wahana Prestasi Prima meletakkan dasar visi untuk menghadirkan pendidikan tinggi vokasi yang modern dan relevan dengan industri digital global.",
+    icon: RiFlashlightLine,
+    image: "/images/facility/poltek-presma3-1024x768.jpg",
+    tags: ["Foundation", "Vision"]
   },
   {
-    id: 2,
+    year: "2020",
+    title: "Pengembangan Infrastruktur",
+    description: "Pembangunan gedung RPS (Hall) dan laboratorium komputer berstandar industri dimulai sebagai komitmen menghadirkan fasilitas kelas dunia.",
+    icon: RiBuilding4Line,
+    image: "/images/facility/facility1.png",
+    tags: ["Infrastructure", "Modernization"]
+  },
+  {
+    year: "2023",
     title: "Pendirian Resmi",
-    excerpt:
-      "Resmi berdiri pada 19 Oktober 2023 melalui Keputusan Mendikbudristek No. 271/D/OT/2023.",
-    image: "/images/cards/card2.jpg",
-    tag: "Milestone",
+    description: "Tepat pada 19 Oktober 2023, Politeknik Prestasi Prima resmi berdiri melalui Keputusan Mendikbudristek No. 271/D/OT/2023, membuka babak baru pendidikan vokasi digital.",
+    icon: RiRocket2Line,
+    image: "/images/facility/poltek-presma5-1024x768.jpg",
+    tags: ["Milestone", "Legal Authorization"]
   },
   {
-    id: 3,
-    title: "Visi & Identitas",
-    excerpt:
-      "Mencetak lulusan yang beriman, cerdas, percaya diri, dan kompeten digital.",
-    image: "/images/cards/card3.jpg",
-    tag: "Vision",
+    year: "2024",
+    title: "Ekspansi Program & Kemitraan",
+    description: "Meluncurkan program unggulan D3 dan D4 serta menjalin kemitraan strategis dengan berbagai raksasa teknologi dan industri nasional.",
+    icon: RiAwardLine,
+    image: "/images/facility/poltek-presma6-1024x768.jpg",
+    tags: ["Growth", "Industry Partnership"]
   },
   {
-    id: 4,
-    title: "Perkembangan & Ekspansi",
-    excerpt:
-      "Perluasan program studi, fasilitas modern, dan kemitraan industri strategis.",
-    image: "/images/cards/card4.jpg",
-    tag: "Growth",
-  },
-  {
-    id: 5,
-    title: "Program Studi",
-    excerpt:
-      "D3: RPL, Administrasi Perkantoran, Manajemen Pemasaran. D4: Bisnis Digital, TR Jaringan, TR Multimedia.",
-    image: "/images/cards/card5.jpg",
-    tag: "Academics",
-  },
-  {
-    id: 6,
-    title: "Filosofi Pendidikan",
-    excerpt:
-      "Komitmen mutu, karakter, integritas, dan inovasi berkelanjutan dalam pembelajaran.",
-    image: "/images/cards/card6.jpg",
-    tag: "Philosophy",
-  },
-  // add more cards if needed
+    year: "Future",
+    title: "Menuju Global Excellence",
+    description: "Berkomitmen menjadi pusat keunggulan vokasi di Asia Tenggara, mencetak profesional digital yang berakhlak dan berdaya saing global.",
+    icon: RiGlobalLine,
+    image: "/images/facility/360.jpeg",
+    tags: ["Vision 2030", "Innovation"]
+  }
 ];
 
-export default function HistoryPage(): JSX.Element {
+export default function HistoryPage() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
-    <main className={`${jakarta.className} min-h-screen bg-[#080c1b] text-gray-100`}>
-      {/* HERO */}
-      <header className="relative h-[56vh] md:h-[60vh] lg:h-[64vh] overflow-hidden">
-        <Image
-          src="/images/carousel/carousel2.jpg"
-          alt="Hero campus"
-          fill
-          priority
-          className="object-cover brightness-[0.45] -z-10"
-        />
+    <main className={`${jakarta.className} min-h-screen bg-[#080C1B] text-white selection:bg-[#F15A24]/30 overflow-hidden`}>
+      {/* 1. HERO SECTION */}
+      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Background Decorative Rings */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-white/[0.03] rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-white/[0.05] rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#F15A24]/10 rounded-full" />
+          
+          {/* Gradients */}
+          <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-[#F15A24]/10 blur-[120px] rounded-full" />
+          <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-[#1A2B5F]/30 blur-[120px] rounded-full" />
+        </div>
 
-        {/* decorative uploaded design image (will be transformed by system) */}
-        <img
-          src="/mnt/data/93c35b88-2eb9-432d-bdaf-1179a680d748.png"
-          alt="design-collage"
-          className="absolute right-6 top-6 w-44 opacity-10 pointer-events-none hidden lg:block"
-        />
-
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-[#0e162e]/40 via-[#080c1b]/60 to-[#080c1b]/90"
-          aria-hidden
-        />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 flex flex-col items-center justify-center h-full text-center">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-6"
           >
-            <Image
-              src="/images/logo_politeknik.png"
-              alt="logo"
-              width={110}
-              height={110}
-              className="drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
-            />
+            <div className="inline-flex items-center gap-2 bg-[#F15A24]/10 text-[#F15A24] px-6 py-2 rounded-full border border-[#F15A24]/20 mb-8 font-black uppercase tracking-[0.3em] text-[10px]">
+              Our Journey
+            </div>
+            
+            <h1 className="text-5xl md:text-8xl font-black mb-6 leading-none tracking-tight">
+              Jejak Bersejarah <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F15A24] via-[#ff7c3d] to-[#F15A24] bg-[length:200%_auto] animate-gradient">Politeknik Kami</span>
+            </h1>
+            
+            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+              Dari sebuah visi besar menjadi institusi pendidikan vokasi terdepan. Simak setiap langkah yang membentuk Politeknik Prestasi Prima hari ini.
+            </p>
           </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 6, scale: 0.995 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wide"
-            style={{ lineHeight: 1.02 }}
-          >
-            <span className="text-[#FF6700]">Politeknik</span>{" "}
-            <span className="text-[#442489]">Prestasi Prima</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-base md:text-lg italic text-gray-200 max-w-2xl"
-          >
-            “Perjalanan menuju institusi pendidikan tinggi yang unggul, modern, dan
-            berdaya saing global.”
-          </motion.p>
         </div>
-      </header>
 
-      {/* INTRO */}
-      <section className="max-w-6xl mx-auto px-6 md:px-10 pt-12 pb-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
-              Sejarah & Perjalanan
-            </h2>
-            <p className="text-gray-300 mt-2 max-w-2xl">
-              Ringkasan perjalanan Politeknik Prestasi Prima — highlight penting
-              dan bukti perkembangan yang membentuk institusi sampai hari ini.
-            </p>
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              className="bg-gradient-to-r from-[#FF6700] to-[#FF7C00] text-[#080c1b] font-semibold px-4 py-2 rounded-lg shadow-md hover:brightness-105 transition"
-              aria-label="Download Timeline"
-            >
-              Download Timeline
-            </button>
-
-            <button
-              className="border border-[#442489] text-[#442489] px-4 py-2 rounded-lg hover:bg-[#442489]/10 transition"
-              aria-label="Explore Programs"
-            >
-              Explore Programs
-            </button>
-          </div>
+        {/* Scroll Prompt */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-[#F15A24] to-transparent" />
+           <span className="text-[9px] font-black uppercase tracking-[0.5em] text-white/40">Scroll to Explore</span>
         </div>
       </section>
 
-      {/* PINTEREST MASONRY */}
-      <section className="max-w-6xl mx-auto px-6 md:px-10 pb-20">
-        {/* Masonry columns using CSS columns (simple and responsive) */}
-        <div
-          className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6"
-          style={{ columnGap: "1.25rem" }}
-        >
-          {CARDS.map((card, idx) => {
-            // variation classes to make cards unique (rotate badge, slanted top, different shadows)
-            const variant = idx % 5;
-            const tiltClass =
-              variant === 1
-                ? "rotate-0" // normal
-                : variant === 2
-                ? "-rotate-[1deg] translate-y-0"
-                : variant === 3
-                ? "rotate-[1deg]"
-                : variant === 4
-                ? "-rotate-[0.6deg]"
-                : "rotate-0";
+      {/* 2. TIMELINE SECTION */}
+      <section ref={containerRef} className="relative py-32 px-6">
+        <div className="max-w-7xl mx-auto relative">
+          
+          {/* Line - Hidden on Mobile */}
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/[0.05] -translate-x-1/2 overflow-hidden">
+            <motion.div 
+              style={{ scaleY }}
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#F15A24] to-[#ff7c3d] origin-top"
+            />
+          </div>
 
-            return (
-              <motion.article
-                key={card.id}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.05 }}
-                className={`mb-6 break-inside-avoid ${tiltClass}`}
-              >
-                {/* Card wrapper with decorative left accent and gradient border */}
-                <div
-                  className="
-                    relative overflow-hidden rounded-2xl 
-                    bg-gradient-to-b from-[#0e162e]/80 to-[#080c1b]/80
-                    border border-transparent p-0
-                    shadow-[0_12px_40px_rgba(4,6,28,0.6)]
-                    hover:shadow-[0_16px_60px_rgba(4,6,28,0.75)]
-                    transition
-                  "
-                  style={{
-                    borderImage: "linear-gradient(90deg, #FF6700, #442489) 1",
-                  }}
-                >
-                  {/* Image (use next/image if you want optimized images) */}
-                  <div className="w-full aspect-[4/3] relative">
-                    {/* If you have many images, change to <Image /> with actual src. For now we use Image component */}
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      className="object-cover rounded-t-2xl"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      priority={idx < 2}
-                    />
-                    {/* colorful overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#080c1b]/60 via-transparent to-transparent" />
-                    {/* tag badge */}
-                    <div
-                      className={`absolute left-4 top-4 inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold`}
-                      style={{
-                        background:
-                          "linear-gradient(90deg, rgba(255,103,0,0.15), rgba(68,36,137,0.12))",
-                        backdropFilter: "blur(4px)",
-                        color: "#fff",
-                        border: "1px solid rgba(255,255,255,0.06)",
-                      }}
+          <div className="space-y-32">
+            {TIMELINE_EVENTS.map((event, index) => {
+              const Icon = event.icon;
+              const isEven = index % 2 === 0;
+
+              return (
+                <div key={index} className="relative">
+                  {/* Timeline Dot */}
+                   <div className="hidden lg:flex absolute left-1/2 top-0 -translate-x-1/2 w-12 h-12 rounded-full bg-[#080C1B] border-4 border-[#F15A24] z-20 items-center justify-center shadow-[0_0_20px_rgba(241,90,36,0.3)]">
+                      <Icon className="text-[#F15A24] text-xl" />
+                   </div>
+
+                  <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+                    
+                    {/* Text Platform */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="w-full lg:w-1/2"
                     >
-                      <span className="w-2 h-2 rounded-full bg-[#FF6700] block" />
-                      <span className="text-xs">{card.tag}</span>
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold text-white mb-2">
-                      {card.title}
-                    </h3>
-
-                    <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                      {card.excerpt}
-                    </p>
-
-                    {/* action row */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-10 h-10 rounded-full flex items-center justify-center"
-                          style={{
-                            background:
-                              "linear-gradient(180deg, rgba(68,36,137,0.2), rgba(255,124,0,0.06))",
-                            boxShadow: "inset 0 -6px 14px rgba(0,0,0,0.2)",
-                          }}
-                        >
-                          <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"
-                              stroke="#FFD8A8"
-                              strokeWidth="0.7"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
+                      <div className={`flex flex-col ${isEven ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'}`}>
+                        <span className="text-6xl md:text-8xl font-black text-white/5 mb-4 block leading-none">
+                          {event.year}
+                        </span>
+                        
+                        <div className="inline-flex gap-2 mb-6">
+                          {event.tags.map(tag => (
+                            <span key={tag} className="bg-white/5 border border-white/10 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-[#F15A24]">
+                              {tag}
+                            </span>
+                          ))}
                         </div>
-                        <div className="text-sm">
-                          <div className="text-white font-medium">Prestasi Prima</div>
-                          <div className="text-xs text-gray-400">Politeknik</div>
-                        </div>
-                      </div>
 
-                      <div className="flex items-center gap-3">
-                        <button
-                          className="px-3 py-1 rounded-md text-sm font-semibold bg-[#FF6700] text-[#080c1b] hover:brightness-105 transition"
-                          aria-label="Read more"
-                        >
-                          Read More
-                        </button>
-                        <button
-                          className="p-2 rounded-md bg-transparent border border-white/6 hover:bg-white/3 transition"
-                          aria-label="Share"
-                        >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"
-                              stroke="#fff"
-                              strokeWidth="1"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M12 3v13"
-                              stroke="#fff"
-                              strokeWidth="1"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M8 7l4-4 4 4"
-                              stroke="#fff"
-                              strokeWidth="1"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </button>
+                        <h3 className="text-3xl md:text-4xl font-black mb-6 text-white group-hover:text-[#F15A24] transition-colors">
+                          {event.title}
+                        </h3>
+
+                        <p className="text-gray-400 text-base md:text-lg leading-relaxed font-medium">
+                          {event.description}
+                        </p>
                       </div>
-                    </div>
+                    </motion.div>
+
+                    {/* Image Platform */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="w-full lg:w-1/2"
+                    >
+                      <div className="relative group rounded-[2.5rem] overflow-hidden bg-[#1D234E]/20 border border-white/5 p-4 shadow-2xl">
+                         <div className="relative aspect-video rounded-[1.5rem] overflow-hidden">
+                            <Image
+                              src={event.image}
+                              alt={event.title}
+                              fill
+                              className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                              unoptimized
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#080C1B] via-transparent to-transparent opacity-60" />
+                         </div>
+                         
+                         {/* Mobile Icon */}
+                         <div className="lg:hidden absolute top-8 left-8 w-12 h-12 rounded-2xl bg-[#F15A24] text-white flex items-center justify-center shadow-xl">
+                            <Icon className="text-2xl" />
+                         </div>
+                      </div>
+                    </motion.div>
+
                   </div>
-
-                  {/* decorative slanted corner */}
-                  <div
-                    className="absolute -right-10 -top-6 w-28 h-28 rounded-full opacity-5 pointer-events-none"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 30% 30%, rgba(68,36,137,0.35), rgba(255,103,0,0.05))",
-                    }}
-                  />
                 </div>
-              </motion.article>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* FOOTER CTA */}
-      <section className="max-w-6xl mx-auto px-6 md:px-10 pb-24">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-[#0e162e]/60 to-[#080c1b]/80 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg"
-        >
-          <div>
-            <h4 className="text-xl font-bold text-white">Ingin tahu lebih jauh?</h4>
-            <p className="text-gray-300 mt-1">
-              Download profil lengkap atau hubungi tim penerimaan mahasiswa baru.
-            </p>
-          </div>
+      {/* 3. QUOTE / VALUES SECTION */}
+      <section className="relative py-40 overflow-hidden bg-[#0a0f25]">
+        <div className="absolute inset-0 opacity-10 blur-[100px] pointer-events-none">
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-gradient-to-r from-[#F15A24] via-[#1A2B5F] to-orange-600 rounded-full" />
+        </div>
 
-          <div className="flex gap-3">
-            <button className="bg-[#FF6700] text-[#080c1b] px-4 py-2 rounded-lg font-semibold">
-              Download Profil
-            </button>
-            <button className="border border-[#442489] text-[#442489] px-4 py-2 rounded-lg">
-              Kontak Kami
-            </button>
-          </div>
-        </motion.div>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+           <motion.div
+             initial={{ opacity: 0, scale: 0.9 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+           >
+              <RiFlashlightLine className="text-6xl text-[#F15A24] mx-auto mb-10" />
+              <h2 className="text-3xl md:text-5xl font-black mb-10 leading-tight italic">
+                "Sejarah bukan hanya tentang catatan masa lalu, <br /> 
+                tapi tentang <span className="text-[#F15A24]">pondasi masa depan</span> yang kita bangun hari ini."
+              </h2>
+              <div className="w-20 h-1 bg-[#F15A24] mx-auto rounded-full" />
+           </motion.div>
+        </div>
       </section>
+
+      {/* 4. FOOTER CTA */}
+      <section className="relative py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[3rem] bg-gradient-to-br from-[#1D234E] to-[#080C1B] border border-white/10 p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 overflow-hidden relative shadow-3xl"
+          >
+            {/* Background Decorative */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#F15A24]/10 blur-[100px] rounded-full -mr-48 -mt-48" />
+
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="text-4xl md:text-6xl font-black mb-6 text-white tracking-tight">Kini Giliran <span className="text-[#F15A24]">Anda</span></h2>
+              <p className="text-gray-400 text-lg md:text-xl font-medium max-w-xl">
+                Jadilah bagian dari sejarah besar kami berikutnya. Bergabunglah dengan Politeknik Prestasi Prima.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link
+                href="https://wa.me/6285199328825"
+                className="bg-[#F15A24] text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/30 hover:scale-105 transition-all text-center"
+              >
+                Daftar Sekarang
+              </Link>
+              <Link
+                href="/site/facility"
+                className="bg-white/5 border border-white/10 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all text-center"
+              >
+                Explore Fasilitas
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          animation: gradient 5s ease infinite;
+        }
+      `}</style>
     </main>
   );
 }

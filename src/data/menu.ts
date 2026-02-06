@@ -17,11 +17,9 @@ export const MENU: MenuItem[] = [
     id: "profil",
     title: "Profil",
     items: [
-      { label: "Tentang Kampus", url: "/site/about" },
-      { label: "Visi & Misi", url: "/site/about" },
-      { label: "Sejarah", url: "/site/history" },
+      { label: "Sejarah Poltek", url: "/site/history" },
+      { label: "Profile Kampus", url: "/site/about" },
       { label: "Sambutan Direktur", url: "/site/director-message" },
-      { label: "Struktur Organisasi", url: "/site/about" },
       { label: "Dosen & Staff", url: "/site/about" },
     ],
     subgroups: [
