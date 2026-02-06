@@ -116,6 +116,33 @@ const FACILITIES: Facility[] = [
     capacity: "500 orang",
     features: ["Sound System Pro", "LED Screen", "AC Central", "Stage Lighting"]
   },
+  {
+    id: 10,
+    title: "Lab IoT & Robotics",
+    category: "lab",
+    description: "Pusat riset Internet of Things dan robotika dengan kit development terlengkap.",
+    image: "/images/facility/poltek-presma5-1024x768.jpg",
+    capacity: "25 mahasiswa",
+    features: ["Arduino/Raspberry Pi Kit", "3D Printer", "Soldering Station", "Testing Bench"]
+  },
+  {
+    id: 11,
+    title: "Innovation Hub",
+    category: "umum",
+    description: "Inkubator startup dan kolaborasi industri untuk menghasilkan karya inovatif.",
+    image: "/images/facility/poltek-presma6-1024x768.jpg",
+    capacity: "40 orang",
+    features: ["Conference Area", "Creative Wall", "Idea Sandbox", "Venture Corner"]
+  },
+  {
+    id: 12,
+    title: "Executive Classroom",
+    category: "kelas",
+    description: "Ruang kelas dengan standar kenyamanan tinggi untuk program profesional.",
+    image: "/images/facility/ruang-kelas06-1024x768.jpeg",
+    capacity: "20 mahasiswa",
+    features: ["Leather Seats", "Private Station", "Touchscreen Display", "Personal AC Control"]
+  },
 ];
 
 const CATEGORIES = [
@@ -128,12 +155,16 @@ const CATEGORIES = [
 
 export default function FacilityPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
 
-  const filteredFacilities = activeCategory === "all" 
-    ? FACILITIES 
-    : FACILITIES.filter(f => f.category === activeCategory);
+  const filteredFacilities = FACILITIES.filter(f => {
+    const matchesCategory = activeCategory === "all" || f.category === activeCategory;
+    const matchesSearch = f.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         f.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <main className={`${jakarta.className} min-h-screen bg-gradient-to-b from-gray-50 to-white`}>
@@ -250,15 +281,34 @@ export default function FacilityPage() {
         </div>
       </section>
 
-      {/* CATEGORY FILTER */}
+      {/* SEARCH AND CATEGORY FILTER */}
       <section className="max-w-7xl mx-auto px-6 -mt-8 relative z-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+          className="bg-white rounded-3xl shadow-2xl p-6 border border-gray-100 flex flex-col gap-6"
         >
-          <div className="flex flex-wrap gap-3 justify-center">
+          {/* Search Bar */}
+          <div className="relative max-w-2xl mx-auto w-full">
+            <input
+              type="text"
+              placeholder="Cari fasilitas..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 pl-12 pr-6 focus:ring-2 focus:ring-[#F15A24]/20 focus:border-[#F15A24] transition-all outline-none font-medium"
+            />
+            <svg 
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
             {CATEGORIES.map((cat) => {
               const Icon = cat.icon;
               const isActive = activeCategory === cat.id;
@@ -277,16 +327,8 @@ export default function FacilityPage() {
                     }
                   `}
                 >
-                  <Icon className="text-xl" />
+                  <Icon className="text-base sm:text-xl" />
                   <span>{cat.label}</span>
-                  {isActive && (
-                    <motion.span 
-                      layoutId="activeCount"
-                      className="bg-white/20 px-2 py-0.5 rounded-full text-xs"
-                    >
-                      {filteredFacilities.length}
-                    </motion.span>
-                  )}
                 </motion.button>
               );
             })}
@@ -478,7 +520,7 @@ export default function FacilityPage() {
                 className="flex flex-wrap gap-4 justify-center"
               >
                 <Link
-                  href="/profil/fasilitas/virtual-tour"
+                  href="/site/facility-tour"
                   className="bg-[#F15A24] text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#ff6c35] transition-all duration-300 shadow-xl shadow-[#F15A24]/30 flex items-center gap-3 group/btn"
                 >
                   Mulai Virtual Tour
@@ -499,26 +541,26 @@ export default function FacilityPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 md:p-8"
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-8"
           >
             {/* Backdrop */}
             <div
               onClick={() => setSelectedFacility(null)}
-              className="absolute inset-0 bg-[#0E1333]/90 backdrop-blur-xl cursor-pointer"
+              className="absolute inset-0 bg-[#0E1333]/95 backdrop-blur-2xl cursor-pointer"
             />
 
             {/* Modal Content */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[500px] lg:max-h-[85vh] z-10"
+              exit={{ opacity: 0, scale: 0.9, y: 40 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="relative w-full max-w-6xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row max-h-[90vh] lg:max-h-[85vh] z-10"
             >
-              {/* Close Button */}
+              {/* Close Button - Enhanced visibility */}
               <button 
                 onClick={() => setSelectedFacility(null)}
-                className="absolute top-6 right-6 z-50 p-3 bg-white/20 hover:bg-[#F15A24] backdrop-blur-md rounded-full text-white transition-all duration-300 shadow-lg"
+                className="absolute top-6 right-6 z-50 p-3 bg-white hover:bg-[#F15A24] hover:text-white rounded-full text-[#1A2B5F] transition-all duration-300 shadow-xl border border-gray-100"
               >
                 <FiX className="text-2xl" />
               </button>
@@ -586,7 +628,7 @@ export default function FacilityPage() {
 
                   <div className="flex flex-col sm:flex-row gap-5">
                     <Link
-                      href="/profil/fasilitas/virtual-tour"
+                      href="/site/facility-tour"
                       onClick={() => setSelectedFacility(null)}
                       className="flex-1 bg-[#1A2B5F] text-white px-8 py-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest hover:bg-[#F15A24] transition-all duration-300 flex items-center justify-center gap-3 group/btn shadow-xl shadow-[#1A2B5F]/20"
                     >

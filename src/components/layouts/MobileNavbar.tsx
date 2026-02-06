@@ -53,8 +53,8 @@ export default function MobileNavbar() {
                 <div className="pl-4 space-y-2 border-l">
                   {menu.items?.map((item) => (
                     <Link
-                      key={item.url}
-                      href={item.url}
+                      key={item.label}
+                      href={item.url || "#"}
                       className="block text-sm py-1 hover:text-orange-600"
                     >
                       {item.label}
@@ -70,7 +70,7 @@ export default function MobileNavbar() {
                       <div className="pl-4 mt-1 space-y-1">
                         {sub.items.map((child) => (
                           <Link
-                            key={child.url}
+                            key={child.label}
                             href={child.url}
                             className="block text-sm hover:text-orange-600"
                           >

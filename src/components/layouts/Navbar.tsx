@@ -50,8 +50,8 @@ export default function Navbar() {
                 {/* Item normal */}
                 {menu.items?.map((item) => (
                   <Link
-                    key={item.url}
-                    href={item.url}
+                    key={item.label}
+                    href={item.url || "#"}
                     className="block px-4 py-2 hover:bg-gray-50"
                   >
                     {item.label}
@@ -76,7 +76,7 @@ export default function Navbar() {
                     >
                       {sub.items.map((child) => (
                         <Link
-                          key={child.url}
+                          key={child.label}
                           href={child.url}
                           className="block px-4 py-2 hover:bg-gray-50"
                         >
