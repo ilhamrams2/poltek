@@ -18,127 +18,160 @@ const cardVariants: Variants = {
 
 export default function QuickActionSection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-6 mt-12 mb-20">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* === CARD 1 === */}
-        <motion.a
-          href="/site/program"
-          custom={0}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={cardVariants}
-          whileHover={{ y: -12, transition: { duration: 0.3 } }}
-          className="
-            group relative h-[420px] rounded-[2rem] p-9 bg-white/90 backdrop-blur-xl
-            border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]
-            overflow-hidden flex flex-col transition-shadow hover:shadow-[0_20px_50px_rgba(29,35,78,0.1)]
-          "
-        >
-          {/* Highlight Glow */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-            <div className="absolute -inset-[100%] bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),transparent_50%)]" />
-          </div>
+    <section className="relative py-28 mt-12">
 
-          <div className="mb-8">
-            <div className="w-20 h-20 rounded-3xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-500 shadow-sm group-hover:shadow-blue-200">
-              <i className="ri-macbook-line text-[#1D234E] text-4xl group-hover:text-white transition-colors duration-500" />
+      {/* === BACKGROUND AURORA === */}
+      <div className="absolute inset-0 -z-10">
+        {/* Soft Dark Base */}
+        <div className="absolute inset-0 bg-[#0e162e]" />
+
+        {/* Purple Aurora Glow */}
+        <div className="absolute -top-32 left-1/3 w-[600px] h-[600px] bg-[#5320C0]/30 blur-[180px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#7D42FD]/20 blur-[200px] rounded-full" />
+
+        {/* Light Subtle Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.07] bg-[url('/images/patterns/grid.svg')] bg-cover" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+          {/* ==============================
+              CARD 1 — Glass Purple
+          =============================== */}
+          <motion.a
+            href="#"
+            custom={0}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            whileHover={{ y: -12, transition: { duration: 0.3 } }}
+            className="
+              group relative h-[420px] rounded-2xl p-8
+              bg-white/5 backdrop-blur-xl
+              border border-white/10
+              shadow-[0_0_30px_rgba(82,33,192,0.15)]
+              transition-all duration-500
+              hover:-translate-y-3 hover:shadow-[0_0_50px_rgba(82,33,192,0.35)]
+              overflow-hidden flex flex-col
+            "
+          >
+            {/* Glow Border Animation */}
+            <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#7D42FD]/50 transition-all duration-700" />
+
+            {/* Glow Shine */}
+            <div className="absolute -inset-10 opacity-0 group-hover:opacity-30 bg-[radial-gradient(circle_at_top_left,#7D42FD,transparent_60%)] transition duration-700" />
+
+            <div className="mb-6 mt-2">
+              <div className="w-20 h-20 rounded-xl bg-[#7D42FD]/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                <i className="ri-macbook-line text-white text-5xl" />
+              </div>
             </div>
-          </div>
 
-          <h3 className="text-2xl font-black text-[#1D234E] mb-4 leading-[1.2]">
-            Daftar Kuliah Bisa Dari Mana Saja
-          </h3>
+            <h3 className="text-xl font-bold text-white mb-3 leading-snug">
+              Daftar Kuliah di Politeknik Prestasi Prima Bisa dari Mana Saja
+            </h3>
 
-          <p className="text-zinc-500 font-medium leading-relaxed mb-6">
-            Banyak pilihan beasiswa menarik sampai dengan beasiswa kuliah gratis 100%. Daftarkan dirimu sekarang!
-          </p>
+            <p className="text-[15px] font-medium text-white/70 mb-4 leading-relaxed">
+              Banyak pilihan beasiswa sampai dengan kuliah gratis 100%
+            </p>
 
-          <div className="mt-auto flex items-center gap-2 text-blue-600 font-bold group-hover:gap-4 transition-all uppercase tracking-tighter text-sm">
-            Info Lengkap <i className="ri-arrow-right-line text-lg" />
-          </div>
+            <span className="mt-auto text-sm text-[#7D42FD] font-semibold group-hover:underline">
+              Info Beasiswa →
+            </span>
+          </motion.a>
 
-          {/* Abstract background shape */}
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-blue-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
-        </motion.a>
+          {/* ==============================
+              CARD 2 — Deep Navy + Shine
+          =============================== */}
+          <motion.a
+            href="#"
+            custom={1}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            whileHover={{ y: -12, transition: { duration: 0.3 } }}
+            className="
+              group relative h-[420px] rounded-2xl p-8
+              bg-[#121A36]/90 backdrop-blur-xl
+              border border-white/10
+              shadow-[0_0_30px_rgba(255,255,255,0.08)]
+              transition-all duration-500
+              hover:-translate-y-3 hover:shadow-[0_0_50px_rgba(255,255,255,0.25)]
+              overflow-hidden flex flex-col
+            "
+          >
+            {/* Shine Border */}
+            <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-white/30 transition-all duration-700" />
 
-        {/* === CARD 2 === */}
-        <motion.a
-          href="#"
-          custom={1}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={cardVariants}
-          whileHover={{ y: -12, transition: { duration: 0.3 } }}
-          className="
-            group relative h-[420px] rounded-[2rem] p-9
-            bg-[#1D234E] text-white shadow-2xl shadow-blue-900/20
-            overflow-hidden flex flex-col
-          "
-        >
-          {/* Moving Gradient Light */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-[radial-gradient(circle_at_top_right,white,transparent_50%)] transition-opacity duration-700" />
-          
-          <div className="mb-8">
-            <div className="w-20 h-20 rounded-3xl bg-white/10 flex items-center justify-center group-hover:bg-orange-600 transition-colors duration-500 shadow-sm">
-              <i className="ri-wallet-line text-white text-4xl" />
+            {/* Glow */}
+            <div className="absolute -inset-10 opacity-0 group-hover:opacity-20 bg-[radial-gradient(circle_at_top_right,#ffffff,transparent_60%)] transition duration-700" />
+
+            <div className="mb-6 mt-2">
+              <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                <i className="ri-wallet-line text-white text-5xl" />
+              </div>
             </div>
-          </div>
 
-          <h3 className="text-2xl font-black mb-4 leading-[1.2]">
-            Kuliah Berkualitas Tidak Harus Mahal
-          </h3>
+            <h3 className="text-xl font-bold text-white mb-3 leading-snug">
+              Kuliah di Politeknik Prestasi Prima Tidak Mahal
+            </h3>
 
-          <p className="text-white/70 font-medium leading-relaxed mb-6">
-            Cek rincian biaya perkuliahan dan skema pembayaran yang fleksibel sesuai kebutuhanmu.
-          </p>
+            <p className="text-[15px] font-medium text-white/70 mb-4 leading-relaxed">
+              Cek biaya perkuliahan disini
+            </p>
 
-          <div className="mt-auto flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all uppercase tracking-tighter text-sm">
-            Rincian Biaya <i className="ri-arrow-right-line text-lg" />
-          </div>
-          
-          {/* Abstract background shape */}
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/5 rounded-full group-hover:scale-150 transition-transform duration-700" />
-        </motion.a>
+            <span className="mt-auto text-sm text-white/90 font-semibold group-hover:underline">
+              Info Biaya Kuliah →
+            </span>
+          </motion.a>
 
-        {/* === CARD 3 === */}
-        <motion.a
-          href="/site/program"
-          custom={2}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={cardVariants}
-          whileHover={{ y: -12, transition: { duration: 0.3 } }}
-          className="
-            group relative h-[420px] rounded-[2rem] p-9
-            bg-linear-to-br from-[#ff7a00] to-[#ffb36b]
-            text-white shadow-2xl shadow-orange-500/20
-            overflow-hidden flex flex-col
-          "
-        >
-          <div className="mb-8">
-            <div className="w-20 h-20 rounded-3xl bg-black/10 flex items-center justify-center group-hover:bg-[#1D234E] transition-colors duration-500 shadow-sm">
-              <i className="ri-file-text-line text-white text-4xl" />
+          {/* ==============================
+              CARD 3 — Orange Premium
+          =============================== */}
+          <motion.a
+            href="#"
+            custom={2}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            whileHover={{ y: -12, transition: { duration: 0.3 } }}
+            className="
+              group relative h-[420px] rounded-2xl p-8
+              bg-gradient-to-br from-[#FF7700] to-[#FF8F2A]
+              text-white shadow-lg backdrop-blur-xl
+              transition-all duration-500
+              hover:-translate-y-3 hover:shadow-[0_0_50px_rgba(255,119,0,0.45)]
+              overflow-hidden flex flex-col
+            "
+          >
+            {/* Diagonal Shine */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-25 bg-linear-to-br from-white/30 to-transparent transition duration-700" />
+
+            <div className="mb-6 mt-2">
+              <div className="w-20 h-20 rounded-xl bg-black/20 flex items-center justify-center group-hover:scale-110 transition duration-300">
+                <i className="ri-file-text-line text-white text-5xl" />
+              </div>
             </div>
-          </div>
 
-          <h3 className="text-2xl font-black mb-4 leading-[1.2]">
-            Sudah Siap Gabung Bersama Kami?
-          </h3>
+            <h3 className="text-xl font-bold mb-3 leading-snug">
+              Sudah Siap Daftar Kuliah di Politeknik Prestasi Prima?
+            </h3>
 
-          <p className="text-white/90 font-medium leading-relaxed mb-6">
-            Klik tombol di bawah untuk memulai proses pendaftaran online yang cepat dan mudah.
-          </p>
+            <p className="text-[15px] font-medium text-white/90 mb-4 leading-relaxed">
+              Klik tombol di bawah ini untuk melakukan pendaftaran online
+            </p>
 
-          <div className="mt-auto flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all uppercase tracking-tighter text-sm">
-            Daftar Sekarang <i className="ri-arrow-right-line text-lg" />
-          </div>
+            <span className="mt-auto text-sm font-semibold group-hover:underline">
+              Info PMB Prestasi Prima →
+            </span>
+          </motion.a>
 
-          {/* Abstract background shape */}
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-black/5 rounded-full group-hover:scale-150 transition-transform duration-700" />
-        </motion.a>
+        </div>
       </div>
     </section>
   );
