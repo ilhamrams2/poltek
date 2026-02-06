@@ -20,10 +20,6 @@ export default function AboutSection() {
           className="relative w-full flex justify-center lg:justify-start"
         >
           <div className="relative group">
-            {/* Decorative Frame */}
-            <div className="absolute -inset-4 border-2 border-orange-100 rounded-[2.5rem] -rotate-3 group-hover:rotate-0 transition-transform duration-700 -z-10" />
-            <div className="absolute -inset-4 border-2 border-blue-100 rounded-[2.5rem] rotate-3 group-hover:rotate-0 transition-transform duration-700 -z-20" />
-            
             <Image
               src="/images/about/about.png"
               alt="Tentang Politeknik"
@@ -41,7 +37,7 @@ export default function AboutSection() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold">
-                  !
+                  <i className="ri-shield-check-fill text-3xl"></i>
                 </div>
                 <div>
                   <div className="text-2xl font-black text-[#1D234E]">Terbaik</div>
