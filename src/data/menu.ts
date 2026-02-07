@@ -49,10 +49,6 @@ export const MENU: MenuItem[] = [
     title: "Akademik",
     items: [
       { label: "Program Studi", url: "/site/studyProgram" },
-      { label: "Kalender Akademik", url: "/site/calendar" },
-      { label: "E-Learning / LMS", url: "/akademik/lms" },
-      { label: "Jadwal Kuliah", url: "/akademik/jadwal" },
-      { label: "Peraturan Akademik", url: "/site/about" },
     ],
     subgroups: [
       {
@@ -74,20 +70,7 @@ export const MENU: MenuItem[] = [
     ],
   },
 
-  /* ===========================
-   *        INFORMASI
-   * =========================== */
-  {
-    id: "informasi",
-    title: "Informasi",
-    items: [
-      { label: "Berita Kampus", url: "/site/news" },
-      { label: "Pengumuman", url: "/site/news" },
-      { label: "Agenda Kegiatan", url: "/site/agenda" },
-      { label: "Beasiswa", url: "/site/news" },
-      { label: "Karir & Magang", url: "/site/news" },
-    ],
-  },
+ 
 
   /* ===========================
    *      DOKUMENTASI
@@ -116,30 +99,5 @@ export const MENU: MenuItem[] = [
     ],
   },
 
-  /* ===========================
-   *         LAYANAN
-   * =========================== */
-  {
-    id: "layanan",
-    title: "Layanan",
-    items: [
-      { label: "Perpustakaan", url: "/layanan/perpustakaan" },
-      { label: "Biro Administrasi", url: "/layanan/bak" },
-      { label: "Kemahasiswaan", url: "/layanan/kemahasiswaan" },
-      { label: "Humas", url: "/layanan/humas" },
-    ],
-  },
 
-  /* ===========================
-   *        KERJASAMA
-   * =========================== */
-  {
-    id: "kerjasama",
-    title: "Kerjasama",
-    items: [
-      { label: "Mitra Industri", url: "/kerjasama/mitra-industri" },
-      { label: "MOU / MOA", url: "/kerjasama/mou-moa" },
-      { label: "Pengabdian Masyarakat", url: "/kerjasama/pengabdian" },
-    ],
-  },
 ];
