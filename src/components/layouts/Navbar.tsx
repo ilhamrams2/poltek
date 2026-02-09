@@ -15,17 +15,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* === LOGO === */}
-        <Link href="/" className="flex items-center gap-4 group">
-          <div className="relative w-12 h-12 rounded-xl overflow-hidden p-[1px] bg-gradient-to-br from-[#FF6B00] to-[#FF8C00] shadow-lg shadow-[#FF6B00]/20">
-             <div className="w-full h-full bg-[#020617] rounded-[11px] flex items-center justify-center overflow-hidden">
-                <Image
-                  src="/images/logo_politeknik.png"
-                  alt="Logo"
-                  width={36}
-                  height={36}
-                  className="group-hover:scale-110 transition-transform duration-500"
-                />
-             </div>
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12 flex items-center justify-center">
+             <Image
+               src="/images/logo_politeknik.png"
+               alt="Logo"
+               width={48}
+               height={48}
+               className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
+             />
           </div>
           <div className="flex flex-col">
             <span className="font-black text-white text-sm tracking-tighter leading-none">POLITEKNIK</span>

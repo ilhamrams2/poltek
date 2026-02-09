@@ -44,16 +44,14 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" className="inline-flex items-center gap-4 group">
-              <div className="relative w-16 h-16 rounded-2xl overflow-hidden p-1 bg-gradient-to-br from-[#F15A24] to-orange-400">
-                 <div className="w-full h-full bg-[#080C1B] rounded-[14px] flex items-center justify-center overflow-hidden">
-                    <Image
-                      src="/images/logo_politeknik.png"
-                      alt="Logo"
-                      width={48}
-                      height={48}
-                      className="group-hover:scale-110 transition-transform"
-                    />
-                 </div>
+              <div className="relative w-16 h-16 flex items-center justify-center">
+                 <Image
+                   src="/images/logo_politeknik.png"
+                   alt="Logo"
+                   width={64}
+                   height={64}
+                   className="w-full h-full object-contain group-hover:scale-110 transition-transform drop-shadow-2xl"
+                 />
               </div>
               <div>
                 <h2 className="text-xl font-black text-white leading-none tracking-tight">Politeknik <br/> <span className="text-[#F15A24]">Prestasi Prima</span></h2>

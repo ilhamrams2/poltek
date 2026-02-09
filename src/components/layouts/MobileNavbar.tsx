@@ -16,10 +16,8 @@ export default function MobileNavbar() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl overflow-hidden p-[1px] bg-gradient-to-br from-[#FF6B00] to-[#FF8C00]">
-             <div className="w-full h-full bg-[#020617] rounded-[10px] flex items-center justify-center">
-                <Image src="/images/logo_politeknik.png" alt="Logo" width={24} height={24} />
-             </div>
+          <div className="w-10 h-10 flex items-center justify-center">
+             <Image src="/images/logo_politeknik.png" alt="Logo" width={40} height={40} className="w-full h-full object-contain drop-shadow-lg" />
           </div>
           <div className="flex flex-col">
             <span className="font-black text-white text-[10px] tracking-tighter leading-none">POLITEKNIK</span>
