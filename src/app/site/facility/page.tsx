@@ -525,27 +525,30 @@ export default function FacilityPage() {
               Rasakan pengalaman nyata menelusuri setiap laboratorium dan fasilitas unggulan kami secara digital dari mana saja.
             </p>
 
-            <div className="flex flex-wrap gap-6 justify-center">
+            <div className="flex flex-wrap gap-6 justify-center pt-8">
               <Link
                 href="/site/facility-tour"
-                className="group relative bg-[#FF6B00] text-white px-12 py-6 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-[0_20px_50px_rgba(255,107,0,0.3)] hover:scale-105 transition-all duration-300 overflow-hidden"
+                className="group relative flex items-center"
               >
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <span className="relative z-10 flex items-center gap-3">
-                  Mulai Jelajah <RiArrowRightUpLine className="text-xl" />
-                </span>
+                {/* Magnetic Glow Aura */}
+                <div className="absolute inset-0 bg-[#FF6B00]/20 rounded-full blur-3xl group-hover:bg-[#FF6B00]/40 transition-all duration-700 opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-110" />
+                
+                <div className="relative flex items-center gap-10 bg-white/5 backdrop-blur-2xl border border-white/10 hover:border-white/20 pl-14 pr-4 py-4 rounded-full transition-all duration-500 overflow-hidden shadow-2xl">
+                  {/* The Liquid Slide Background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-orange-400 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]" />
+                  
+                  {/* Subtle Shimmer */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-300" />
+
+                  <span className="relative z-10 text-white font-black text-[11px] uppercase tracking-[0.3em] group-hover:tracking-[0.5em] transition-all duration-500">
+                    Mulai Jelajah
+                  </span>
+                  
+                  <div className="relative z-10 w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#FF6B00] shadow-xl transition-all duration-500 group-hover:rotate-45 group-hover:scale-110">
+                    <RiArrowRightUpLine className="text-3xl" />
+                  </div>
+                </div>
               </Link>
-              
-              <div className="flex -space-x-3 items-center">
-                 {[1,2,3,4].map(i => (
-                   <div key={i} className="w-12 h-12 rounded-full border-4 border-[#050A1F] overflow-hidden bg-gray-800">
-                      <img src={`https://i.pravatar.cc/100?img=${i+40}`} alt="User" />
-                   </div>
-                 ))}
-                 <div className="pl-6 text-white/40 text-[10px] font-black uppercase tracking-widest">
-                    1K+ Lulusan Telah Bergabung
-                 </div>
-              </div>
             </div>
           </div>
         </motion.div>
