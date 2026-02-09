@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ==========================================
-#  Politeknik Prestasi Prima - VPS Production Deploy Script
-#  For Ubuntu/Debian/CentOS VPS with Node.js & PM2
+#  UNIVERSAL DEPLOY SCRIPT (VPS & Shared Hosting)
+#  Politeknik Prestasi Prima
 # ==========================================
 
 # Colors
@@ -12,73 +12,107 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-APP_NAME="poltek-app"
-PORT=3000
-
 echo -e "${BLUE}==============================================${NC}"
-echo -e "${BLUE}   STARTING VPS PRODUCTION DEPLOYMENT         ${NC}"
+echo -e "${BLUE}   UNIVERSAL DEPLOYMENT MANAGER               ${NC}"
 echo -e "${BLUE}==============================================${NC}"
+echo -e "Where are you deploying this application?"
+echo -e "1) ${YELLOW}Shared Hosting / cPanel${NC} (Static HTML Export)"
+echo -e "2) ${YELLOW}VPS / Dedicated Server${NC} (Node.js + SSR + PM2)"
+echo -e "3) Exit"
+read -p "Select an option [1-3]: " DEPLOY_MODE
 
-# 1. Environment Check
-echo -e "\n${YELLOW}[1/4] Checking System Requirements...${NC}"
-if ! command -v npm &> /dev/null; then
-    echo -e "${RED}Error: npm is not installed! Please install Node.js first.${NC}"
-    exit 1
-fi
-
-if ! command -v pm2 &> /dev/null; then
-    echo -e "${YELLOW}PM2 is not installed. Installing PM2 globally...${NC}"
-    npm install -g pm2
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}✓ PM2 Installed Successfully${NC}"
-    else
-        echo -e "${RED}Error: Failed to install PM2. Try running with sudo.${NC}"
+# ==========================================
+#  SHARED HOSTING FLOW (Static)
+# ==========================================
+if [ "$DEPLOY_MODE" == "1" ]; then
+    echo -e "\n${BLUE}>>> Initiating Shared Hosting Deployment (Static)...${NC}"
+    
+    # Clean previous builds
+    rm -rf out .next
+    
+    echo -e "${YELLOW}Building for Static Export...${NC}"
+    # Use the specific ENV variable to trigger static config in next.config.ts
+    export DEPLOY_TARGET="static"
+    npm run build
+    
+    if [ ! -d "out" ]; then
+        echo -e "${RED}Error: Build failed! 'out' directory not found.${NC}"
         exit 1
     fi
-fi
-echo -e "${GREEN}✓ Environment Ready${NC}"
+    
+    # Generate .htaccess for proper routing on Apache/cPanel
+    echo -e "${YELLOW}Generating .htaccess configuration...${NC}"
+    cat > out/.htaccess <<EOL
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+  RewriteRule ^ %1 [R=301,L]
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+  ErrorDocument 404 /404.html
+</IfModule>
+EOL
 
-# 2. Dependency Installation
-echo -e "\n${YELLOW}[2/4] Installing Dependencies...${NC}"
-# Use 'npm ci' for faster, reliable builds if package-lock exists, else 'npm install'
-if [ -f "package-lock.json" ]; then
-    npm ci --legacy-peer-deps
-else
+    # Package files
+    echo -e "${YELLOW}Compressing files...${NC}"
+    if command -v zip &> /dev/null; then
+        rm -f deploy_package.zip
+        cd out
+        zip -r "../deploy_package.zip" . * .htaccess
+        cd ..
+        echo -e "${GREEN}SUCCESS! Upload 'deploy_package.zip' to your cPanel public_html folder.${NC}"
+    else
+        echo -e "${YELLOW}Zip command not found. Please verify the 'out' folder manually.${NC}"
+    fi
+
+# ==========================================
+#  VPS FLOW (Node.js / PM2)
+# ==========================================
+elif [ "$DEPLOY_MODE" == "2" ]; then
+    echo -e "\n${BLUE}>>> Initiating VPS Deployment (Node.js/SSR)...${NC}"
+    
+    APP_NAME="poltek-app"
+    
+    # Install Dependencies
+    echo -e "${YELLOW}Installing dependencies...${NC}"
     npm install --legacy-peer-deps
-fi
-echo -e "${GREEN}✓ Dependencies Installed${NC}"
+    
+    # Build
+    echo -e "${YELLOW}Building for Production (SSR)...${NC}"
+    # Ensure DEPLOY_TARGET is NOT set to 'static'
+    unset DEPLOY_TARGET
+    npm run build
+    
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Build failed.${NC}"
+        exit 1
+    fi
+    
+    # PM2 Management
+    if command -v pm2 &> /dev/null; then
+        echo -e "${YELLOW}Managing PM2 process...${NC}"
+        pm2 describe $APP_NAME > /dev/null
+        if [ $? -eq 0 ]; then
+            pm2 reload $APP_NAME
+            echo -e "${GREEN}App '$APP_NAME' reloaded successfully.${NC}"
+        else
+            pm2 start npm --name "$APP_NAME" -- start
+            echo -e "${GREEN}App '$APP_NAME' started successfully.${NC}"
+        fi
+        pm2 save
+    else
+        echo -e "${RED}PM2 not found!${NC} Installing PM2..."
+        npm install -g pm2
+        pm2 start npm --name "$APP_NAME" -- start
+        pm2 save
+        echo -e "${GREEN}PM2 installed and app started.${NC}"
+    fi
+    
+    echo -e "${GREEN}Deployment Complete! Your app is running.${NC}"
 
-# 3. Build Application
-echo -e "\n${YELLOW}[3/4] Building Next.js Application...${NC}"
-npm run build
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error: Build failed! Aborting deployment.${NC}"
-    exit 1
-fi
-echo -e "${GREEN}✓ Build Successful${NC}"
-
-# 4. Start/Restart with PM2
-echo -e "\n${YELLOW}[4/4] Starting Application with PM2...${NC}"
-
-# Check if app is already running
-pm2 describe $APP_NAME > /dev/null
-if [ $? -eq 0 ]; then
-    echo "Reloading existing application..."
-    pm2 reload $APP_NAME
 else
-    echo "Starting application for the first time..."
-    pm2 startnpm --name "$APP_NAME" -- start
-    # Alternative raw command if npm script has issues:
-    # pm2 start node_modules/next/dist/bin/next --name "$APP_NAME" -- start
+    echo "Exiting..."
+    exit 0
 fi
-
-# Save PM2 list so it restarts on reboot
-pm2 save
-
-echo -e "\n${BLUE}==============================================${NC}"
-echo -e "${GREEN}   DEPLOYMENT COMPLETE!   ${NC}"
-echo -e "${BLUE}==============================================${NC}"
-echo -e "Your app is running on port ${YELLOW}$PORT${NC}"
-echo -e "Use 'pm2 status' to check status"
-echo -e "Use 'pm2 logs $APP_NAME' to view logs"
-echo -e "${BLUE}==============================================${NC}"
