@@ -1,35 +1,32 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { RiPhoneLine, RiMailLine } from "react-icons/ri";
+import { RiPhoneLine, RiMailLine, RiDownload2Line } from "react-icons/ri";
 
 export default function Topbar() {
-  const [currentLang, setCurrentLang] = useState<"id" | "en">("id");
-
   return (
-    <div className="w-full bg-[#0E1333] text-white text-[15px] px-6 lg:px-12 hidden lg:block border-b border-white/10">
-      {/* Mengubah justify-between menjadi justify-end agar semua konten terdorong ke kanan */}
+    <div className="w-full bg-[#020617]/60 backdrop-blur-md text-white/50 text-[9px] font-black uppercase tracking-[0.3em] px-6 lg:px-12 hidden lg:block border-b border-white/[0.08]">
       <div className="max-w-7xl mx-auto flex items-center justify-end py-3">
 
         {/* Contact + Links Container */}
-        <div className="flex items-center gap-6 text-white/90">
+        <div className="flex items-center gap-10">
 
-          <div className="flex items-center gap-2 hover:text-white transition">
-            <RiPhoneLine size={15} className="opacity-80" />
+          <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+            <RiPhoneLine size={12} className="text-[#FF6B00] group-hover:scale-110 transition-transform" />
             <span>+62 851-9932-8825</span>
           </div>
 
-          <div className="flex items-center gap-2 hover:text-white transition">
-            <RiMailLine size={15} className="opacity-80" />
-            <span>poltek.prestasiprima@gmail.id</span>
+          <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+            <RiMailLine size={12} className="text-[#FF6B00] group-hover:scale-110 transition-transform" />
+            <span>info@politekpresma.ac.id</span>
           </div>
 
           <Link
             href="/download-brosur"
-            className="px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition"
+            className="flex items-center gap-2 text-[#FF6B00] hover:text-white transition-colors group"
           >
-            Download Brosur
+            <RiDownload2Line size={12} className="group-hover:translate-y-0.5 transition-transform" />
+            <span>Download Brosur</span>
           </Link>
 
         </div>

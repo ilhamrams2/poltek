@@ -94,12 +94,13 @@ const cards = [
 
 export default function QuickActionSection() {
   return (
-    <section className="relative py-20 px-6 overflow-hidden">
-      {/* Optional Subtle Background Pattern */}
-      <div className="absolute inset-0 -z-10 bg-slate-50/50" />
+    <section className="relative py-24 px-6 overflow-hidden bg-white">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#FF6B00]/5 blur-[120px] rounded-full -z-10" />
 
       <motion.div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -131,17 +132,17 @@ function Card({ data }: { data: any }) {
         transition-all duration-500 ease-out
         ${
           isLight
-            ? "bg-white text-[#1D234E] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
+            ? "bg-white text-[#050A1F] shadow-[0_15px_50px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_70px_-20px_rgba(0,0,0,0.15)]"
             : ""
         }
         ${
           isDark
-            ? "bg-[#1D234E] text-white shadow-[0_10px_40px_-10px_rgba(29,35,78,0.4)] hover:shadow-[0_20px_60px_-15px_rgba(29,35,78,0.6)]"
+            ? "bg-[#050A1F] text-white shadow-[0_20px_60px_-15px_rgba(5,10,31,0.4)] hover:shadow-[0_30px_80px_-20px_rgba(5,10,31,0.6)] border border-white/5"
             : ""
         }
         ${
           isOrange
-            ? "bg-[#FF7A00] text-white shadow-[0_10px_40px_-10px_rgba(255,122,0,0.4)] hover:shadow-[0_20px_60px_-15px_rgba(255,122,0,0.6)]"
+            ? "bg-gradient-to-br from-[#FF6B00] to-[#FF8C00] text-white shadow-[0_25px_60px_-15px_rgba(255,107,0,0.4)] hover:shadow-[0_35px_80px_-20px_rgba(255,107,0,0.6)]"
             : ""
         }
         transform hover:-translate-y-2
@@ -172,7 +173,7 @@ function Card({ data }: { data: any }) {
             w-20 h-20 rounded-3xl flex items-center justify-center mb-8
             ${
               isLight
-                ? "bg-slate-50 text-[#1D234E]"
+                ? "bg-slate-50 text-[#FF6B00]"
                 : "bg-white/10 text-white backdrop-blur-sm"
             }
           `}

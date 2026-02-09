@@ -11,95 +11,97 @@ interface ProgramItem {
   link: string;
 }
 
-interface ProgramGroup {
-  [key: string]: ProgramItem[];
-}
+import { PROGRAMS_DATA } from "@/data/programs";
 
 export default function AcademicProgramsSection() {
   const [activeTab, setActiveTab] = useState<"D3" | "D4">("D3");
 
-  const programs: ProgramGroup = {
+  const programs = {
     D3: [
       {
-        title: "Administrasi Perkantoran",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d3_administrasi_perkantoran"],
         label: "Program D3",
-        desc: "Mempelajari tata kelola administrasi perkantoran modern berbasis teknologi informasi.",
+        img: PROGRAMS_DATA["d3_administrasi_perkantoran"].heroImage,
         link: "/site/program/d3_administrasi_perkantoran",
       },
       {
-        title: "Manajemen Pemasaran",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d3_manajemen_pemasaran"],
         label: "Program D3",
-        desc: "Fokus pada strategi pemasaran digital, riset pasar, dan perilaku konsumen di era modern.",
+        img: PROGRAMS_DATA["d3_manajemen_pemasaran"].heroImage,
         link: "/site/program/d3_manajemen_pemasaran",
       },
       {
-        title: "Rekayasa Perangkat Lunak",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d3_rekayasa_perangkat_lunak"],
         label: "Program D3",
-        desc: "Pengembangan dasar-dasar perangkat lunak dan arsitektur sistem informasi enterprise.",
+        img: PROGRAMS_DATA["d3_rekayasa_perangkat_lunak"].heroImage,
         link: "/site/program/d3_rekayasa_perangkat_lunak",
       },
     ],
     D4: [
       {
-        title: "Bisnis Digital",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d4_bisnis_digital"],
         label: "Program D4",
-        desc: "Mempelajari strategi bisnis modern, e-commerce, dan analisis data untuk pertumbuhan bisnis di era digital.",
+        img: PROGRAMS_DATA["d4_bisnis_digital"].heroImage,
         link: "/site/program/d4_bisnis_digital",
       },
       {
-        title: "Teknologi Rekayasa Jaringan Komputer",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d4_teknologi_rekayasa_jaringan_komputer"],
         label: "Program D4",
-        desc: "Studi mendalam tentang infrastruktur jaringan, keamanan siber, dan manajemen sistem server.",
+        img: PROGRAMS_DATA["d4_teknologi_rekayasa_jaringan_komputer"].heroImage,
         link: "/site/program/d4_teknologi_rekayasa_jaringan_komputer",
       },
       {
-        title: "Teknologi Rekayasa Multimedia",
-        img: "/images/sections/program/programdummy.png",
+        ...PROGRAMS_DATA["d4_teknologi_rekayasa_multimedia"],
         label: "Program D4",
-        desc: "Menciptakan konten digital kreatif, produksi video, dan desain interaktif berstandar industri.",
+        img: PROGRAMS_DATA["d4_teknologi_rekayasa_multimedia"].heroImage,
         link: "/site/program/d4_teknologi_rekayasa_multimedia",
       },
     ],
   };
 
   return (
-    <section className="w-full py-24 lg:py-32 bg-gray-50/50 flex flex-col items-center overflow-hidden">
+    <section className="w-full py-24 lg:py-32 bg-white flex flex-col items-center overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
+      <div className="absolute top-48 right-0 w-96 h-96 bg-orange-50/50 rounded-full blur-[100px] -z-10" />
+
       {/* Title */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-center px-6 mb-16 lg:mb-20"
       >
-        <span className="text-orange-600 font-bold uppercase tracking-[0.4em] text-[9px] md:text-[10px] mb-4 block">Our Curriculum</span>
-        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-tight mb-6">
-          Program <span className="text-orange-500">Akademik</span>
+        <div className="inline-flex items-center gap-3 px-5 py-2 bg-[#FF6B00]/5 border border-[#FF6B00]/10 rounded-full mb-6">
+          <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+          <span className="text-[#FF6B00] font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px]">Academic Overview</span>
+        </div>
+        
+        <h2 className="text-4xl lg:text-5xl xl:text-7xl font-black text-[#020617] leading-[1.05] mb-8 tracking-tighter">
+          Pilihan Program <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Studi Unggulan</span>
         </h2>
-        <div className="w-16 h-1.5 bg-orange-500 mx-auto rounded-full mb-6" />
-        <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed font-medium">
-          Dapatkan keunggulan kompetitif dengan pilihan program studi vokasi yang selaras dengan perkembangan industri global masa kini.
+
+        <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed font-semibold">
+          Kuasai keahlian masa depan dengan kurikulum vokasi yang dirancang khusus untuk mencetak profesional siap kerja di era ekonomi digital.
         </p>
       </motion.div>
 
       {/* Tabs Container */}
-      <div className="flex bg-white p-1.5 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.05)] mb-16 md:mb-20 relative z-10 border border-gray-100">
+      <div className="flex bg-[#050A1F] p-2 rounded-[2rem] shadow-[0_20px_50px_rgba(2,6,23,0.15)] mb-16 md:mb-20 relative z-10">
         {(["D3", "D4"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`relative min-w-[120px] md:min-w-[160px] py-3.5 px-6 rounded-xl transition-all duration-300 font-black text-base z-10
-              ${activeTab === tab ? "text-white" : "text-[#1D234E] hover:text-orange-600"}`}
+            className={`relative min-w-[140px] md:min-w-[180px] py-4 px-8 rounded-[1.5rem] transition-all duration-500 font-black text-xs md:text-sm uppercase tracking-widest z-10
+              ${activeTab === tab ? "text-white" : "text-gray-400 hover:text-white"}`}
           >
             {activeTab === tab && (
               <motion.div 
-                layoutId="activeTab"
-                className="absolute inset-0 bg-orange-500 rounded-xl -z-10 shadow-lg shadow-orange-500/40"
-                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                layoutId="activeTabBg"
+                className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-orange-500 rounded-[1.5rem] -z-10 shadow-lg shadow-[#FF6B00]/20"
+                transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
               />
             )}
             Diploma {tab.replace("D", "")}
@@ -138,14 +140,14 @@ export default function AcademicProgramsSection() {
                 
                 {/* Overlays */}
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-all duration-700" />
-                <div className="absolute inset-0 bg-linear-to-tr from-orange-600/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute inset-0 bg-linear-to-tr from-[#FF6B00]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
                 {/* Badge */}
                 <div className="absolute top-6 left-6 overflow-hidden z-20">
                   <motion.span
                     initial={{ y: -20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    className="inline-block bg-orange-500 text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-xl"
+                    className="inline-block bg-[#FF6B00] text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-xl"
                   >
                     {prog.label}
                   </motion.span>
@@ -160,12 +162,12 @@ export default function AcademicProgramsSection() {
                   <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-700 ease-in-out overflow-hidden">
                     <div className="min-h-0">
                       <p className="text-gray-100 text-sm md:text-base leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 font-medium">
-                        {prog.desc}
+                        {prog.description}
                       </p>
                       
                       <a
                         href={prog.link}
-                        className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-orange-600 px-5 py-3 rounded-xl hover:bg-white hover:text-orange-600 transition-all shadow-xl uppercase tracking-widest"
+                        className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] px-6 py-4 rounded-xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest"
                       >
                         Detail Program <i className="ri-arrow-right-up-line text-lg"></i>
                       </a>

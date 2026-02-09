@@ -11,7 +11,7 @@ export default function GlobalLoader() {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds
+    }, 800); // 0.8 seconds (faster but still gives premium feel)
 
     return () => clearTimeout(timer);
   }, []);

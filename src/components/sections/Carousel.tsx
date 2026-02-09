@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 type CarouselProps = {
   images: string[];
@@ -12,7 +12,7 @@ type CarouselProps = {
 
 export default function Carousel({
   images,
-  interval = 4000,
+  interval = 5000,
   fullHeight = false,
   roundedClass = "rounded-3xl",
 }: CarouselProps) {
@@ -31,7 +31,6 @@ export default function Carousel({
   }, [index, images.length, interval]);
 
   useEffect(() => {
-    // pause auto-rotation on hover
     const cont = containerRef.current;
     if (!cont) return;
     const onEnter = () => {
@@ -58,47 +57,61 @@ export default function Carousel({
     <div
       ref={containerRef}
       className={`relative w-full ${
-        fullHeight ? "h-full" : "h-[540px]"
-      } overflow-hidden ${roundedClass}`}
+        fullHeight ? "h-full" : "h-[600px]"
+      } overflow-hidden ${roundedClass} bg-slate-900`}
     >
       {/* slides */}
       <div className="w-full h-full relative">
-        {images.map((src, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              i === index ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-            aria-hidden={i === index ? "false" : "true"}
-          >
-            <motion.img
-              initial={{ scale: 1 }}
-              animate={i === index ? { scale: 1.1 } : { scale: 1 }}
-              transition={{ duration: interval / 1000, ease: "linear" }}
-              src={src}
-              alt={`slide-${i}`}
-              className="w-full h-full object-cover block"
-              draggable={false}
-            />
-          </div>
-        ))}
+        <AnimatePresence initial={false}>
+          {images.map((src, i) => (
+            i === index && (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="absolute inset-0 z-10"
+              >
+                <motion.img
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.15 }}
+                  transition={{ duration: interval / 1000 + 1, ease: "linear" }}
+                  src={src}
+                  alt={`slide-${i}`}
+                  className="w-full h-full object-cover block"
+                  draggable={false}
+                />
+                {/* Individual overlay to prevent flickering */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30 pointer-events-none" />
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
       </div>
 
-      {/* overlay gradient (subtle) */}
-      <div className="absolute inset-0 pointer-events-none rounded-3xl bg-linear-to-b from-black/25 via-transparent to-black/20" />
-
-      {/* Dots — kanan bawah horizontal */}
-      <div className="absolute bottom-5 right-5 flex gap-2 z-20">
+      {/* Modern Dots — Kanan bawah */}
+      <div className="absolute bottom-10 right-10 flex gap-3 z-30">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === i ? "bg-orange-500 scale-125" : "bg-white/70"
-            }`}
-          />
+            className="group relative flex items-center justify-center p-2"
+          >
+            <div className={`w-2 h-2 rounded-full transition-all duration-500 ${
+              index === i ? "bg-[#FF6B00] scale-150" : "bg-white/40"
+            }`} />
+            {index === i && (
+              <motion.div 
+                layoutId="active-dot"
+                className="absolute inset-0 border border-[#FF6B00] rounded-full scale-150"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+          </button>
         ))}
       </div>
     </div>
   );
 }
+

@@ -31,7 +31,7 @@ export const PROGRAMS_DATA: Record<string, ProgramDetail> = {
     subtitle: "Modern Marketing & Digital Strategy",
     description: "Kuasai strategi pemasaran digital, branding, dan analisis pasar untuk memenangkan kompetisi di era ekonomi kreatif.",
     longDescription: "Program Studi D3 Manajemen Pemasaran dirancang untuk menghasilkan tenaga ahli madya yang kompeten dalam merencanakan, mengimplementasikan, dan mengevaluasi strategi pemasaran. Mahasiswa akan mempelajari dasar-dasar bisnis, psikologi konsumen, hingga teknik pemasaran digital mutakhir seperti Social Media Marketing, SEO, dan Data Analytics.",
-    heroImage: "/images/program/hero-manajemen.png",
+    heroImage: "/images/facility/poltek-presma1-1024x768.jpg",
     color: "#F15A24",
     competencies: [
       { title: "Digital Marketing", desc: "Keahlian mengelola kampanye iklan di Google, Facebook, dan Instagram.", icon: "RiGlobalLine" },
@@ -59,7 +59,7 @@ export const PROGRAMS_DATA: Record<string, ProgramDetail> = {
     subtitle: "Professional Office Management",
     description: "Menjadi tenaga administrasi profesional dengan keahlian tata kelola kantor modern berbasis teknologi informasi.",
     longDescription: "Kurikulum kami fokus pada efisiensi operasional kantor, manajemen dokumen digital, komunikasi bisnis internasional, dan protokol perkantoran modern. Mahasiswa dilatih menggunakan berbagai software otomasi kantor terkini.",
-    heroImage: "/images/program/hero-administrasi.png",
+    heroImage: "/images/facility/poltek-presma2-1024x768.jpg",
     color: "#F15A24",
     competencies: [
       { title: "Office Automation", desc: "Mengoperasikan perangkat lunak perkantoran tingkat mahir.", icon: "RiComputerLine" },
