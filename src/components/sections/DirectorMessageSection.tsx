@@ -40,7 +40,7 @@ export default function DirectorMessageSection() {
             viewport={{ once: true }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative z-10 rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-[#0A1128]">
+            <div className="relative z-10 rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-[#0A1128] w-full max-w-[500px] mx-auto lg:max-w-full">
               <Image 
                 src="/images/direktur.png" 
                 alt="Direktur Politeknik" 
@@ -66,7 +66,7 @@ export default function DirectorMessageSection() {
               <span className="text-[#FF6B00] text-[10px] font-black uppercase tracking-[0.2em]">Sambutan Direktur Utama</span>
             </motion.div>
 
-            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-white leading-[1.05] tracking-tight">
               {titleWords.map((word, i) => (
                 <span key={i} className="inline-block mr-[0.2em]">
                   {word === "Digital" || word === "Masa" || word === "Depan" ? (

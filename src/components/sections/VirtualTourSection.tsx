@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building, Play, Globe, Camera } from "lucide-react";
+import { RiBuildingLine, RiPlayFill, RiGlobalLine, RiCameraLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 export default function VirtualTourSection() {
@@ -45,8 +45,8 @@ export default function VirtualTourSection() {
 
           <div className="flex flex-wrap gap-8">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <Globe size={20} className="text-orange-500" />
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-orange-500">
+                <RiGlobalLine />
               </div>
               <div>
                 <div className="text-sm font-black">Akses 24/7</div>
@@ -55,8 +55,8 @@ export default function VirtualTourSection() {
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <Camera size={20} className="text-orange-500" />
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-orange-500">
+                <RiCameraLine />
               </div>
               <div>
                 <div className="text-sm font-black">Ultra HD</div>
@@ -70,8 +70,8 @@ export default function VirtualTourSection() {
             className="group relative mt-16 inline-flex items-center gap-4 bg-orange-500 hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-900/20 transition-all duration-300 hover:-translate-y-1"
           >
             Mulai Virtual Tour
-            <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
-              <Play size={18} fill="currentColor" />
+            <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors text-sm">
+              <RiPlayFill />
             </div>
           </Link>
         </motion.div>
@@ -104,8 +104,8 @@ export default function VirtualTourSection() {
 
                 {/* Center Play Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 bg-black/20">
-                   <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center text-[#1D234E] shadow-2xl scale-75 group-hover/card:scale-100 transition-transform duration-500">
-                      <Play size={32} fill="currentColor" />
+                   <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center text-[#1D234E] shadow-2xl scale-75 group-hover/card:scale-100 transition-transform duration-500 text-3xl">
+                      <RiPlayFill />
                    </div>
                 </div>
              </div>
@@ -113,8 +113,8 @@ export default function VirtualTourSection() {
              {/* Footer Info */}
              <div className="flex items-center justify-between mt-6 px-4 pb-4">
                 <div className="flex items-center gap-4">
-                   <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                      <Building size={18} className="text-orange-500" />
+                   <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-lg">
+                      <RiBuildingLine className="text-orange-500" />
                    </div>
                    <div>
                       <h4 className="font-black text-sm">Main Campus</h4>

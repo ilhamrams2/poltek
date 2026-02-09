@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 interface ProgramItem {
   title: string;
@@ -78,7 +79,7 @@ export default function AcademicProgramsSection() {
           <span className="text-[#FF6B00] font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px]">Academic Overview</span>
         </div>
         
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-[#020617] leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-[#020617] leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
           Pilihan Program <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Studi Unggulan</span>
         </h2>
@@ -213,12 +214,12 @@ function ProgramCard({ prog, idx }: { prog: ProgramItem; idx: number }) {
               {prog.description}
             </p>
 
-            <a
-              href={prog.link}
-              className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] px-6 py-4 rounded-xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest"
-            >
-              Detail Program <i className="ri-arrow-right-up-line text-lg"></i>
-            </a>
+              <a
+                href={prog.link}
+                className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] px-6 py-4 rounded-xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest"
+              >
+                Detail Program <RiArrowRightUpLine className="text-lg" />
+              </a>
           </div>
         </div>
       </div>

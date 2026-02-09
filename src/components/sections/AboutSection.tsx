@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
+import { RiShieldStarLine, RiArrowRightLine } from "react-icons/ri";
+
 export default function AboutSection() {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -19,7 +21,7 @@ export default function AboutSection() {
   return (
     <section className="relative overflow-hidden bg-white py-12 sm:py-24 lg:py-32">
       {/* Background patterns - More Vibrant */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-[#FF6B00]/5 to-transparent -z-10" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#FF6B00]/5 to-transparent -z-10" />
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/10 rounded-full blur-[120px] -z-10 animate-pulse" />
       <div className="absolute -bottom-24 right-0 w-80 h-80 bg-[#FF6B00]/5 rounded-full blur-[100px] -z-10" />
 
@@ -38,15 +40,17 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="relative w-full flex justify-center lg:justify-start"
         >
-          <div className="relative group">
+          <div className="relative group rounded-3xl overflow-hidden shadow-2xl w-full">
             <Image 
               src="/images/about/about.png" 
               alt="Tentang Politeknik" 
-              width={600}
-              height={700}
-              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-1000"
+              width={800}
+              height={900}
+              className="w-full h-auto object-cover transition-transform duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+            
+            {/* Added overlay content or decoration if needed */}
           </div>
 
           {/* Decorative Elements */}
@@ -55,10 +59,10 @@ export default function AboutSection() {
           {/* Experience Badge */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="absolute -bottom-6 -right-4 sm:-bottom-10 sm:-right-10 md:-right-6 lg:-right-10 z-20 bg-white p-4 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-3xl border border-gray-50 flex items-center gap-3 sm:gap-5"
+            className="absolute -bottom-6 -right-2 sm:-bottom-10 sm:-right-10 z-20 bg-white p-4 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-50 flex items-center gap-3 sm:gap-5"
           >
-             <div className="w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6B00] to-[#FF8C00] rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-xl sm:text-3xl shadow-lg shadow-[#FF6B00]/20">
-                <i className="ri-shield-star-line"></i>
+             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6B00] to-[#FF8C00] rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-2xl sm:text-3xl shadow-lg shadow-[#FF6B00]/20">
+                <RiShieldStarLine />
              </div>
              <div>
                 <h4 className="text-2xl sm:text-4xl font-black text-[#020617] leading-none mb-1">10+</h4>
@@ -68,12 +72,12 @@ export default function AboutSection() {
         </motion.div>
 
         {/* ================= RIGHT SIDE (TEXT CONTENT) ================= */}
-        <motion.div variants={itemVariants} className="relative z-10">
+        <motion.div variants={itemVariants} className="relative z-10 mt-8 lg:mt-0">
           <div className="inline-block px-5 py-2 bg-[#FF6B00]/5 border border-[#FF6B00]/10 rounded-full text-[#FF6B00] font-black text-[10px] uppercase tracking-widest mb-6">
             Kenali Kami Lebih Dekat
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-[#020617] mb-6 sm:mb-8 leading-[1.05] tracking-tighter">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-[#020617] mb-6 sm:mb-8 leading-tight tracking-tighter">
             Membangun Generasi <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Digital Berkualitas</span>
           </h2>
@@ -93,14 +97,14 @@ export default function AboutSection() {
             <button className="group relative inline-flex items-center gap-4 bg-[#020617] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-xl sm:rounded-2xl shadow-xl shadow-[#020617]/20 hover:scale-[1.02] transition-all duration-300 active:scale-95 overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                <span className="relative z-10 font-black text-xs uppercase tracking-widest">Detail Kami</span>
-               <i className="ri-arrow-right-line relative z-10 text-lg group-hover:translate-x-1 transition-transform"></i>
+               <RiArrowRightLine className="relative z-10 text-lg group-hover:translate-x-1 transition-transform" />
             </button>
             
             <div className="flex items-center gap-5">
               <div className="flex -space-x-3 sm:-space-x-4">
                 {[1,2,3].map(i => (
-                  <div key={i} className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white bg-gray-100 overflow-hidden shadow-lg rotate-3">
-                    <img src={`https://i.pravatar.cc/150?img=${i+20}`} alt="Student" />
+                  <div key={i} className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white bg-gray-100 overflow-hidden shadow-lg rotate-3 odd:-rotate-2">
+                    <img src={`https://i.pravatar.cc/150?img=${i+20}`} alt="Student" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>

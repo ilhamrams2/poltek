@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus, HelpCircle, MessageCircle } from "lucide-react";
+import { RiAddLine, RiSubtractLine, RiQuestionLine, RiWhatsappLine, RiMessage2Line } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
@@ -41,7 +41,7 @@ export default function FAQSection() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full text-purple-700 text-xs font-bold uppercase tracking-widest mb-6 border border-purple-100">
-            <HelpCircle size={14} />
+            <RiQuestionLine size={16} />
             Support Center
           </div>
           <h2 className="text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
@@ -83,7 +83,7 @@ export default function FAQSection() {
                   <div className={`shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-500 ${
                     isOpen ? "bg-[#1D234E] text-white rotate-180" : "bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white"
                   }`}>
-                    {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                    {isOpen ? <RiSubtractLine size={20} /> : <RiAddLine size={20} />}
                   </div>
                 </button>
 
@@ -117,7 +117,7 @@ export default function FAQSection() {
         >
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center text-orange-500 shrink-0">
-              <MessageCircle size={32} />
+              <RiMessage2Line size={32} />
             </div>
             <div>
               <h4 className="text-xl sm:text-2xl font-black">Masih Punya Pertanyaan?</h4>
@@ -127,8 +127,9 @@ export default function FAQSection() {
           
           <a
             href="https://wa.me/628123456789"
-            className="w-full sm:w-auto px-6 py-4 sm:px-8 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-xl shadow-orange-900/40 text-center whitespace-nowrap"
+            className="group relative w-full sm:w-auto px-6 py-4 sm:px-8 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-xl shadow-green-900/40 text-center whitespace-nowrap flex items-center justify-center gap-2"
           >
+            <RiWhatsappLine size={20} />
             Hubungi Lewat WhatsApp
           </a>
         </motion.div>

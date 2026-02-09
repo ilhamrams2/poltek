@@ -115,7 +115,7 @@ export default function HeroMedia() {
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231D234E' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
       </div>
 
-      <div className="w-full max-w-[1600px] mx-auto relative">
+      <div className="w-[94%] md:w-[90%] max-w-[1440px] mx-auto relative">
         {/* Media Player Container */}
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
@@ -125,7 +125,7 @@ export default function HeroMedia() {
         >
           {/* Main Frame */}
           <div
-            className={`relative mx-auto w-full aspect-[4/5] sm:aspect-video lg:aspect-[21/9] rounded-[2rem] sm:rounded-[4rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)] transition-all duration-700 bg-slate-900 ${
+            className={`relative mx-auto w-full aspect-[4/5] sm:aspect-video md:aspect-[2/1] xl:aspect-[21/9] rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)] transition-all duration-700 bg-slate-900 ${
               isTransitioning ? "opacity-60 scale-[0.98] blur-xl" : "opacity-100"
             }`}
           >
@@ -160,7 +160,7 @@ export default function HeroMedia() {
             )}
 
             {/* Content Overlay */}
-            <div className={`absolute inset-0 z-20 p-6 sm:p-14 lg:p-20 flex flex-col justify-center transition-all duration-1000 ${showCarousel ? 'bg-black/20' : 'bg-transparent'}`}>
+            <div className={`absolute inset-0 z-20 p-6 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-center transition-all duration-1000 ${showCarousel ? 'bg-black/20' : 'bg-transparent'}`}>
                
                <AnimatePresence mode="wait">
                  {showCarousel && (
@@ -177,7 +177,7 @@ export default function HeroMedia() {
                    >
                       <motion.div
                         variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } }}
-                        className="flex items-center gap-3 mb-6"
+                        className="flex items-center gap-3 mb-4 sm:mb-6"
                       >
                         <span className="h-[2px] w-8 sm:w-12 bg-[#FF6B00]"></span>
                         <span className="text-white/80 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[8px] sm:text-xs">Excellence in Technology</span>
@@ -185,7 +185,7 @@ export default function HeroMedia() {
 
                       <motion.h1 
                         variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-                        className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-white leading-[0.95] uppercase tracking-tighter"
+                        className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-white leading-[0.95] uppercase tracking-tighter"
                       >
                         POLITEKNIK <br />
                         <span className="text-[#FF6B00] relative italic">
@@ -194,23 +194,23 @@ export default function HeroMedia() {
                              initial={{ width: 0 }}
                              animate={{ width: "100%" }}
                              transition={{ delay: 1, duration: 0.8 }}
-                             className="absolute bottom-2 left-0 h-[4px] sm:h-[8px] bg-white/10 -z-10"
+                             className="absolute bottom-2 left-0 h-[4px] sm:h-[6px] bg-white/10 -z-10"
                            />
                         </span>
                       </motion.h1>
 
                       <motion.p 
                         variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                        className="mt-4 sm:mt-8 text-white/90 text-[10px] sm:text-lg lg:text-2xl font-medium max-w-2xl leading-relaxed drop-shadow-lg"
+                        className="mt-4 sm:mt-6 text-white/90 text-sm sm:text-lg lg:text-lg xl:text-xl font-medium max-w-xl lg:max-w-2xl leading-relaxed drop-shadow-lg"
                       >
                         Membangun masa depan digital dengan pendidikan berbasis teknologi terkini dan pengalaman kampus yang futuristik.
                       </motion.p>
                       
                       <motion.div
                         variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
-                        className="mt-6 sm:mt-12 flex flex-wrap gap-3 sm:gap-5"
+                        className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-5"
                       >
-                         <Link href="/site/program" className="group pointer-events-auto relative overflow-hidden bg-[#FF6B00] text-white px-5 py-3 sm:px-10 sm:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
+                         <Link href="/site/program" className="group pointer-events-auto relative overflow-hidden bg-[#FF6B00] text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm lg:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
                             <span className="relative z-10 flex items-center justify-center gap-2 text-nowrap">
                                 MULAI JELAJAHI <RiArrowRightSLine className="text-lg sm:text-xl group-hover:translate-x-1 transition-transform" />
                             </span>
@@ -223,7 +223,7 @@ export default function HeroMedia() {
                             />
                          </Link>
                          
-                         <button className="pointer-events-auto group flex items-center justify-center gap-3 sm:gap-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white px-5 py-3 sm:px-8 sm:py-5 rounded-2xl font-bold text-xs sm:text-base tracking-wider sm:tracking-widest hover:bg-white hover:text-[#1D234E] transition-all flex-1 sm:flex-none">
+                         <button className="pointer-events-auto group flex items-center justify-center gap-3 sm:gap-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-2xl font-bold text-xs sm:text-sm lg:text-base tracking-wider sm:tracking-widest hover:bg-white hover:text-[#1D234E] transition-all flex-1 sm:flex-none">
                             < RiPlayFill className="text-xl sm:text-2xl" /> VIRTUAL TOUR
                          </button>
                       </motion.div>

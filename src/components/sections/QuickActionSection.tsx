@@ -189,6 +189,7 @@ function Card({ data }: { data: any }) {
             variants={iconInnerVariants}
             className="text-3xl sm:text-[2.5rem]"
           >
+            {/* The icon from data is already a component */}
             {data.icon}
           </motion.div>
         </motion.div>
@@ -227,16 +228,18 @@ function Card({ data }: { data: any }) {
           >
             {data.linkText}
           </motion.span>
-          <motion.i 
+          <motion.div 
             variants={{
               rest: { x: 0, opacity: 0.7 },
               hover: { x: 10, opacity: 1 }
             }}
             transition={{ type: "spring", stiffness: 300}}
-            className="ri-arrow-right-line text-lg" 
-          />
+          >
+            <RiArrowRightLine className="text-lg" />
+          </motion.div>
         </div>
       </div>
     </motion.a>
   );
 }
+
