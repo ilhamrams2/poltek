@@ -38,7 +38,7 @@ export default function VisionMissionSection() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-black text-[#020617] leading-[1.05] mb-8 sm:mb-12 tracking-tighter">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-[#020617] leading-[1.05] mb-8 sm:mb-12 tracking-tighter">
             Target <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">
               Masa Depan

@@ -67,13 +67,13 @@ export default function NewsSection() {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setItemsPerView(1);
-        setGap(24); // gap-6
-      } else if (window.innerWidth < 1024) {
+        setGap(24);
+      } else if (window.innerWidth < 1150) { // Keep 2 items for standard laptops (13-14 inch)
         setItemsPerView(2);
-        setGap(32); // gap-8
+        setGap(32);
       } else {
         setItemsPerView(3);
-        setGap(40); // gap-10
+        setGap(40);
       }
     };
     handleResize();

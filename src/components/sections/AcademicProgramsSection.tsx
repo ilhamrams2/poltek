@@ -78,7 +78,7 @@ export default function AcademicProgramsSection() {
           <span className="text-[#FF6B00] font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px]">Academic Overview</span>
         </div>
         
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-black text-[#020617] leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-[#020617] leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
           Pilihan Program <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Studi Unggulan</span>
         </h2>

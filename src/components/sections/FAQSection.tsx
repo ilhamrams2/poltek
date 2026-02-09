@@ -44,7 +44,7 @@ export default function FAQSection() {
             <HelpCircle size={14} />
             Support Center
           </div>
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
+          <h2 className="text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-[#1D234E] leading-[1.1] mb-12">
             Pertanyaan <span className="text-orange-500">Populer</span>
           </h2>
           <p className="max-w-2xl mx-auto text-gray-500 text-lg font-medium">

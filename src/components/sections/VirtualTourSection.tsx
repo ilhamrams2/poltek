@@ -34,7 +34,7 @@ export default function VirtualTourSection() {
             <span className="text-orange-500 font-black uppercase tracking-[0.2em] text-xs">Immersive Experience</span>
           </div>
 
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.1] mb-8">
+          <h2 className="text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black leading-[1.1] mb-8">
             Jelajahi Kampus <br /> 
             Dari <span className="text-orange-500 italic">Mana Saja</span>
           </h2>

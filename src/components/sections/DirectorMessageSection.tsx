@@ -66,7 +66,7 @@ export default function DirectorMessageSection() {
               <span className="text-[#FF6B00] text-[10px] font-black uppercase tracking-[0.2em]">Sambutan Direktur Utama</span>
             </motion.div>
 
-            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
               {titleWords.map((word, i) => (
                 <span key={i} className="inline-block mr-[0.2em]">
                   {word === "Digital" || word === "Masa" || word === "Depan" ? (

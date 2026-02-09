@@ -185,7 +185,7 @@ export default function HeroMedia() {
 
                       <motion.h1 
                         variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-                        className="text-4xl sm:text-4xl lg:text-8xl font-black text-white leading-[0.9] uppercase tracking-tighter"
+                        className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-white leading-[0.95] uppercase tracking-tighter"
                       >
                         POLITEKNIK <br />
                         <span className="text-[#FF6B00] relative italic">
@@ -194,7 +194,7 @@ export default function HeroMedia() {
                              initial={{ width: 0 }}
                              animate={{ width: "100%" }}
                              transition={{ delay: 1, duration: 0.8 }}
-                             className="absolute bottom-2 left-0 h-[8px] bg-white/10 -z-10"
+                             className="absolute bottom-2 left-0 h-[4px] sm:h-[8px] bg-white/10 -z-10"
                            />
                         </span>
                       </motion.h1>
