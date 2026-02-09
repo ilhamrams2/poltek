@@ -145,7 +145,6 @@ export default function HeroMedia() {
                   controls={false}
                   className="w-full h-full object-cover scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
               </div>
             )}
 
@@ -316,12 +315,12 @@ export default function HeroMedia() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="mt-20 flex flex-col items-center gap-4 relative z-10"
+        className="mt-6 flex flex-col items-center gap-2 relative z-10"
       >
         <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#1D234E]/40">
           Scroll to Discovery
         </span>
-        <div className="w-[1px] h-16 bg-[#1D234E]/10 relative overflow-hidden">
+        <div className="w-[1px] h-10 bg-[#1D234E]/10 relative overflow-hidden">
           <motion.div 
              animate={{ top: ["-100%", "100%"] }}
              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

@@ -200,47 +200,63 @@ export default function FacilityPage() {
             variants={containerVariants}
             className="lg:col-span-7 order-2 lg:order-1"
           >
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center gap-3 bg-white border border-gray-100 px-5 py-2.5 rounded-2xl mb-12 shadow-sm"
-            >
-              <div className="flex -space-x-2">
-                 {[1, 2, 3].map((i) => (
-                   <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-100 overflow-hidden">
-                      <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" className="w-full h-full object-cover" />
-                   </div>
-                 ))}
-              </div>
-              <span className="font-bold uppercase tracking-[0.2em] text-[9px] text-gray-400">Trusted by <span className="text-[#020617]">2k+ Students</span></span>
-            </motion.div>
 
-            <motion.div variants={itemVariants} className="relative mb-10">
-               <h1 className="text-6xl lg:text-8xl xl:text-9xl font-black text-[#020617] leading-[0.85] tracking-tighter">
-                  <span className="block mb-2">ELITE</span>
-                  <span className="text-transparent border-b-8 border-[#FF6B00]/20 pb-4 bg-clip-text bg-linear-to-r from-[#FF6B00] via-[#FF8C00] to-orange-400">FACILITIES</span>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="relative mb-8"
+            >
+               <h1 className="text-7xl lg:text-9xl font-black text-[#020617] leading-[0.85] tracking-tighter">
+                  <span className="block font-light text-gray-300 mb-2">ULTRA</span>
+                  <span className="relative">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#020617] via-[#FF6B00] to-orange-500">FACILITIES</span>
+                  </span>
                </h1>
             </motion.div>
 
             <motion.p 
-               variants={itemVariants} 
-               className="text-xl lg:text-2xl text-gray-500 font-medium leading-relaxed max-w-xl mb-14 border-l-4 border-[#FF6B00] pl-8"
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.4 }}
+               className="text-xl lg:text-2xl text-gray-500 font-medium leading-relaxed max-w-2xl mb-14 border-l-4 border-[#FF6B00] pl-8"
             >
-               Standardisasi infrastruktur teknologi kelas dunia yang dirancang untuk melahirkan pemimpin digital masa depan.
+               Standardisasi <span className="text-[#020617] font-bold">Infrastruktur Teknologi</span> kelas dunia yang dirancang khusus untuk melahirkan <span className="text-[#FF6B00] font-bold italic underline decoration-wavy underline-offset-4">Digital Leaders</span> masa depan.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap items-center gap-10"
+            >
               <Link
                 href="#explore"
-                className="group relative inline-flex items-center gap-4 bg-[#020617] text-white px-12 py-7 rounded-[2.5rem] shadow-2xl shadow-[#020617]/30 hover:scale-[1.05] transition-all duration-500 active:scale-95 overflow-hidden"
+                className="group relative inline-flex items-center gap-6 bg-[#020617] text-white pl-10 pr-4 py-4 rounded-full shadow-2xl shadow-[#020617]/20 hover:shadow-[#FF6B00]/20 transition-all duration-700 active:scale-95 border border-white/5"
               >
-                 <div className="absolute inset-0 bg-[#FF6B00] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                 <span className="relative z-10 font-black text-sm uppercase tracking-widest">Start Expedition</span>
-                 <RiArrowRightUpLine className="relative z-10 text-2xl group-hover:rotate-45 transition-transform duration-500" />
+                 {/* Shimmer Effect */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                 
+                 <span className="relative z-10 font-black text-[12px] uppercase tracking-[0.3em] group-hover:tracking-[0.4em] transition-all duration-500">
+                    Discover Spaces
+                 </span>
+
+                 <div className="relative z-10 w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#FF6B00] transition-colors duration-500 overflow-hidden">
+                    <RiArrowRightUpLine className="text-2xl group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-500 absolute" />
+                    <RiArrowRightUpLine className="text-2xl -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 absolute" />
+                 </div>
               </Link>
 
-              <div className="flex flex-col">
-                 <span className="text-3xl font-black text-[#020617]">12+</span>
-                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Master Labs</span>
+              <div className="flex items-center gap-6">
+                 <div className="flex flex-col">
+                    <span className="text-5xl font-black text-[#020617] leading-none mb-1">12<span className="text-[#FF6B00]">+</span></span>
+                    <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Master Labs</span>
+                 </div>
+                 <div className="w-px h-12 bg-gray-100" />
+                 <div className="flex flex-col">
+                    <span className="text-5xl font-black text-[#020617] leading-none mb-1">24<span className="text-[#FF6B00]">h</span></span>
+                    <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Digital Hub</span>
+                 </div>
               </div>
             </motion.div>
           </motion.div>
@@ -264,31 +280,9 @@ export default function FacilityPage() {
                  unoptimized
                />
                
-               {/* Advanced Glass Float 1 */}
-               <motion.div 
-                 animate={{ y: [0, -15, 0] }}
-                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                 className="absolute top-10 -left-10 bg-white/80 backdrop-blur-2xl p-6 rounded-3xl shadow-2xl border border-white/50 z-20 hidden xl:block"
-               >
-                  <div className="w-12 h-12 bg-[#020617] rounded-xl flex items-center justify-center text-[#FF6B00] mb-4">
-                     <RiCheckDoubleLine className="text-2xl" />
-                  </div>
-                  <h4 className="text-lg font-black text-[#020617]">Global Standard</h4>
-                  <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">A+ Certified</p>
-               </motion.div>
 
-               {/* Advanced Glass Float 2 */}
-               <motion.div 
-                 animate={{ y: [0, 15, 0] }}
-                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                 className="absolute bottom-20 -right-5 bg-[#020617]/90 backdrop-blur-2xl p-6 rounded-3xl shadow-2xl border border-white/10 z-20 hidden xl:block text-white"
-               >
-                  <div className="flex items-center gap-4 mb-3">
-                     <div className="w-2 h-2 rounded-full bg-[#FF6B00] animate-ping" />
-                     <span className="text-[10px] font-black uppercase tracking-widest">Active Access</span>
-                  </div>
-                  <h4 className="text-lg font-bold">24/7 Digital Hub</h4>
-               </motion.div>
+
+
             </div>
 
             {/* Background Decorative Rings */}
@@ -441,39 +435,28 @@ export default function FacilityPage() {
                     {facility.description}
                   </p>
 
-                  <div className="mt-auto pt-8 border-t border-gray-100 flex items-center justify-between">
+                  <div className="mt-auto pt-10 border-t border-gray-100 flex items-center justify-between">
                      <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-300 border border-gray-100">
                            <RiGroupLine className="text-lg" />
                         </div>
                         <div className="flex flex-col">
-                           <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Capacity</span>
-                           <span className="text-[12px] font-bold text-[#020617] uppercase tracking-wide leading-none">{facility.capacity} Seats</span>
+                           <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1.5">Capacity</span>
+                           <span className="text-[12px] font-bold text-[#020617] uppercase tracking-wide leading-none">{facility.capacity}</span>
                         </div>
                      </div>
                      
-                     <div className="flex items-center gap-1.5 group/cta relative">
-                        {/* Aura Glow Effect */}
-                        <div className="absolute -right-2 w-16 h-16 bg-[#FF6B00]/10 rounded-full blur-2xl scale-0 group-hover/cta:scale-150 transition-transform duration-1000 opacity-0 group-hover/cta:opacity-100" />
-                        
-                        <div className="flex flex-col h-4 overflow-hidden pointer-events-none">
-                           <span className="text-[10px] font-black text-[#020617]/30 uppercase tracking-[0.2em] transition-transform duration-500 cubic-bezier(0.22, 1, 0.36, 1) group-hover/cta:-translate-y-full">Explore</span>
-                           <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.2em] transition-transform duration-500 cubic-bezier(0.22, 1, 0.36, 1) group-hover/cta:-translate-y-full">More</span>
-                        </div>
-                        
-                        <div className="relative">
-                           <div className="w-14 h-14 rounded-[1.3rem] bg-[#020617] flex items-center justify-center text-white transition-all duration-500 group-hover/cta:bg-[#FF6B00] group-hover/cta:scale-110 group-hover/cta:rotate-[-6deg] shadow-xl group-hover/cta:shadow-[0_20px_40px_-10px_rgba(255,107,0,0.5)]">
-                              <RiArrowRightUpLine className="text-2xl transition-transform duration-500 group-hover/cta:rotate-[51deg]" />
+                     <div className="group/cta relative">
+                        <div className="relative flex items-center bg-[#020617] rounded-full p-1 w-12 group-hover/cta:w-36 group-hover/cta:bg-[#FF6B00] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden">
+                           {/* Icon Circle */}
+                           <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-transform duration-500 group-hover/cta:rotate-45">
+                              <RiArrowRightUpLine className="text-xl" />
                            </div>
                            
-                           {/* Tech Indicator Dot with Radar Pulse */}
-                           <motion.div 
-                             className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#FF6B00] rounded-full border-[3px] border-white shadow-sm opacity-0 group-hover/cta:opacity-100 transition-all duration-500 scale-0 group-hover/cta:scale-100" 
-                             animate={{ 
-                                boxShadow: ["0 0 0 0px rgba(255,107,0,0.8)", "0 0 0 10px rgba(255,107,0,0)"] 
-                             }}
-                             transition={{ duration: 1.5, repeat: Infinity }}
-                           />
+                           {/* Text revealed by width expansion */}
+                           <span className="text-[9px] font-black text-white uppercase tracking-[0.2em] ml-3 whitespace-nowrap opacity-0 group-hover/cta:opacity-100 transition-all duration-300 delay-100">
+                             View Space
+                           </span>
                         </div>
                      </div>
                   </div>

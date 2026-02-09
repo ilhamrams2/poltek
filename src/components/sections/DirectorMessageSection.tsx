@@ -51,13 +51,6 @@ export default function DirectorMessageSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#050A1F] via-transparent to-transparent opacity-40" />
             </div>
             
-            {/* Decoration */}
-            <motion.div 
-              animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-              transition={{ duration: 10, repeat: Infinity }}
-              className="absolute -bottom-8 -right-8 w-56 h-56 bg-gradient-to-br from-[#FF6B00] to-orange-400 rounded-[3rem] -z-10 opacity-20 blur-3xl" 
-            />
-            <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-[#FF6B00]/30 rounded-[2rem] -z-10" />
           </motion.div>
 
           {/* === TEXT SIDE === */}
