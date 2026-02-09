@@ -1,20 +1,31 @@
-import FAQSection from "@/components/faq/FAQSection";
+import PremiumFAQHub from "@/components/sections/PremiumFAQHub";
 
 export default function FaqSistemPembelajaranPage() {
   const faqs = [
     {
+      category: "akademik",
       q: "Bagaimana metode pembelajaran di Poltek Presma?",
-      a: "Pembelajaran mengacu pada kurikulum berbasis kompetensi dengan metode praktikum, teori, dan proyek.",
+      a: "Kami menerapkan Kurikulum Berbasis Kompetensi (KBK) dengan porsi praktikum yang lebih besar (60% Praktik, 40% Teori) serta metode Problem-Based Learning yang relevan dengan tantangan dunia kerja.",
     },
     {
-      q: "Apakah tersedia fasilitas laboratorium?",
-      a: "Ya, seluruh program studi memiliki laboratorium lengkap untuk menunjang kegiatan belajar.",
+      category: "fasilitas",
+      q: "Apakah tersedia fasilitas laboratorium pendukung?",
+      a: "Setiap program studi didukung oleh laboratorium khusus sesuai bidangnya, seperti Lab Multimedia, Lab Pemrograman, dan Lab Administrasi Digital dengan software standar industri terbaru.",
     },
     {
-      q: "Apakah ada pembelajaran berbasis industri?",
-      a: "Benar, mahasiswa akan mengikuti kegiatan magang dan proyek kolaborasi dengan perusahaan.",
+      category: "akademik",
+      q: "Apakah ada kurikulum berbasis industri?",
+      a: "Benar sekali. Kami berkolaborasi dengan asosiasi profesi dan perusahaan teknologi untuk menyusun kurikulum agar setiap kompetensi yang diajarkan sesuai dengan kebutuhan real di lapangan.",
     },
   ];
 
-  return <FAQSection title="FAQ – Sistem Pembelajaran" faqs={faqs} />;
+  return (
+    <PremiumFAQHub 
+      title="Sistem Pembelajaran"
+      subtitle="Knowledge & Skill"
+      description="Temukan bagaimana metode belajar-mengajar di Politeknik Prestasi Prima mempersiapkan Anda menjadi profesional digital kelas dunia."
+      initialFaqs={faqs}
+      showCategories={false} 
+    />
+  );
 }

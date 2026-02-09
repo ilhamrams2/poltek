@@ -1,20 +1,31 @@
-import FAQSection from "@/components/faq/FAQSection";
+import PremiumFAQHub from "@/components/sections/PremiumFAQHub";
 
 export default function FaqPendaftaranPage() {
   const faqs = [
     {
+      category: "pendaftaran",
       q: "Bagaimana cara mendaftar ke Politeknik Prestasi Prima?",
-      a: "Pendaftaran dapat dilakukan secara online melalui website resmi atau datang langsung ke kampus.",
+      a: "Proses pendaftaran sangat mudah! Anda dapat melakukannya 100% online melalui dashboard pendaftaran kami atau datang langsung ke kampus untuk dipandu oleh tim admisi kami yang ramah.",
     },
     {
-      q: "Apa saja syarat pendaftaran mahasiswa baru?",
-      a: "Syarat meliputi ijazah SMA/SMK sederajat, formulir pendaftaran, dan berkas tambahan sesuai prodi.",
+      category: "pendaftaran",
+      q: "Apa saja syarat dokumen yang diperlukan?",
+      a: "Cukup siapkan scan Ijazah SMA/SMK sederajat, Kartu Keluarga, dan Pas Foto terbaru. Semua dokumen diupload dalam format digital lewat portal pendaftaran.",
     },
     {
-      q: "Berapa biaya pendaftaran?",
-      a: "Biaya pendaftaran mengikuti ketentuan tahun berjalan dan dapat dilihat pada halaman informasi biaya.",
+      category: "pendaftaran",
+      q: "Berapa biaya pendaftaran mahasiswa baru?",
+      a: "Biaya pendaftaran mengikuti kebijakan tahun akademik berjalan. Anda dapat melihat rincian biaya lengkap di halaman Biaya Kuliah atau bertanya langsung via WhatsApp Admissions.",
     },
   ];
 
-  return <FAQSection title="FAQ – Pendaftaran" faqs={faqs} />;
+  return (
+    <PremiumFAQHub 
+      title="Tentang Pendaftaran"
+      subtitle="Info PMB 2026/2027"
+      description="Temukan informasi lengkap mengenai alur, persyaratan, dan jadwal pendaftaran mahasiswa baru di Politeknik Prestasi Prima."
+      initialFaqs={faqs}
+      showCategories={false} 
+    />
+  );
 }

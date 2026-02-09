@@ -33,9 +33,9 @@ export const MENU: MenuItem[] = [
       {
         title: "FAQ",
         items: [
-          { label: "Pendaftaran", url: "/site/faq" },
-          { label: "Program Studi", url: "/site/faq" },
-          { label: "Sistem Pembelajaran", url: "/site/faq" },
+          { label: "Pendaftaran", url: "/site/faq/pendaftaran" },
+          { label: "Program Studi", url: "/site/faq/program-studi" },
+          { label: "Sistem Pembelajaran", url: "/site/faq/sistem-pembelajaran" },
         ],
       },
     ],
