@@ -297,32 +297,81 @@ export default function GalleryPage() {
         <section className="space-y-12">
           
           {/* Tabs / Filter */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-3"
-          >
-            {CATEGORIES.map((cat) => {
+          {/* Kinetic Morphing Dock Concept */}
+          <div className="flex flex-wrap justify-center gap-6 px-4">
+            {CATEGORIES.map((cat, idx) => {
               const isActive = activeCategory === cat.name;
+              const count = cat.name === "Show All" 
+                ? GALLERY_DATA.length 
+                : GALLERY_DATA.filter(i => i.category.toUpperCase() === cat.name.toUpperCase()).length;
+
               return (
                 <motion.button
                   key={cat.name}
                   onClick={() => setActiveCategory(cat.name)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-2
-                    ${isActive 
-                      ? "bg-[#F97316] border-[#F97316] text-white shadow-lg shadow-orange-600/20" 
-                      : "bg-white border-[#E2E8F0] text-[#64748B] hover:bg-gray-50 hover:border-gray-300"
-                    }`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    delay: idx * 0.05,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -8, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`relative group flex items-center h-16 transition-all duration-700
+                    ${isActive ? "px-8 bg-white border-orange-500 rounded-[2rem] shadow-[0_20px_40px_rgba(249,115,22,0.15)]" : "w-16 bg-white/40 border-white/80 rounded-full backdrop-blur-xl shadow-lg shadow-black/5 hover:bg-white"}
+                    border overflow-hidden`}
                 >
-                  {cat.icon && <span className={isActive ? "text-white" : "text-[#94A3B8]"}>{cat.icon}</span>}
-                  {cat.name}
+                  {/* Icon Container */}
+                  <div className={`flex items-center justify-center shrink-0 transition-all duration-500
+                    ${isActive ? "text-orange-500 scale-110 mr-4" : "w-full text-gray-400 group-hover:text-orange-500"}`}>
+                    <div className="relative">
+                      {cat.icon}
+                      {isActive && (
+                        <motion.div 
+                          layoutId="iconGlow"
+                          className="absolute inset-0 bg-orange-400 blur-md opacity-30 -z-10"
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Morphing Label - Only visible when active */}
+                  <AnimatePresence mode="wait">
+                    {isActive && (
+                      <motion.div
+                        initial={{ width: 0, opacity: 0, x: -10 }}
+                        animate={{ width: "auto", opacity: 1, x: 0 }}
+                        exit={{ width: 0, opacity: 0, x: -10 }}
+                        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                        className="flex items-center whitespace-nowrap overflow-hidden"
+                      >
+                        <span className="text-[11px] font-[900] uppercase tracking-[0.2em] text-[#0F172A]">
+                          {cat.name}
+                        </span>
+                        
+                        {count > 0 && (
+                          <span className="ml-3 flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-orange-50 text-orange-600 rounded-full text-[9px] font-black">
+                            {count}
+                          </span>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Liquid Border Effect on Active */}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="liquidBorder"
+                      className="absolute inset-0 border-2 border-orange-500/20 rounded-[2rem] pointer-events-none"
+                    />
+                  )}
                 </motion.button>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* Grid */}
           <motion.div 
