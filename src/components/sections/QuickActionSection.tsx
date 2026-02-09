@@ -3,6 +3,13 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 
+import { 
+  RiMacbookLine, 
+  RiWallet3Line, 
+  RiFileList3Line, 
+  RiArrowRightLine 
+} from "react-icons/ri";
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -70,7 +77,7 @@ const cards = [
     desc: "Banyak pilihan beasiswa menarik sampai dengan beasiswa kuliah gratis 100%. Daftarkan dirimu sekarang!",
     linkText: "INFO LENGKAP",
     linkUrl: "/site/pendaftaran",
-    icon: "ri-macbook-line",
+    icon: <RiMacbookLine />,
   },
   {
     id: 2,
@@ -79,7 +86,7 @@ const cards = [
     desc: "Cek rincian biaya perkuliahan dan skema pembayaran yang fleksibel sesuai kebutuhanmu.",
     linkText: "RINCIAN BIAYA",
     linkUrl: "/site/biaya",
-    icon: "ri-wallet-3-line",
+    icon: <RiWallet3Line />,
   },
   {
     id: 3,
@@ -88,13 +95,13 @@ const cards = [
     desc: "Klik tombol di bawah untuk memulai proses pendaftaran online yang cepat dan mudah.",
     linkText: "DAFTAR SEKARANG",
     linkUrl: "/site/daftar",
-    icon: "ri-file-list-3-line",
+    icon: <RiFileList3Line />,
   },
 ];
 
 export default function QuickActionSection() {
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-white">
+    <section className="relative py-12 sm:py-24 px-4 sm:px-6 overflow-hidden bg-white">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#FF6B00]/5 blur-[120px] rounded-full -z-10" />
@@ -128,7 +135,7 @@ function Card({ data }: { data: any }) {
       initial="rest"
       className={`
         group relative flex flex-col justify-between
-        h-[420px] rounded-[2.5rem] p-10 overflow-hidden
+        h-auto min-h-[380px] sm:h-[420px] rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 overflow-hidden
         transition-all duration-500 ease-out
         ${
           isLight
@@ -170,7 +177,7 @@ function Card({ data }: { data: any }) {
           custom={isLight}
           variants={iconBoxVariants}
           className={`
-            w-20 h-20 rounded-3xl flex items-center justify-center mb-8
+            w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center mb-6 sm:mb-8
             ${
               isLight
                 ? "bg-slate-50 text-[#FF6B00]"
@@ -178,14 +185,16 @@ function Card({ data }: { data: any }) {
             }
           `}
         >
-          <motion.i
+          <motion.div
             variants={iconInnerVariants}
-            className={`${data.icon} text-[2.5rem]`}
-          />
+            className="text-3xl sm:text-[2.5rem]"
+          >
+            {data.icon}
+          </motion.div>
         </motion.div>
 
         {/* TITLE */}
-        <h3 className="text-2xl font-black leading-tight mb-4 tracking-tight">
+        <h3 className="text-lg sm:text-2xl font-black leading-tight mb-3 sm:mb-4 tracking-tight">
           {data.title}
         </h3>
 

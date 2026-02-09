@@ -174,7 +174,7 @@ export default function GalleryPage() {
       <div className="fixed top-[-100px] right-[-100px] w-[500px] h-[500px] bg-orange-100/40 rounded-full blur-3xl -z-10" />
       <div className="fixed bottom-0 left-[-100px] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-3xl -z-10" />
 
-      <main className="max-w-7xl mx-auto px-6 py-12 lg:py-20 space-y-24">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-20 space-y-16 sm:space-y-24">
         
         {/* ===========================
             HERO SECTION

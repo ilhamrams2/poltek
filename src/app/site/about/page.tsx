@@ -25,7 +25,7 @@ export default function AboutPage() {
     <main className={`${jakarta.className} min-h-screen bg-white overflow-hidden`}>
       
       {/* 1. ULTRA MODERN HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-[#0E1333] overflow-hidden">
+      <section className="relative pt-24 pb-16 lg:pt-48 lg:pb-32 bg-[#0E1333] overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#F15A24]/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
@@ -33,7 +33,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 sm:gap-16">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -45,7 +45,7 @@ export default function AboutPage() {
               <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em]">Tentang Institusi kami</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-black leading-[1.1] mb-8">
+            <h1 className="text-3xl sm:text-6xl xl:text-7xl font-black leading-[1.1] mb-6 sm:mb-8">
               Membangun <span className="text-[#F15A24]">Generasi</span> <br />
               <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">Digital Masa Depan</span>
             </h1>
@@ -55,7 +55,7 @@ export default function AboutPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-               <button className="bg-[#F15A24] text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/30 hover:scale-105 transition-all">
+               <button className="bg-[#F15A24] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/30 hover:scale-105 transition-all">
                   Informasi Pendaftaran
                </button>
                <div className="flex items-center gap-4 px-6 py-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
@@ -114,8 +114,8 @@ export default function AboutPage() {
       </section>
 
       {/* 2. STATS SECTION */}
-      <section className="relative z-20 -mt-20 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="relative z-20 -mt-10 sm:-mt-20 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {[
             { label: "Mahasiswa Aktif", val: "1000+", icon: RiTeamLine, color: "#F15A24" },
             { label: "Mitra Industri", val: "50+", icon: RiLeafLine, color: "#1A2B5F" },
@@ -130,11 +130,11 @@ export default function AboutPage() {
               transition={{ delay: i * 0.1 }}
               className="bg-white p-8 rounded-[2.5rem] shadow-2xl shadow-[#1A2B5F]/5 border border-gray-100 text-center flex flex-col items-center group hover:-translate-y-2 transition-transform duration-500"
             >
-              <div className="w-14 h-14 rounded-2xl mb-6 flex items-center justify-center text-white text-2xl" style={{ backgroundColor: stat.color }}>
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 flex items-center justify-center text-white text-xl sm:text-2xl" style={{ backgroundColor: stat.color }}>
                 <stat.icon />
               </div>
-              <div className="text-3xl sm:text-4xl font-black text-[#0E1333] mb-2">{stat.val}</div>
-              <div className="text-[10px] uppercase font-black tracking-widest text-gray-400">{stat.label}</div>
+              <div className="text-2xl sm:text-4xl font-black text-[#0E1333] mb-1 sm:mb-2">{stat.val}</div>
+              <div className="text-[8px] sm:text-[10px] uppercase font-black tracking-widest text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -169,7 +169,7 @@ export default function AboutPage() {
                   <span className="w-8 h-[2px] bg-[#F15A24]" />
                   Arah & Tujuan
                 </div>
-                <h2 className="text-4xl lg:text-5xl font-black text-[#0E1333] mb-8">Visi & Misi <br /> <span className="text-[#F15A24]">Politeknik</span></h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0E1333] mb-6 sm:mb-8">Visi & Misi <br /> <span className="text-[#F15A24]">Politeknik</span></h2>
               </div>
 
               <div className="space-y-12">
@@ -225,7 +225,7 @@ export default function AboutPage() {
               <div className="inline-flex items-center gap-2 text-[#1A2B5F] font-black uppercase tracking-widest text-xs mb-4">
                 Management System
               </div>
-              <h2 className="text-4xl lg:text-6xl font-black text-[#0E1333] mb-6">Struktur <span className="text-[#F15A24]">Organisasi</span></h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-[#0E1333] mb-4 sm:mb-6">Struktur <span className="text-[#F15A24]">Organisasi</span></h2>
               <p className="text-gray-500 max-w-2xl mx-auto font-medium">
                 Komitmen kami terhadap tata kelola yang transparan dan profesional diwakili oleh struktur manajemen yang kokoh dan koordinasi antar unit yang harmonis.
               </p>
@@ -273,7 +273,7 @@ export default function AboutPage() {
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
            >
-              <h2 className="text-4xl md:text-7xl font-black text-white mb-10 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-8 sm:mb-10 leading-tight">
                 Mulai Masa Depan <br /> Di <span className="text-[#F15A24]">Poltek Kami</span>
               </h2>
               <p className="text-gray-400 text-lg md:text-xl font-medium mb-12 max-w-2xl mx-auto">

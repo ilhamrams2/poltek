@@ -185,54 +185,53 @@ export default function FacilityPage() {
   return (
     <main className={`${jakarta.className} min-h-screen bg-white selection:bg-[#FF6B00] selection:text-white`}>
       {/* ================= HERO SECTION (HYPER-MODERN MASTERPIECE) ================= */}
-      <section className="relative pt-16 pb-24 lg:pt-24 lg:pb-40 overflow-hidden">
+      <section className="relative pt-8 pb-16 lg:pt-24 lg:pb-40 overflow-hidden">
         {/* Futuristic Background System */}
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_20%,#FF6B0008_0%,transparent_50%)] -z-10" />
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] -z-10" />
         <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-[#FF6B00]/5 rounded-full blur-[180px] -z-10 animate-pulse" />
         <div className="absolute top-1/2 -left-20 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
 
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 items-center gap-16 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 items-center gap-12 sm:gap-24 relative z-10">
           {/* LEFT CONTENT: Massive High-End Typography */}
           <motion.div 
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
-            className="lg:col-span-7 order-2 lg:order-1"
+            className="lg:col-span-7 order-1"
           >
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              variants={itemVariants}
               className="relative mb-8"
             >
-               <h1 className="text-7xl lg:text-9xl font-black text-[#020617] leading-[0.85] tracking-tighter">
-                  <span className="block font-light text-gray-300 mb-2">ULTRA</span>
-                  <span className="relative">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#020617] via-[#FF6B00] to-orange-500">FACILITIES</span>
+                <h1 className="flex flex-col items-center lg:items-start text-center lg:text-left tracking-tighter">
+                   <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 px-3 py-1.5 rounded-full mb-6 max-w-fit">
+                      <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                      <span className="text-[8px] sm:text-xs font-black text-orange-600 uppercase tracking-[0.2em]">World Class Facility</span>
+                   </div>
+                  <span className="text-4xl sm:text-7xl lg:text-9xl font-black text-[#020617] leading-[0.85]">
+                     ULTRA <br className="sm:hidden" />
+                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#020617] via-[#FF6B00] to-orange-500">FACILITIES</span>
                   </span>
                </h1>
             </motion.div>
 
             <motion.p 
-               initial={{ opacity: 0, y: 20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ delay: 0.4 }}
-               className="text-xl lg:text-2xl text-gray-500 font-medium leading-relaxed max-w-2xl mb-14 border-l-4 border-[#FF6B00] pl-8"
+               variants={itemVariants}
+               className="text-sm sm:text-2xl text-gray-500 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 sm:mb-14 border-l-0 lg:border-l-4 border-[#FF6B00] pl-0 lg:pl-6 text-center lg:text-left"
             >
-               Standardisasi <span className="text-[#020617] font-bold">Infrastruktur Teknologi</span> kelas dunia yang dirancang khusus untuk melahirkan <span className="text-[#FF6B00] font-bold italic underline decoration-wavy underline-offset-4">Digital Leaders</span> masa depan.
+               Standardisasi <span className="text-[#020617] font-bold">Infrastruktur Teknologi</span> kelas dunia untuk melahirkan <span className="text-[#FF6B00] font-black italic">Digital Leaders</span> masa depan.
             </motion.p>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap items-center gap-10"
+              variants={itemVariants}
+              className="flex flex-col lg:flex-row items-center gap-10 sm:gap-14"
             >
               <Link
                 href="#explore"
-                className="group relative inline-flex items-center gap-6 bg-[#020617] text-white pl-10 pr-4 py-4 rounded-full shadow-2xl shadow-[#020617]/20 hover:shadow-[#FF6B00]/20 transition-all duration-700 active:scale-95 border border-white/5"
+                className="group relative inline-flex items-center gap-4 sm:gap-6 bg-[#020617] text-white pl-6 sm:pl-10 pr-2 sm:pr-4 py-2 sm:py-4 rounded-full shadow-2xl shadow-[#020617]/20 hover:shadow-[#FF6B00]/20 transition-all duration-700 active:scale-95 border border-white/5"
               >
                  {/* Shimmer Effect */}
                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -247,17 +246,17 @@ export default function FacilityPage() {
                  </div>
               </Link>
 
-              <div className="flex items-center gap-6">
-                 <div className="flex flex-col">
-                    <span className="text-5xl font-black text-[#020617] leading-none mb-1">12<span className="text-[#FF6B00]">+</span></span>
-                    <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Master Labs</span>
-                 </div>
-                 <div className="w-px h-12 bg-gray-100" />
-                 <div className="flex flex-col">
-                    <span className="text-5xl font-black text-[#020617] leading-none mb-1">24<span className="text-[#FF6B00]">h</span></span>
-                    <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Digital Hub</span>
-                 </div>
-              </div>
+                <div className="flex items-center gap-8 sm:gap-12">
+                  <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                     <span className="text-3xl sm:text-5xl font-black text-[#020617] leading-none mb-1">12<span className="text-[#FF6B00]">+</span></span>
+                     <span className="text-[7px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">Master Labs</span>
+                  </div>
+                  <div className="w-px h-10 bg-gray-200" />
+                  <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                     <span className="text-3xl sm:text-5xl font-black text-[#020617] leading-none mb-1">24<span className="text-[#FF6B00]">h</span></span>
+                     <span className="text-[7px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">Digital Hub</span>
+                  </div>
+                </div>
             </motion.div>
           </motion.div>
 
@@ -266,10 +265,10 @@ export default function FacilityPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 relative order-1 lg:order-2"
+            className="lg:col-span-5 relative order-2"
           >
             {/* Main Visual Node */}
-            <div className="relative z-10 rounded-[4rem] overflow-hidden group">
+            <div className="relative z-10 rounded-[2rem] sm:rounded-[4rem] overflow-hidden group max-w-[300px] sm:max-w-none mx-auto lg:mx-0">
                <Image
                  src="/images/facility/modelfacility.png"
                  alt="Elite Facility Visual"
@@ -295,10 +294,11 @@ export default function FacilityPage() {
       {/* ================= FILTER SECTION (MODERN APP STYLE) ================= */}
       <section id="explore" className="max-w-7xl mx-auto px-6 mb-20 relative z-20">
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-[#050A1F] rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(2,6,23,0.4)] p-12 lg:p-16 border border-white/5 relative overflow-hidden"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={itemVariants}
+          className="bg-[#050A1F] rounded-[2.5rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(2,6,23,0.4)] p-6 sm:p-12 lg:p-16 border border-white/5 relative overflow-hidden"
         >
           {/* Background Glow inside Filter */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6B00]/10 blur-[100px] -z-10" />
@@ -312,16 +312,16 @@ export default function FacilityPage() {
                 <h3 className="text-4xl lg:text-5xl font-black text-white leading-tight">Cari & Filter <br /> Fasilitas Impian</h3>
              </div>
              
-             <div className="relative flex-1 max-w-2xl group">
-               <input
-                 type="text"
-                 placeholder="Cari Laboratorium, Kelas, atau Studio..."
-                 value={searchQuery}
-                 onChange={(e) => setSearchQuery(e.target.value)}
-                 className="w-full bg-white/5 border-2 border-white/5 rounded-[2rem] py-6 pl-18 pr-10 focus:bg-white/10 focus:border-[#FF6B00] transition-all outline-none font-bold text-white text-lg placeholder-white/20"
-               />
-               <RiSearch2Line className="absolute left-8 top-1/2 -translate-y-1/2 w-8 h-8 text-[#FF6B00] group-hover:scale-110 transition-transform" />
-             </div>
+              <div className="relative flex-1 max-w-2xl group">
+                <input
+                  type="text"
+                  placeholder="Cari Fasilitas..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl sm:rounded-[2rem] py-4 sm:py-6 pl-14 sm:pl-18 pr-6 sm:pr-10 focus:bg-white/10 focus:border-[#FF6B00] transition-all outline-none font-bold text-white text-base sm:text-lg placeholder-white/20 shadow-inner"
+                />
+                <RiSearch2Line className="absolute left-5 sm:left-8 top-1/2 -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 text-[#FF6B00] group-hover:scale-110 transition-transform" />
+              </div>
           </div>
 
           <div className="flex flex-wrap gap-4 justify-start">
@@ -332,7 +332,7 @@ export default function FacilityPage() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveCategory(cat.id as Category)}
                 className={`
-                  relative flex items-center gap-4 px-10 py-5 rounded-[2rem] font-bold text-[10px] uppercase tracking-[0.15em] transition-all duration-500
+                  relative flex items-center gap-3 sm:gap-4 px-6 sm:px-10 py-3 sm:py-5 rounded-[1.5rem] sm:rounded-[2rem] font-bold text-[8px] sm:text-[10px] uppercase tracking-[0.15em] transition-all duration-500
                   ${activeCategory === cat.id 
                     ? 'bg-[#FF6B00] text-white shadow-[0_20px_40px_-10px_rgba(255,107,0,0.5)]' 
                     : 'bg-white/5 text-white/40 hover:text-white border border-white/10'
@@ -378,20 +378,19 @@ export default function FacilityPage() {
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            exit="hidden"
+            variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8"
           >
             {filteredFacilities.map((facility, index) => (
               <motion.div
                 key={facility.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                variants={itemVariants}
                 onClick={() => setSelectedFacility(facility)}
-                className="group cursor-pointer bg-white rounded-[3rem] p-5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] transition-all duration-500 border border-gray-50 flex flex-col h-full"
+                className="group cursor-pointer bg-white rounded-[2rem] sm:rounded-[3rem] p-4 sm:p-5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] transition-shadow duration-500 border border-gray-50 flex flex-col h-full"
               >
                 {/* Image Frame - Constrained & Refined */}
                 <motion.div 
@@ -427,7 +426,7 @@ export default function FacilityPage() {
 
                 {/* Content Side */}
                 <div className="px-4 pb-4 flex flex-col flex-1">
-                  <h3 className="text-2xl font-black text-[#020617] mb-4 group-hover:text-[#FF6B00] transition-colors duration-300 tracking-tight leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#020617] mb-3 sm:mb-4 group-hover:text-[#FF6B00] transition-colors duration-300 tracking-tight leading-tight">
                     {facility.title}
                   </h3>
                   
@@ -483,12 +482,12 @@ export default function FacilityPage() {
       </section>
       
       {/* 360 VIRTUAL TOUR CTA */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-32 sm:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative group rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(2,6,23,0.3)] min-h-[550px] flex items-center bg-[#050A1F]"
+          className="relative group rounded-[2.5rem] sm:rounded-[4rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(2,6,23,0.3)] min-h-[450px] sm:min-h-[550px] flex items-center bg-[#050A1F]"
         >
           {/* Background Image */}
           <div className="absolute inset-0 opacity-40">
@@ -503,10 +502,10 @@ export default function FacilityPage() {
           </div>
           
           {/* Animated Glows */}
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#FF6B00]/20 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
+          <div className="absolute -top-32 -left-32 w-64 h-64 sm:w-96 sm:h-96 bg-[#FF6B00]/20 rounded-full blur-[80px] sm:blur-[120px] animate-pulse" />
+          <div className="absolute -bottom-32 -right-32 w-64 h-64 sm:w-96 sm:h-96 bg-blue-600/20 rounded-full blur-[80px] sm:blur-[120px]" />
 
-          <div className="relative w-full h-full flex flex-col items-center justify-center px-8 lg:px-24 text-center z-10 py-20">
+          <div className="relative w-full h-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-24 text-center z-10 py-12 sm:py-20">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -516,14 +515,26 @@ export default function FacilityPage() {
               <span className="text-white font-black uppercase tracking-[0.3em] text-[10px]">Immersive Experience</span>
             </motion.div>
 
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1] mb-8 tracking-tighter">
+            <motion.h2 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1] mb-6 sm:mb-8 tracking-tighter"
+            >
               Eksplorasi Kampus <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Virtual 360°</span>
-            </h2>
+            </motion.h2>
 
-            <p className="text-white/60 text-lg md:text-xl font-bold mb-12 max-w-2xl leading-relaxed">
-              Rasakan pengalaman nyata menelusuri setiap laboratorium dan fasilitas unggulan kami secara digital dari mana saja.
-            </p>
+            <motion.p 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-white/60 text-sm sm:text-lg md:text-xl font-bold mb-8 sm:mb-12 max-w-2xl leading-relaxed"
+            >
+               Rasakan pengalaman nyata menelusuri setiap laboratorium dan fasilitas unggulan kami secara digital dari mana saja.
+            </motion.p>
 
             <div className="flex flex-wrap gap-6 justify-center pt-8">
               <Link
@@ -533,21 +544,27 @@ export default function FacilityPage() {
                 {/* Magnetic Glow Aura */}
                 <div className="absolute inset-0 bg-[#FF6B00]/20 rounded-full blur-3xl group-hover:bg-[#FF6B00]/40 transition-all duration-700 opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-110" />
                 
-                <div className="relative flex items-center gap-10 bg-white/5 backdrop-blur-2xl border border-white/10 hover:border-white/20 pl-14 pr-4 py-4 rounded-full transition-all duration-500 overflow-hidden shadow-2xl">
+                <motion.div 
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="relative flex items-center gap-4 sm:gap-10 bg-white/5 backdrop-blur-2xl border border-white/10 hover:border-white/20 pl-6 sm:pl-14 pr-3 sm:pr-4 py-3 sm:py-4 rounded-full transition-shadow duration-500 overflow-hidden shadow-2xl"
+                >
                   {/* The Liquid Slide Background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-orange-400 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]" />
                   
                   {/* Subtle Shimmer */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-300" />
 
-                  <span className="relative z-10 text-white font-black text-[11px] uppercase tracking-[0.3em] group-hover:tracking-[0.5em] transition-all duration-500">
+                  <span className="relative z-10 text-white font-black text-[9px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.3em] group-hover:tracking-[0.5em] transition-all duration-500">
                     Mulai Jelajah
                   </span>
                   
-                  <div className="relative z-10 w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#FF6B00] shadow-xl transition-all duration-500 group-hover:rotate-45 group-hover:scale-110">
-                    <RiArrowRightUpLine className="text-3xl" />
+                  <div className="relative z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white flex items-center justify-center text-[#FF6B00] shadow-xl transition-all duration-500 group-hover:rotate-45 group-hover:scale-110">
+                    <RiArrowRightUpLine className="text-2xl sm:text-3xl" />
                   </div>
-                </div>
+                </motion.div>
               </Link>
             </div>
           </div>
@@ -580,9 +597,9 @@ export default function FacilityPage() {
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedFacility(null)}
-                className="absolute top-8 right-8 z-50 w-12 h-12 bg-white/10 backdrop-blur-xl hover:bg-[#FF6B00] hover:text-white rounded-full text-[#020617] transition-all duration-300 flex items-center justify-center border border-black/5 group"
+                className="absolute top-4 right-4 sm:top-8 sm:right-8 z-50 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl hover:bg-[#FF6B00] hover:text-white rounded-full text-[#020617] transition-all duration-300 flex items-center justify-center border border-black/5 group"
               >
-                <RiCloseLine className="text-2xl group-hover:rotate-90 transition-transform" />
+                <RiCloseLine className="text-xl sm:text-2xl group-hover:rotate-90 transition-transform" />
               </button>
 
               {/* Left Side: Image */}

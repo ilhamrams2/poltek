@@ -113,21 +113,21 @@ export default function FAQSection() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="mt-20 p-10 rounded-[2.5rem] bg-[#1D234E] text-white flex flex-col lg:flex-row items-center justify-between gap-8"
+          className="mt-20 p-6 sm:p-8 lg:p-10 rounded-[2.5rem] bg-[#1D234E] text-white flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left"
         >
-          <div className="flex items-center gap-6">
-            <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center text-orange-500">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <div className="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center text-orange-500 shrink-0">
               <MessageCircle size={32} />
             </div>
             <div>
-              <h4 className="text-2xl font-black">Masih Punya Pertanyaan?</h4>
-              <p className="text-white/60 font-medium">Tim kami siap membantu Anda kapan saja.</p>
+              <h4 className="text-xl sm:text-2xl font-black">Masih Punya Pertanyaan?</h4>
+              <p className="text-white/60 font-medium text-sm sm:text-base">Tim kami siap membantu Anda kapan saja.</p>
             </div>
           </div>
           
           <a
             href="https://wa.me/628123456789"
-            className="w-full md:w-auto px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl font-black text-sm uppercase tracking-widest transition-all shadow-xl shadow-orange-900/40 text-center"
+            className="w-full sm:w-auto px-6 py-4 sm:px-8 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-xl shadow-orange-900/40 text-center whitespace-nowrap"
           >
             Hubungi Lewat WhatsApp
           </a>

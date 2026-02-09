@@ -15,7 +15,7 @@ export default function VisionMissionSection() {
   };
 
   return (
-    <section className="relative w-full bg-white py-24 lg:py-32 overflow-hidden">
+    <section className="relative w-full bg-white py-12 sm:py-24 lg:py-32 overflow-hidden">
       
       {/* Background patterns - More Energetic */}
       <div className="absolute top-0 right-0 w-[40%] h-full bg-orange-50/50 -skew-x-12 translate-x-32 -z-10" />
@@ -26,7 +26,7 @@ export default function VisionMissionSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start"
+        className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start"
       >
         {/* ================= LEFT CONTENT ================= */}
         <motion.div variants={itemVariants}>
@@ -38,7 +38,7 @@ export default function VisionMissionSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl lg:text-5xl xl:text-7xl font-black text-[#020617] leading-[1.05] mb-12 tracking-tighter">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-black text-[#020617] leading-[1.05] mb-8 sm:mb-12 tracking-tighter">
             Target <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">
               Masa Depan
@@ -48,7 +48,7 @@ export default function VisionMissionSection() {
           {/* ---- VISI (Highlight Card) ---- */}
           <motion.div 
             whileHover={{ y: -5, scale: 1.02 }}
-            className="mb-14 p-10 rounded-[2.5rem] bg-[#050A1F] text-white relative overflow-hidden group shadow-[0_30px_60px_-15px_rgba(5,10,31,0.4)]"
+            className="mb-10 sm:mb-14 p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050A1F] text-white relative overflow-hidden group shadow-[0_30px_60px_-15px_rgba(5,10,31,0.4)]"
           >
             {/* Abstract Shapes */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-[4rem] transition-all duration-500 group-hover:scale-110" />
@@ -62,7 +62,7 @@ export default function VisionMissionSection() {
                  <h3 className="text-xs font-black tracking-[0.2em] uppercase text-white/50">Visi Institusi</h3>
               </div>
               
-              <p className="text-xl lg:text-2xl font-black leading-tight text-white italic">
+              <p className="text-lg sm:text-xl lg:text-2xl font-black leading-tight text-white italic">
                 &ldquo;Menjadi politeknik vokasi terdepan yang unggul, terpercaya, dan
                 mampu mencetak insan terampil berakhlak dengan penguasaan
                 teknologi serta kontribusi global.&rdquo;
@@ -114,11 +114,11 @@ export default function VisionMissionSection() {
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-20 -left-10 bg-white shadow-3xl p-6 rounded-[2rem] border-l-4 border-[#FF6B00] z-20"
+              className="absolute top-10 sm:top-20 -left-4 sm:-left-10 bg-white shadow-3xl p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] border-l-4 border-[#FF6B00] z-20"
             >
                <div className="flex flex-col">
-                  <span className="text-4xl font-black text-[#020617]">A+</span>
-                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em] mt-1">Akreditasi Unggul</span>
+                  <span className="text-2xl sm:text-4xl font-black text-[#020617]">A+</span>
+                  <span className="text-[7px] sm:text-[9px] font-black text-gray-400 uppercase tracking-[0.2em] mt-1">Akreditasi Unggul</span>
                </div>
             </motion.div>
 
@@ -126,15 +126,15 @@ export default function VisionMissionSection() {
             <motion.div 
               animate={{ y: [0, 15, 0] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-20 -right-8 bg-gradient-to-br from-[#FF6B00] to-orange-500 shadow-3xl p-6 rounded-[2rem] z-20"
+              className="absolute bottom-10 sm:bottom-20 -right-4 sm:-right-8 bg-gradient-to-br from-[#FF6B00] to-orange-500 shadow-3xl p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] z-20"
             >
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-white backdrop-blur-sm">
-                    <i className="ri-briefcase-4-fill text-xl" />
+               <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl sm:rounded-2xl flex items-center justify-center text-white backdrop-blur-sm">
+                    <i className="ri-briefcase-4-fill text-lg sm:text-xl" />
                   </div>
                   <div>
-                    <div className="text-white font-black text-sm leading-none">Siap Kerja</div>
-                    <div className="text-white/70 text-[9px] font-black uppercase tracking-widest mt-1">Industri Ready</div>
+                    <div className="text-white font-black text-xs sm:text-sm leading-none">Siap Kerja</div>
+                    <div className="text-white/70 text-[7px] sm:text-[9px] font-black uppercase tracking-widest mt-1">Industri Ready</div>
                   </div>
                </div>
             </motion.div>

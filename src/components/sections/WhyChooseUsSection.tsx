@@ -94,7 +94,7 @@ const itemVariants = {
 
 export default function WhyChooseUsSection() {
   return (
-    <section className="w-full py-24 lg:py-32 bg-gray-50/50 overflow-hidden">
+    <section className="w-full py-12 sm:py-24 lg:py-32 bg-gray-50/50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
         <motion.div
@@ -104,10 +104,10 @@ export default function WhyChooseUsSection() {
           className="text-center mb-20"
         >
           <span className="text-orange-600 font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Reason to Join</span>
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-tight mb-4 sm:mb-6">
             Kenapa Memilih <span className="text-orange-500">Politeknik Kami?</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-500 text-lg leading-relaxed font-medium">
+          <p className="max-w-2xl mx-auto text-gray-500 text-base sm:text-lg leading-relaxed font-medium">
             Membangun masa depan cerah melalui pendidikan vokasi berkualitas,
             siap kerja, dan berstandar internasional.
           </p>

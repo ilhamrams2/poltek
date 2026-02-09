@@ -24,12 +24,12 @@ export default function DirectorMessageSection() {
   const titleWords = "Mempersiapkan Generasi Digital Masa Depan".split(" ");
 
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-[#020617]">
+    <section className="relative py-12 sm:py-24 lg:py-32 overflow-hidden bg-[#020617]">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B00]/5 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
           
           {/* === IMAGE SIDE === */}
@@ -40,7 +40,7 @@ export default function DirectorMessageSection() {
             viewport={{ once: true }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative z-10 rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-[#0A1128]">
+            <div className="relative z-10 rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-[#0A1128]">
               <Image 
                 src="/images/direktur.png" 
                 alt="Direktur Politeknik" 
@@ -66,7 +66,7 @@ export default function DirectorMessageSection() {
               <span className="text-[#FF6B00] text-[10px] font-black uppercase tracking-[0.2em]">Sambutan Direktur Utama</span>
             </motion.div>
 
-            <motion.h2 variants={itemVariants} className="text-4xl lg:text-5xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
               {titleWords.map((word, i) => (
                 <span key={i} className="inline-block mr-[0.2em]">
                   {word === "Digital" || word === "Masa" || word === "Depan" ? (
@@ -81,7 +81,7 @@ export default function DirectorMessageSection() {
             </motion.h2>
 
             <motion.div variants={itemVariants} className="relative">
-              <RiDoubleQuotesR className="absolute -top-12 -left-12 text-[12rem] text-white/5 pointer-events-none" />
+              <RiDoubleQuotesR className="absolute -top-8 sm:-top-12 -left-4 sm:-left-12 text-[6rem] sm:text-[12rem] text-white/5 pointer-events-none" />
               <div className="space-y-6 text-gray-300 text-lg lg:text-xl leading-relaxed font-medium relative z-10">
                 <p className="italic border-l-4 border-[#FF6B00] pl-6 py-2 bg-white/[0.02] rounded-r-2xl">
                   "Selamat datang di Politeknik Prestasi Prima. Kami berkomitmen untuk menyelenggarakan pendidikan vokasi 
@@ -94,10 +94,10 @@ export default function DirectorMessageSection() {
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="pt-8 flex flex-col sm:flex-row items-center gap-8 border-t border-white/10">
-              <div className="flex flex-col">
-                <p className="text-white font-black text-2xl tracking-tighter">Dr. (Cand) Antonius S.Kom., M.TI</p>
-                <div className="flex items-center gap-3 mt-1">
+            <motion.div variants={itemVariants} className="pt-8 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 border-t border-white/10">
+              <div className="flex flex-col text-center sm:text-left">
+                <p className="text-white font-black text-xl sm:text-2xl tracking-tighter">Dr. (Cand) Antonius S.Kom., M.TI</p>
+                <div className="flex items-center justify-center sm:justify-start gap-3 mt-1">
                   <div className="h-[2px] w-8 bg-[#FF6B00]" />
                   <p className="text-[#FF6B00] font-black text-[11px] tracking-[0.3em] uppercase">Direktur Utama</p>
                 </div>
