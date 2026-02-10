@@ -16,6 +16,8 @@ export default function NewNewsPage() {
     content: "",
     image: "",
     published: true,
+    metaTitle: "",
+    metaDesc: "",
   });
 
   const generateSlug = (title: string) => {
@@ -31,6 +33,7 @@ export default function NewNewsPage() {
       ...formData,
       title,
       slug: generateSlug(title),
+      metaTitle: title, // Suggest same as title by default
     });
   };
 
@@ -50,87 +53,126 @@ export default function NewNewsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center gap-4">
-        <Link 
-          href="/admin/news" 
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <ArrowLeft size={20} />
-        </Link>
-        <h2 className="text-2xl font-bold text-gray-900">Buat Berita Baru</h2>
+    <div className="max-w-5xl mx-auto space-y-8 animate-fade-in font-sans">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Link 
+            href="/admin/news" 
+            className="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-orange-600 hover:border-orange-200 transition-all shadow-sm"
+          >
+            <ArrowLeft size={20} />
+          </Link>
+          <div>
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight">Buat Berita Baru</h2>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Publikasi informasi terbaru politeknik</p>
+          </div>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-        <div className="grid grid-cols-1 gap-6">
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700">Judul Berita</label>
-            <input
-              required
-              type="text"
-              value={formData.title}
-              onChange={handleTitleChange}
-              placeholder="Masukkan judul berita..."
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-            />
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-8">
+          <form onSubmit={handleSubmit} className="space-y-8 bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+            <div className="grid grid-cols-1 gap-8">
+              <div className="space-y-3">
+                <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Judul Berita Utama</label>
+                <input
+                  required
+                  type="text"
+                  value={formData.title}
+                  onChange={handleTitleChange}
+                  placeholder="Masukkan judul yang menarik..."
+                  className="w-full px-6 py-4 rounded-2xl bg-slate-50 border-transparent focus:bg-white border focus:border-orange-200 outline-none transition-all font-bold text-slate-700 placeholder:text-slate-300 focus:ring-4 focus:ring-orange-500/5 shadow-inner"
+                />
+              </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700">Slug (URL)</label>
-            <input
-              required
-              type="text"
-              value={formData.slug}
-              onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 text-gray-500 outline-none"
-            />
-          </div>
+              <div className="space-y-3">
+                <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Konten Berita Eksklusif</label>
+                <div className="bg-slate-50 rounded-[2rem] p-4 border border-transparent focus-within:border-orange-200 focus-within:bg-white transition-all shadow-inner">
+                  <Editor
+                    value={formData.content}
+                    onChange={(content) => setFormData({ ...formData, content })}
+                    placeholder="Tulis cerita lengkap di sini..."
+                  />
+                </div>
+              </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700">URL Gambar Utama</label>
-            <input
-              type="text"
-              value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              placeholder="https://example.com/image.jpg"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-          </div>
+              <div className="flex items-center gap-4 p-4 bg-orange-50 rounded-2xl border border-orange-100/50">
+                <input
+                  type="checkbox"
+                  id="published"
+                  checked={formData.published}
+                  onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+                  className="w-5 h-5 rounded-lg text-orange-600 focus:ring-orange-500 border-orange-200"
+                />
+                <label htmlFor="published" className="text-sm font-black text-orange-900 uppercase tracking-tight cursor-pointer">
+                  Terbitkan Langsung Ke Publik
+                </label>
+              </div>
+            </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700">Konten Berita</label>
-            <Editor
-              value={formData.content}
-              onChange={(content) => setFormData({ ...formData, content })}
-              placeholder="Tulis konten berita di sini..."
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="published"
-              checked={formData.published}
-              onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
-              className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
-            />
-            <label htmlFor="published" className="text-sm font-medium text-gray-700 font-inter">
-              Terbitkan Langsung
-            </label>
-          </div>
+            <div className="flex justify-end pt-8 border-t border-slate-50">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-[#0F172A] hover:bg-orange-600 disabled:bg-slate-300 text-white px-10 py-4 rounded-2xl font-black flex items-center gap-3 transition-all shadow-xl shadow-slate-900/10 active:scale-95 uppercase tracking-widest text-xs"
+              >
+                {loading ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
+                Simpan Berita
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div className="flex justify-end pt-6 border-t border-gray-100">
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-md active:scale-95 font-inter"
-          >
-            {loading ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
-            Simpan Berita
-          </button>
+        <div className="lg:col-span-4 space-y-8">
+           {/* Sidebar: Media & SEO */}
+           <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 space-y-6">
+              <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest border-b border-slate-50 pb-4">Pengaturan Media</h3>
+              <div className="space-y-4">
+                 <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">URL Gambar Utama</label>
+                    <input
+                      type="text"
+                      value={formData.image}
+                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border-transparent focus:bg-white border focus:border-orange-200 outline-none transition-all font-bold text-xs"
+                    />
+                 </div>
+                 <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-200">
+                    {formData.image ? (
+                       <img src={formData.image} className="w-full h-full object-cover" alt="Preview" />
+                    ) : (
+                       <div className="w-full h-full flex items-center justify-center text-slate-300 italic text-[10px] font-black uppercase">Preview Media</div>
+                    )}
+                 </div>
+              </div>
+           </div>
+
+           <div className="bg-[#0F172A] p-8 rounded-[2.5rem] shadow-xl shadow-slate-900/10 space-y-6 text-white text-xs">
+              <h3 className="text-sm font-black uppercase tracking-widest border-b border-white/5 pb-4">SEO Control Center</h3>
+              <div className="space-y-5">
+                 <div className="space-y-2">
+                    <label className="text-[10px] font-black text-white/40 uppercase tracking-widest">Meta Title Tag</label>
+                    <input
+                      type="text"
+                      value={formData.metaTitle}
+                      onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border-transparent focus:bg-white/10 border focus:border-orange-500/50 outline-none transition-all font-bold text-white"
+                    />
+                 </div>
+                 <div className="space-y-2">
+                    <label className="text-[10px] font-black text-white/40 uppercase tracking-widest">Meta Description</label>
+                    <textarea
+                      rows={3}
+                      value={formData.metaDesc}
+                      onChange={(e) => setFormData({ ...formData, metaDesc: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border-transparent focus:bg-white/10 border focus:border-orange-500/50 outline-none transition-all font-bold text-white resize-none"
+                    ></textarea>
+                 </div>
+              </div>
+           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

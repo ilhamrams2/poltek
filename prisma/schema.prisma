@@ -8,15 +8,24 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Role {
+  SUPER_ADMIN
+  NEWS_EDITOR
+  ACADEMIC_ADMIN
+}
+
 model News {
-  id        String   @id @default(cuid())
-  title     String
-  slug      String   @unique
-  content   String   // Stores HTML content from Rich Text Editor
-  image     String?  // Featured image URL
-  published Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  image       String?
+  published   Boolean  @default(true)
+  views       Int      @default(0)
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("news")
 }
@@ -25,19 +34,89 @@ model Gallery {
   id          String   @id @default(cuid())
   title       String
   description String?
-  videoUrl    String   // YouTube Video URL
+  videoUrl    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@map("gallery")
 }
 
+model Program {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  degree          String   // D3 or D4
+  subtitle        String
+  description     String   @db.Text
+  longDescription String   @db.Text
+  heroImage       String
+  color           String   @default("#F15A24")
+  competencies    Json     // Array of {title, desc, icon}
+  careers         Json     // Array of strings
+  tools           Json     // Array of {name, icon}
+  stats           Json     // Array of {label, value}
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("programs")
+}
+
 model Admin {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String     @id @default(cuid())
+  email             String     @unique
+  name              String?
+  role              Role       @default(NEWS_EDITOR)
+  twoFactorEnabled  Boolean    @default(false)
+  twoFactorSecret   String?
+  auditLogs         AuditLog[]
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 
   @@map("admins")
 }
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  action    String
+  entity    String   // e.g., "News", "Program"
+  entityId  String?
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+model DailyStat {
+  id        String   @id @default(cuid())
+  date      DateTime @unique @default(now())
+  visitors  Int      @default(0)
+  pageViews Int      @default(0)
+
+  @@map("daily_stats")
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+

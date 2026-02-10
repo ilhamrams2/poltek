@@ -14,9 +14,16 @@ import { format } from "date-fns";
 import { id } from "date-fns/locale";
 
 async function getDashboardData() {
-  const [newsCount, galleryCount, latestNews, latestGallery] = await Promise.all([
+  const [newsCount, galleryCount, programCount, visitorStats, unreadMessages, latestNews, latestGallery] = await Promise.all([
     prisma.news.count(),
     prisma.gallery.count(),
+    prisma.program.count(),
+    prisma.dailyStat.findFirst({
+       orderBy: { date: 'desc' }
+    }),
+    prisma.contactMessage.count({
+       where: { isRead: false }
+    }),
     prisma.news.findMany({
       orderBy: { createdAt: 'desc' },
       take: 5
@@ -31,6 +38,9 @@ async function getDashboardData() {
     stats: {
       news: newsCount,
       gallery: galleryCount,
+      programs: programCount,
+      todayViews: visitorStats?.pageViews || 0,
+      unreadMessages
     },
     latestNews,
     latestGallery
@@ -41,10 +51,10 @@ export default async function DashboardPage() {
   const { stats, latestNews, latestGallery } = await getDashboardData();
 
   const cards = [
-    { title: "Total Berita", count: stats.news, icon: Newspaper, color: "text-blue-600", bg: "bg-blue-50", href: "/admin/news" },
-    { title: "Total Galeri", count: stats.gallery, icon: ImageIcon, color: "text-purple-600", bg: "bg-purple-50", href: "/admin/gallery" },
-    { title: "Admin Aktif", count: 1, icon: Users, color: "text-emerald-600", bg: "bg-emerald-50", href: "#" },
-    { title: "Pengunjung", count: "1.2k+", icon: Activity, color: "text-amber-600", bg: "bg-amber-50", href: "#" },
+    { title: "Total Berita", count: stats.news, icon: Newspaper, color: "text-orange-600", bg: "bg-orange-50", href: "/admin/news" },
+    { title: "Program Studi", count: stats.programs, icon: Users, color: "text-indigo-600", bg: "bg-indigo-50", href: "/admin/programs" },
+    { title: "Pesan Baru", count: stats.unreadMessages, icon: Activity, color: "text-emerald-600", bg: "bg-emerald-50", href: "/admin/inbox" },
+    { title: "Views Hari Ini", count: stats.todayViews, icon: TrendingUp, color: "text-amber-600", bg: "bg-amber-50", href: "/admin/audit" },
   ];
 
   return (

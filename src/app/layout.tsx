@@ -3,6 +3,7 @@ import "./styles/program/animations.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import GlobalLoader from "@/components/GlobalLoader";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,6 +46,7 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <GlobalLoader />
+        <AnalyticsTracker />
         {children}
       </body>
     </html>
