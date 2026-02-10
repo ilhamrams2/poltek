@@ -47,7 +47,9 @@ export default function AdminLayout({
   }, []);
 
   const handleLogout = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
     await supabase.auth.signOut();
+    console.log(`[AUTH] Logout success for: ${user?.email} at ${new Date().toLocaleString()}`);
     router.push("/admin/login");
     router.refresh();
   };

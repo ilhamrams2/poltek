@@ -64,10 +64,12 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
     
+    /* 
     // Redirect ke dashboard jika sudah login tapi akses halaman login
     if (session && request.nextUrl.pathname.startsWith("/admin/login")) {
       return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
+    */
   }
 
   return response;
