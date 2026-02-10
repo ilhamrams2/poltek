@@ -538,7 +538,7 @@ export default function FacilityPage() {
 
             <div className="flex flex-wrap gap-6 justify-center pt-8">
               <Link
-                href="/site/facility-tour"
+                href="/facility-tour"
                 className="group relative flex items-center"
               >
                 {/* Magnetic Glow Aura */}
@@ -675,7 +675,7 @@ export default function FacilityPage() {
 
                   <div className="flex flex-col sm:flex-row gap-6">
                     <Link
-                      href="/site/facility-tour"
+                      href="/facility-tour"
                       onClick={() => setSelectedFacility(null)}
                       className="flex-1 bg-[#050A1F] text-white px-10 py-6 rounded-[2rem] font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-[#050A1F]/30 group/btn"
                     >

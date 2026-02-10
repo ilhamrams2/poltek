@@ -310,7 +310,7 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
                   <Link href="https://wa.me/6285199328825" className="w-full sm:w-auto bg-white text-[#0E1333] px-16 py-8 rounded-full font-black text-xs uppercase tracking-[0.3em] shadow-[0_20px_60px_rgba(255,255,255,0.1)] hover:scale-105 transition-all">
                     Register Now
                   </Link>
-                  <Link href="/site/facility-tour" className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-4 hover:gap-8 transition-all group">
+                  <Link href="/facility-tour" className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-4 hover:gap-8 transition-all group">
                      Virtual Tour <FiArrowRight className="text-[#F15A24] text-2xl" />
                   </Link>
                </div>

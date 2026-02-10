@@ -76,7 +76,7 @@ const cards = [
     title: "Daftar Kuliah Bisa Dari Mana Saja",
     desc: "Banyak pilihan beasiswa menarik sampai dengan beasiswa kuliah gratis 100%. Daftarkan dirimu sekarang!",
     linkText: "INFO LENGKAP",
-    linkUrl: "/site/pendaftaran",
+    linkUrl: "/pendaftaran",
     icon: <RiMacbookLine />,
   },
   {
@@ -85,7 +85,7 @@ const cards = [
     title: "Kuliah Berkualitas Tidak Harus Mahal",
     desc: "Cek rincian biaya perkuliahan dan skema pembayaran yang fleksibel sesuai kebutuhanmu.",
     linkText: "RINCIAN BIAYA",
-    linkUrl: "/site/biaya",
+    linkUrl: "/biaya",
     icon: <RiWallet3Line />,
   },
   {
@@ -94,7 +94,7 @@ const cards = [
     title: "Sudah Siap Gabung Bersama Kami?",
     desc: "Klik tombol di bawah untuk memulai proses pendaftaran online yang cepat dan mudah.",
     linkText: "DAFTAR SEKARANG",
-    linkUrl: "/site/daftar",
+    linkUrl: "/daftar",
     icon: <RiFileList3Line />,
   },
 ];

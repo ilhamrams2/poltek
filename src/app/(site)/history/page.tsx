@@ -250,7 +250,7 @@ export default function HistoryPage() {
                 Daftar Sekarang
               </Link>
               <Link
-                href="/site/facility"
+                href="/facility"
                 className="bg-white/5 border border-white/10 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all text-center"
               >
                 Explore Fasilitas

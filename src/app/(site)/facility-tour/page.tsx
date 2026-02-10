@@ -143,7 +143,7 @@ export default function FacilityVirtualTourPage() {
               </button>
               
               <Link
-                href="/site/facility"
+                href="/facility"
                 className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-10 py-5 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-all"
               >
                 Daftar Fasilitas
@@ -340,7 +340,7 @@ export default function FacilityVirtualTourPage() {
                <Link href="https://wa.me/6285199328825" className="w-full sm:w-auto bg-[#F15A24] text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/30 hover:scale-105 transition-transform">
                   Daftar Sekarang
                </Link>
-               <Link href="/site/facility" className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+               <Link href="/facility" className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
                   Informasi Fasilitas
                </Link>
             </div>

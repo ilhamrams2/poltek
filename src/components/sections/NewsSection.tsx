@@ -12,7 +12,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "25 Nov 2025",
     excerpt: "Mahasiswa kami berhasil meraih medali emas dalam kompetisi desain aplikasi tingkat dunia.",
-    link: "/site/news",
+    link: "/news",
   },
   {
     category: "Akademik",
@@ -20,7 +20,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "20 Nov 2025",
     excerpt: "Workshop ini memberikan wawasan terbaru dalam dunia digital marketing, khusus untuk mahasiswa.",
-    link: "/site/news",
+    link: "/news",
   },
   {
     category: "Karir",
@@ -28,7 +28,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "15 Nov 2025",
     excerpt: "Mahasiswa bisa mendaftar untuk magang di perusahaan mitra kami dengan berbagai pilihan lokasi industri.",
-    link: "/site/news",
+    link: "/news",
   },
   {
     category: "Event",
@@ -36,7 +36,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "10 Jan 2026",
     excerpt: "Sebuah perayaan kreativitas tanpa batas yang menggabungkan teknologi dan kearifan lokal.",
-    link: "/site/news",
+    link: "/news",
   },
   {
     category: "Inovasi",
@@ -44,7 +44,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "05 Jan 2026",
     excerpt: "Inovasi mahasiswa dalam bidang pertanian cerdas mendapat apresiasi tinggi dari para juri.",
-    link: "/site/news",
+    link: "/news",
   },
   {
     category: "Teknologi",
@@ -52,7 +52,7 @@ const news = [
     img: "/images/sections/news/newsdummy.jpeg",
     date: "12 Feb 2026",
     excerpt: "Mengahadirkan pakar industri global untuk membahas masa depan kecerdasan buatan.",
-    link: "/site/news",
+    link: "/news",
   },
 ];
 
@@ -343,7 +343,7 @@ export default function NewsSection() {
           className="mt-12 sm:mt-24 flex justify-center"
         >
           <motion.a
-            href="/site/news"
+            href="/news"
             whileHover="hover"
             whileTap="tap"
             className="group relative inline-flex items-center gap-4 sm:gap-6 bg-white px-10 sm:px-14 py-5 sm:py-6 rounded-full font-black text-xs sm:text-base tracking-wider uppercase transition-all duration-300 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:shadow-[0_30px_60px_rgba(160,32,240,0.2)]"

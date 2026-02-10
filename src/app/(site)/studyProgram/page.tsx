@@ -42,7 +42,7 @@ const PROGRAMS = {
       desc: "Mastering Modern Office Administration",
       longDesc: "Menghasilkan ahli madya yang kompeten dalam pengelolaan administrasi perkantoran berbasis teknologi digital, korespondensi bahasa Inggris, dan public relations.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d3_administrasi_perkantoran",
+      link: "/program/d3_administrasi_perkantoran",
       icon: RiDashboardLine,
       color: "#3B82F6", // Blue
       stats: { employable: "98%", salary: "Start 5-7jt" }
@@ -53,7 +53,7 @@ const PROGRAMS = {
       desc: "Digital Marketing & Consumer Behavior Strategy",
       longDesc: "Fokus pada strategi pemasaran digital, branding, analisis pasar, dan e-commerce management untuk memenangkan persaingan bisnis global.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d3_manajemen_pemasaran",
+      link: "/program/d3_manajemen_pemasaran",
       icon: RiBarChartGroupedLine,
       color: "#F59E0B", // Amber
       stats: { employable: "95%", salary: "Start 5-8jt" }
@@ -64,7 +64,7 @@ const PROGRAMS = {
       desc: "Full Stack Development & System Architecture",
       longDesc: "Mencetak developer handal yang menguasai pengembangan aplikasi web, mobile, dan desktop dengan standar industri terkini.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d3_rekayasa_perangkat_lunak",
+      link: "/program/d3_rekayasa_perangkat_lunak",
       icon: RiCodeBoxLine,
       color: "#10B981", // Emerald
       stats: { employable: "99%", salary: "Start 6-10jt" }
@@ -77,7 +77,7 @@ const PROGRAMS = {
       desc: "Digital Business Transformation & Fintech",
       longDesc: "Program sarjana terapan yang menggabungkan manajemen bisnis, analisis data, dan teknologi finansial untuk menciptakan entrepreneur digital.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d4_bisnis_digital",
+      link: "/program/d4_bisnis_digital",
       icon: RiMacbookLine,
       color: "#8B5CF6", // Violet
       stats: { employable: "96%", salary: "Start 6-9jt" }
@@ -88,7 +88,7 @@ const PROGRAMS = {
       desc: "Cloud Computing & Cyber Security",
       longDesc: "Mendalami infrastruktur jaringan skala besar, keamanan siber, cloud computing, dan administrasi sistem server enterprise.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d4_teknologi_rekayasa_jaringan_komputer",
+      link: "/program/d4_teknologi_rekayasa_jaringan_komputer",
       icon: RiServerLine,
       color: "#EF4444", // Red
       stats: { employable: "97%", salary: "Start 7-12jt" }
@@ -99,7 +99,7 @@ const PROGRAMS = {
       desc: "Creative Tech, 3D Animation & UI/UX",
       longDesc: "Menggabungkan seni dan teknologi untuk produksi konten kreatif, animasi 3D, game development, dan desain pengalaman pengguna.",
       image: "/images/sections/program/programdummy.png",
-      link: "/site/program/d4_teknologi_rekayasa_multimedia",
+      link: "/program/d4_teknologi_rekayasa_multimedia",
       icon: RiVideoLine,
       color: "#EC4899", // Pink
       stats: { employable: "94%", salary: "Start 5-9jt" }

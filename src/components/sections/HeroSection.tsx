@@ -210,7 +210,7 @@ export default function HeroMedia() {
                         variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
                         className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-5"
                       >
-                         <Link href="/site/program" className="group pointer-events-auto relative overflow-hidden bg-[#FF6B00] text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm lg:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
+                         <Link href="/program" className="group pointer-events-auto relative overflow-hidden bg-[#FF6B00] text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm lg:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
                             <span className="relative z-10 flex items-center justify-center gap-2 text-nowrap">
                                 MULAI JELAJAHI <RiArrowRightSLine className="text-lg sm:text-xl group-hover:translate-x-1 transition-transform" />
                             </span>
