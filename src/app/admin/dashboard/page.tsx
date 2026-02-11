@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import Image from "next/image";
 
 async function getDashboardData() {
   const [newsCount, galleryCount, programCount, visitorStats, unreadMessages, latestNews, latestGallery] = await Promise.all([
@@ -111,15 +112,15 @@ export default async function DashboardPage() {
           <div className="p-4">
             {latestNews.length > 0 ? (
                <div className="space-y-1">
-                 {latestNews.map((news: any) => (
+                 {latestNews.map((news) => (
                     <Link 
                       key={news.id} 
                       href={`/admin/news/${news.id}/edit`}
                       className="flex items-center gap-5 p-4 rounded-2xl hover:bg-slate-50 transition-all group border border-transparent hover:border-slate-100"
                     >
-                      <div className="w-14 h-14 rounded-[1.25rem] bg-slate-100 overflow-hidden flex-shrink-0 shadow-inner">
+                      <div className="w-14 h-14 rounded-[1.25rem] bg-slate-100 overflow-hidden flex-shrink-0 shadow-inner relative">
                         {news.image ? (
-                           <img src={news.image} alt="" className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                           <Image src={news.image} alt={news.title} fill className="object-cover transition-transform group-hover:scale-110 duration-500" />
                         ) : (
                            <div className="w-full h-full flex items-center justify-center text-slate-300">
                              <Newspaper size={20} />
@@ -168,7 +169,7 @@ export default async function DashboardPage() {
           <div className="p-4">
             {latestGallery.length > 0 ? (
                <div className="space-y-1">
-                 {latestGallery.map((item: any) => (
+                 {latestGallery.map((item) => (
                     <div key={item.id} className="flex items-center gap-5 p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group">
                       <div className="w-24 aspect-video rounded-xl bg-slate-900 flex-shrink-0 relative overflow-hidden ring-1 ring-white/10">
                          <div className="absolute inset-0 flex items-center justify-center text-white/20">

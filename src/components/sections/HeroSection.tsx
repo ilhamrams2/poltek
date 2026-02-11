@@ -5,6 +5,7 @@ import Carousel from "./Carousel";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RiArrowRightSLine, RiPlayFill, RiCompass3Line, RiFocus3Line, RiGlobalLine } from "react-icons/ri";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroMedia() {
   const [showCarousel, setShowCarousel] = useState(false);
@@ -238,7 +239,7 @@ export default function HeroMedia() {
                   transition={{ delay: 0.5, duration: 1 }}
                   className="absolute top-4 right-4 sm:top-12 sm:right-12 lg:top-20 lg:right-20 w-12 h-12 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white/10 backdrop-blur-2xl rounded-full border border-white/20 p-1 shadow-2xl overflow-hidden group hover:rotate-6 transition-transform cursor-pointer"
                >
-                   <img src="/images/logo_politeknik.png" alt="Logo" className="w-full h-full object-contain filter drop-shadow-xl" />
+                   <Image src="/images/logo_politeknik.png" alt="Logo" width={128} height={128} className="w-full h-full object-contain filter drop-shadow-xl" />
                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-orange/0 to-white/20 pointer-events-none" />
                </motion.div>
 

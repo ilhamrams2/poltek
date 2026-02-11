@@ -25,7 +25,8 @@ export async function updateSetting(key: string, value: string) {
 
     revalidatePath("/admin/settings");
     return { success: true };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error updating setting:", error);
     return { success: false, error: error.message || "Failed to update setting" };
   }
@@ -55,7 +56,8 @@ export async function updateMultipleSettings(settings: Record<string, string>) {
     revalidatePath("/admin/settings");
     revalidatePath("/");
     return { success: true };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error updating settings:", error);
     return { success: false, error: error.message || "Failed to update settings" };
   }

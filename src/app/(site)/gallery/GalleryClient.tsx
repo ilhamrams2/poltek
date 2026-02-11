@@ -78,7 +78,7 @@ const VideoModal = ({
   );
 };
 
-export default function GalleryClient({ initialData }: { initialData: any[] }) {
+export default function GalleryClient({ initialData }: { initialData: GalleryItem[] }) {
   const [activeCategory, setActiveCategory] = useState("Show All");
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
@@ -95,10 +95,10 @@ export default function GalleryClient({ initialData }: { initialData: any[] }) {
     createdAt: new Date()
   };
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date | string) => {
     try {
       return format(new Date(date), "dd MMM yyyy", { locale: idLocale });
-    } catch (e) {
+    } catch (err) {
       return "Baru saja";
     }
   };

@@ -104,7 +104,7 @@ export default function AboutSection() {
               <div className="flex -space-x-3 sm:-space-x-4">
                 {[1,2,3].map(i => (
                   <div key={i} className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white bg-gray-100 overflow-hidden shadow-lg rotate-3 odd:-rotate-2">
-                    <img src={`https://i.pravatar.cc/150?img=${i+20}`} alt="Student" className="w-full h-full object-cover" />
+                    <Image src={`https://i.pravatar.cc/150?img=${i+20}`} alt="Student" width={56} height={56} className="w-full h-full object-cover" unoptimized />
                   </div>
                 ))}
               </div>

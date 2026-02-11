@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { getCurrentAdmin, checkRole } from "@/lib/auth-utils";
 import { createAuditLog } from "@/lib/audit";
@@ -53,7 +54,8 @@ export async function createNews(data: {
     revalidatePath("/news");
     revalidatePath("/admin/news");
     return { success: true, data: news };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error creating news:", error);
     return { success: false, error: error.message || "Gagal membuat berita" };
   }
@@ -89,7 +91,8 @@ export async function updateNews(
     revalidatePath(`/news/${id}`);
     revalidatePath("/admin/news");
     return { success: true, data: news };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error updating news:", error);
     return { success: false, error: error.message || "Gagal memperbarui berita" };
   }
@@ -113,13 +116,29 @@ export async function deleteNews(id: string) {
     revalidatePath("/news");
     revalidatePath("/admin/news");
     return { success: true };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error deleting news:", error);
     return { success: false, error: error.message || "Gagal menghapus berita" };
   }
 }
 
 // PROGRAM ACTIONS
+interface ProgramInput {
+  title: string;
+  slug: string;
+  degree: string;
+  subtitle: string;
+  description: string;
+  longDescription: string;
+  heroImage: string;
+  color?: string;
+  competencies: Prisma.InputJsonValue;
+  careers: Prisma.InputJsonValue;
+  tools: Prisma.InputJsonValue;
+  stats: Prisma.InputJsonValue;
+}
+
 export async function getPrograms() {
   try {
     return await prisma.program.findMany({
@@ -142,7 +161,7 @@ export async function getProgramById(id: string) {
   }
 }
 
-export async function createProgram(data: any) {
+export async function createProgram(data: ProgramInput) {
   try {
     const admin = await checkRole(["SUPER_ADMIN", "ACADEMIC_ADMIN"]);
     
@@ -161,13 +180,14 @@ export async function createProgram(data: any) {
     revalidatePath("/(site)/program", "layout");
     revalidatePath("/admin/programs");
     return { success: true, data: program };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error creating program:", error);
     return { success: false, error: error.message || "Gagal membuat program studi" };
   }
 }
 
-export async function updateProgram(id: string, data: any) {
+export async function updateProgram(id: string, data: Partial<ProgramInput>) {
   try {
     const admin = await checkRole(["SUPER_ADMIN", "ACADEMIC_ADMIN"]);
     
@@ -187,7 +207,8 @@ export async function updateProgram(id: string, data: any) {
     revalidatePath("/(site)/program", "layout");
     revalidatePath("/admin/programs");
     return { success: true, data: program };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error updating program:", error);
     return { success: false, error: error.message || "Gagal memperbarui program studi" };
   }
@@ -211,7 +232,8 @@ export async function deleteProgram(id: string) {
     revalidatePath("/(site)/program", "layout");
     revalidatePath("/admin/programs");
     return { success: true };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error deleting program:", error);
     return { success: false, error: error.message || "Gagal menghapus program studi" };
   }
@@ -271,7 +293,8 @@ export async function createGallery(data: {
     revalidatePath("/gallery");
     revalidatePath("/admin/gallery");
     return { success: true, data: item };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error creating gallery:", error);
     return { success: false, error: error.message || "Gagal menambah galeri" };
   }
@@ -295,7 +318,8 @@ export async function deleteGallery(id: string) {
     revalidatePath("/gallery");
     revalidatePath("/admin/gallery");
     return { success: true };
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Error deleting gallery:", error);
     return { success: false, error: error.message || "Gagal menghapus galeri" };
   }

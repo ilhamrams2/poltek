@@ -1,4 +1,5 @@
 import { prisma } from "./prisma";
+import { Prisma } from "@prisma/client";
 
 export async function createAuditLog({
   adminId,
@@ -13,7 +14,7 @@ export async function createAuditLog({
   action: string;
   entity: string;
   entityId?: string;
-  details?: any;
+  details?: Prisma.InputJsonValue;
   ipAddress?: string;
   userAgent?: string;
 }) {

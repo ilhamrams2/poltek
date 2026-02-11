@@ -14,7 +14,7 @@ async function getMessages() {
 
 export default async function InboxPage() {
   const messages = await getMessages();
-  const unreadCount = messages.filter((m: any) => !m.isRead).length;
+  const unreadCount = messages.filter((m) => !m.isRead).length;
 
   return (
     <div className="space-y-8 animate-fade-in font-sans">
@@ -49,7 +49,7 @@ export default async function InboxPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
          {/* List View */}
          <div className="lg:col-span-12 space-y-4">
-            {messages.map((msg: any) => (
+            {messages.map((msg) => (
               <div key={msg.id} className={`bg-white p-6 rounded-[2rem] border ${msg.isRead ? 'border-slate-50 opacity-70' : 'border-orange-100 shadow-lg shadow-orange-500/5'} transition-all hover:scale-[1.01] cursor-pointer flex flex-col md:flex-row gap-6 items-start md:items-center`}>
                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${msg.isRead ? 'bg-slate-50 text-slate-300' : 'bg-orange-50 text-orange-600'}`}>
                     <Mail size={22} />

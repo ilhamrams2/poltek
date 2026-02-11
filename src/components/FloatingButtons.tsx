@@ -409,8 +409,16 @@ export default function FloatingButtons() {
 }
 
 // Sub-components for cleaner code
-function ProfileButton({ active, onClick, icon, label, color }: any) {
-  const colorMap: any = {
+interface ProfileButtonProps {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+  color: "green" | "blue" | "orange" | "purple";
+}
+
+function ProfileButton({ active, onClick, icon, label, color }: ProfileButtonProps) {
+  const colorMap: Record<string, string> = {
      green: "bg-green-500 border-green-500 text-white",
      blue: "bg-blue-600 border-blue-600 text-white",
      orange: "bg-orange-500 border-orange-500 text-white",
@@ -432,7 +440,14 @@ function ProfileButton({ active, onClick, icon, label, color }: any) {
   );
 }
 
-function AccessToggle({ active, onClick, icon, label }: any) {
+interface AccessToggleProps {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+}
+
+function AccessToggle({ active, onClick, icon, label }: AccessToggleProps) {
   return (
     <button
       onClick={onClick}

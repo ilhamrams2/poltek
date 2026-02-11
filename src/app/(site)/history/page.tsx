@@ -215,8 +215,8 @@ export default function HistoryPage() {
            >
               <RiFlashlightLine className="text-6xl text-[#F15A24] mx-auto mb-10" />
               <h2 className="text-3xl md:text-5xl font-black mb-10 leading-tight italic">
-                "Sejarah bukan hanya tentang catatan masa lalu, <br /> 
-                tapi tentang <span className="text-[#F15A24]">pondasi masa depan</span> yang kita bangun hari ini."
+                &ldquo;Sejarah bukan hanya tentang catatan masa lalu, <br /> 
+                tapi tentang <span className="text-[#F15A24]">pondasi masa depan</span> yang kita bangun hari ini.&rdquo;
               </h2>
               <div className="w-20 h-1 bg-[#F15A24] mx-auto rounded-full" />
            </motion.div>

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { getNews, deleteNews } from "@/actions/cms";
 import { Plus, Edit, Trash2, Eye, Newspaper, Loader2, Search, Filter } from "lucide-react";
 import { format } from "date-fns";
@@ -21,15 +22,25 @@ export default function NewsAdminPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  const fetchNews = async () => {
-    setLoading(true);
+  const fetchNews = useCallback(async () => {
     const data = await getNews();
     setNews(data as NewsItem[]);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
-    fetchNews();
+    let isMounted = true;
+    const loadData = async () => {
+      const data = await getNews();
+      if (isMounted) {
+        setNews(data as NewsItem[]);
+        setLoading(false);
+      }
+    };
+    loadData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleDelete = async (id: string, title: string) => {
@@ -108,7 +119,7 @@ export default function NewsAdminPage() {
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-slate-100 overflow-hidden shadow-inner flex-shrink-0">
                            {item.image ? (
-                             <img src={item.image} alt="" className="w-full h-full object-cover" />
+                             <Image src={item.image} alt={item.title} width={48} height={48} className="w-full h-full object-cover" />
                            ) : (
                              <div className="w-full h-full flex items-center justify-center text-slate-300">
                                <Newspaper size={20} />

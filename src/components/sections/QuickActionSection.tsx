@@ -122,8 +122,19 @@ export default function QuickActionSection() {
   );
 }
 
+interface CardData {
+  id: number;
+  theme: string;
+  title: string;
+  desc: string;
+  linkText: string;
+  linkUrl: string;
+  isDownload?: boolean;
+  icon: React.ReactNode;
+}
+
 // Sub-component for individual cards
-function Card({ data }: { data: any }) {
+function Card({ data }: { data: CardData }) {
   const isLight = data.theme === "light";
   const isDark = data.theme === "dark";
   const isOrange = data.theme === "orange";

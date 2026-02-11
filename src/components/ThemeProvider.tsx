@@ -17,8 +17,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const savedTheme = localStorage.getItem("admin-theme") as Theme;
     if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+      // Defer to avoid synchronous setState warning
+      const applyTheme = () => {
+        setTheme(savedTheme);
+        document.documentElement.classList.toggle("dark", savedTheme === "dark");
+      };
+      applyTheme();
     }
   }, []);
 

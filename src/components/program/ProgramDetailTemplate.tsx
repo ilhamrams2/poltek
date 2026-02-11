@@ -186,7 +186,7 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
 
             <div className="lg:w-2/3 space-y-8">
               {data.competencies.map((comp, i) => {
-                const IconComp = (RiIcons as any)[comp.icon] || RiIcons.RiCheckboxCircleLine;
+                const IconComp = (RiIcons as unknown as Record<string, React.ElementType>)[comp.icon] || RiIcons.RiCheckboxCircleLine;
                 return (
                   <motion.div 
                     key={i}
@@ -272,7 +272,7 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
 
              <div className="lg:w-1/2 grid grid-cols-2 sm:grid-cols-3 gap-6">
                 {data.tools.map((tool, i) => {
-                  const ToolIcon = (RiIcons as any)[tool.icon] || FiDatabase;
+                  const ToolIcon = (RiIcons as unknown as Record<string, React.ElementType>)[tool.icon] || FiDatabase;
                   return (
                     <motion.div 
                       key={i} 

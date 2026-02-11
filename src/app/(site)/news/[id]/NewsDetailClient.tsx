@@ -19,14 +19,24 @@ import {
   RiFireLine,
 } from "react-icons/ri";
 
+interface NewsItem {
+  id: string;
+  title: string;
+  image?: string | null;
+  content: string;
+  createdAt: Date | string;
+  published: boolean;
+  slug?: string;
+}
+
 export default function NewsDetailClient({ 
   newsDetail, 
   relatedNews, 
   hotNews 
 }: { 
-  newsDetail: any; 
-  relatedNews: any[]; 
-  hotNews: any[]; 
+  newsDetail: NewsItem; 
+  relatedNews: NewsItem[]; 
+  hotNews: NewsItem[]; 
 }) {
   const handleShare = (platform: string) => {
     const url = typeof window !== "undefined" ? window.location.href : "";
@@ -49,10 +59,10 @@ export default function NewsDetailClient({
     }
   };
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date | string) => {
     try {
       return format(new Date(date), "dd MMM yyyy", { locale: idLocale });
-    } catch (e) {
+    } catch (err) {
       return "Baru saja";
     }
   };

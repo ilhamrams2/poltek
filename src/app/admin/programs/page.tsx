@@ -1,6 +1,7 @@
 import { getPrograms, deleteProgram } from "@/actions/cms";
 import { Plus, GraduationCap, Edit, Trash2, Search, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 
@@ -39,13 +40,15 @@ export default async function ProgramsPage() {
 
       {/* Programs Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {programs.map((program: any) => (
+        {programs.map((program) => (
           <div key={program.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden group hover:shadow-2xl hover:shadow-orange-500/5 transition-all duration-500">
              <div className="h-40 relative overflow-hidden">
-                <img 
+                <Image 
                   src={program.heroImage} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                  alt={program.title} 
+                  alt={program.title}
+                  width={400}
+                  height={200}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
                 <div className="absolute bottom-4 left-6 flex items-center gap-2">

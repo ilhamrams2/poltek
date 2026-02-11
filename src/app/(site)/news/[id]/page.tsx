@@ -11,7 +11,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
   }
 
   const allNews = await getNews();
-  const relatedNews = allNews.filter((n: any) => n.id !== id).slice(0, 2);
+  const relatedNews = allNews.filter((n) => n.id !== id).slice(0, 2);
   const hotNews = allNews.slice(0, 3);
 
   return (

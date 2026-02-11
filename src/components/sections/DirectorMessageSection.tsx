@@ -84,8 +84,8 @@ export default function DirectorMessageSection() {
               <RiDoubleQuotesR className="absolute -top-8 sm:-top-12 -left-4 sm:-left-12 text-[6rem] sm:text-[12rem] text-white/5 pointer-events-none" />
               <div className="space-y-6 text-gray-300 text-lg lg:text-xl leading-relaxed font-medium relative z-10">
                 <p className="italic border-l-4 border-[#FF6B00] pl-6 py-2 bg-white/[0.02] rounded-r-2xl">
-                  "Selamat datang di Politeknik Prestasi Prima. Kami berkomitmen untuk menyelenggarakan pendidikan vokasi 
-                  yang tidak hanya fokus pada teori, tetapi menitikberatkan pada penguasaan teknologi terkini."
+                  &ldquo;Selamat datang di Politeknik Prestasi Prima. Kami berkomitmen untuk menyelenggarakan pendidikan vokasi 
+                  yang tidak hanya fokus pada teori, tetapi menitikberatkan pada penguasaan teknologi terkini.&rdquo;
                 </p>
                 <p className="opacity-80">
                   Melalui kolaborasi erat dengan sektor industri dan kurikulum yang adaptif, kami memastikan setiap 

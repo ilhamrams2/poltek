@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { getGallery, createGallery, deleteGallery } from "@/actions/cms";
 import { getYoutubeThumbnail } from "@/lib/youtube";
 import { 
@@ -16,8 +17,16 @@ import {
   Youtube
 } from "lucide-react";
 
+interface GalleryItem {
+  id: string;
+  title: string;
+  videoUrl: string;
+  description: string | null;
+  createdAt: Date | string;
+}
+
 export default function GalleryAdminPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,15 +35,25 @@ export default function GalleryAdminPage() {
     description: "",
   });
 
-  const fetchItems = async () => {
-    setLoading(true);
+  const fetchItems = useCallback(async () => {
     const data = await getGallery();
     setItems(data);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
-    fetchItems();
+    let isMounted = true;
+    const loadData = async () => {
+      const data = await getGallery();
+      if (isMounted) {
+        setItems(data);
+        setLoading(false);
+      }
+    };
+    loadData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -163,9 +182,11 @@ export default function GalleryAdminPage() {
                   <div key={item.id} className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 flex flex-col">
                     <div className="relative aspect-video bg-slate-900 overflow-hidden">
                       {thumbnail ? (
-                        <img
+                        <Image
                           src={thumbnail}
                           alt={item.title}
+                          width={480}
+                          height={270}
                           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                         />
                       ) : (

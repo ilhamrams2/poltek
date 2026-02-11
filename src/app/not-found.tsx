@@ -96,7 +96,7 @@ export default function NotFound() {
                 Oops! Pencarian <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500">Terhenti Disini.</span>
               </h2>
               <p className="text-slate-400 font-medium text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
-                Kami sudah menyisir setiap sudut kampus digital kami, namun halaman yang Anda tuju sepertinya sedang "bolos" hari ini.
+                Kami sudah menyisir setiap sudut kampus digital kami, namun halaman yang Anda tuju sepertinya sedang &ldquo;bolos&rdquo; hari ini.
               </p>
             </div>
 

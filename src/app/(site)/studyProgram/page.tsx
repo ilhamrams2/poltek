@@ -107,11 +107,20 @@ const PROGRAMS = {
   ],
 };
 
-// --- COMPONENTS ---
+interface ProgramItem {
+  title: string;
+  code: string;
+  desc: string;
+  longDesc: string;
+  image: string;
+  link: string;
+  icon: React.ElementType;
+  color: string;
+  stats: { employable: string; salary: string };
+}
 
-// 1. Tilt Card Component
 // 1. Simple Card Component (Refined)
-const ProgramCard = ({ item, index }: { item: any; index: number }) => {
+const ProgramCard = ({ item, index }: { item: ProgramItem; index: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

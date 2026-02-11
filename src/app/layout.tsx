@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Website resmi Politeknik Prestasi Prima",
 };
 
+import Script from "next/script";
+
 export default function RootLayout({
   children,
 }: {
@@ -25,11 +27,9 @@ export default function RootLayout({
 
         {/* AOS */}
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 
         {/* Swiper */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
 
         {/* Font Awesome */}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -39,15 +39,17 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://unpkg.com/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
         />
-
-        {/* Lucide */}
-        <script src="https://unpkg.com/lucide@latest"></script>
       </head>
 
       <body className={inter.className}>
         <GlobalLoader />
         <AnalyticsTracker />
         {children}
+
+        {/* Scripts moved here to use Next/Script Component */}
+        <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="afterInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" strategy="afterInteractive" />
+        <Script src="https://unpkg.com/lucide@latest" strategy="afterInteractive" />
       </body>
     </html>
   );

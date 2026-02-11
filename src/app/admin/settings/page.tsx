@@ -4,7 +4,7 @@ import SettingsForm from "@/components/SettingsForm";
 
 async function getSettings() {
   const settings = await prisma.setting.findMany();
-  return settings.reduce((acc: any, setting: any) => {
+  return settings.reduce((acc: Record<string, string>, setting) => {
     acc[setting.key] = setting.value;
     return acc;
   }, {});

@@ -52,7 +52,7 @@ const WordReveal = ({ text, delay = 0, className = "" }: { text: string, delay?:
 };
 
 // Interactive Card Component
-const InfoCard = ({ icon: Icon, label, value, href, delay }: any) => {
+const InfoCard = ({ icon: Icon, label, value, href, delay }: { icon: React.ElementType, label: string, value: string, href: string, delay: number }) => {
   return (
     <motion.a
       href={href}
@@ -109,7 +109,7 @@ export default function DirectorMessagePage() {
               </div>
               
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-none mb-6">
-                Director's <br />
+                Director&apos;s <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Perspective</span>
               </h1>
            </motion.div>
@@ -184,7 +184,7 @@ export default function DirectorMessagePage() {
             <div className="prose prose-lg prose-invert max-w-none relative z-10">
               <h3 className="text-3xl md:text-4xl text-white font-serif italic mb-12 leading-relaxed font-light">
                 <WordReveal text="Kami percaya bahwa pendidikan vokasi adalah kunci pembuka pintu masa depan industri digital yang" /> 
-                <span className="text-[#F15A24] font-bold not-italic px-2 bg-[#F15A24]/10 rounded-lg inline-block mx-2">Inklusif & Berkelanjutan.</span>
+                <span className="text-[#F15A24] font-bold not-italic px-2 bg-[#F15A24]/10 rounded-lg inline-block mx-2">Inklusif &amp; Berkelanjutan.</span>
               </h3>
 
               <div className="space-y-10 text-gray-300 text-lg leading-[2] font-light">
@@ -205,7 +205,7 @@ export default function DirectorMessagePage() {
                     className="p-8 bg-gradient-to-r from-white/5 to-transparent border-l-2 border-[#F15A24] rounded-r-2xl my-10"
                  >
                    <p className="text-white font-medium italic m-0">
-                     "Setiap kurikulum yang kami susun, setiap laboratorium yang kami bangun, dan setiap kemitraan yang kami jalin memiliki satu tujuan utama—memastikan mahasiswa kami mendapatkan pengalaman belajar yang nyata."
+                     &ldquo;Setiap kurikulum yang kami susun, setiap laboratorium yang kami bangun, dan setiap kemitraan yang kami jalin memiliki satu tujuan utama—memastikan mahasiswa kami mendapatkan pengalaman belajar yang nyata.&rdquo;
                    </p>
                  </motion.div>
 
@@ -264,9 +264,9 @@ export default function DirectorMessagePage() {
            >
              <RiDoubleQuotesR className="mx-auto text-6xl text-[#F15A24] mb-10 animate-bounce" />
              <h2 className="text-4xl md:text-6xl font-black uppercase leading-tight mb-12 text-white">
-               "Mencetak pemimpin yang <br/>
+                &ldquo;Mencetak pemimpin yang <br/>
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F15A24] to-yellow-500">Siap Menciptakan</span> <br/>
-               Lapangan Kerja."
+                Lapangan Kerja.&rdquo;
              </h2>
              <div className="inline-block px-10 py-4 border border-[#F15A24] rounded-full text-[#F15A24] font-black tracking-[0.3em] text-sm uppercase hover:bg-[#F15A24] hover:text-white transition-all cursor-default">
                Visi Utama

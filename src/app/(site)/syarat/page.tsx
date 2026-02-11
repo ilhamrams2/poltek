@@ -86,7 +86,7 @@ export default function SyaratPendaftaranPage() {
           </h1>
 
           <p className="text-gray-500 text-lg md:text-xl max-w-3xl mx-auto font-medium leading-relaxed italic">
-            "Persyaratan bukan sekadar dokumen, melainkan bukti kesiapan Anda memasuki ekosistem digital kelas dunia."
+            &ldquo;Persyaratan bukan sekadar dokumen, melainkan bukti kesiapan Anda memasuki ekosistem digital kelas dunia.&rdquo;
           </p>
         </motion.div>
       </section>

@@ -42,7 +42,7 @@ export default async function AuditLogsPage() {
           </div>
           <div>
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Aksi Hari Ini</p>
-            <h3 className="text-xl font-black text-slate-900">{logs.filter((l: any) => format(l.createdAt, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd')).length}</h3>
+            <h3 className="text-xl font-black text-slate-900">{logs.filter((l) => format(l.createdAt, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd')).length}</h3>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ export default async function AuditLogsPage() {
                   </tr>
                </thead>
                <tbody className="divide-y divide-slate-50">
-                  {logs.map((log: any) => (
+                  {logs.map((log) => (
                     <tr key={log.id} className="hover:bg-slate-50/50 transition-colors group">
                        <td className="px-8 py-5">
                           <div className="flex items-center gap-3">

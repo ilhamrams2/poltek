@@ -19,9 +19,19 @@ import {
   RiCloseLine
 } from "react-icons/ri";
 
+interface NewsItem {
+  id: string;
+  title: string;
+  image?: string | null;
+  content?: string;
+  createdAt: Date | string;
+  published: boolean;
+  slug?: string;
+}
+
 const topics = ["Akademik", "Beasiswa", "Teknologi", "Event", "Karir", "Alumni"];
 
-export default function NewsClient({ initialNews }: { initialNews: any[] }) {
+export default function NewsClient({ initialNews }: { initialNews: NewsItem[] }) {
   const [search, setSearch] = useState("");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
@@ -43,10 +53,10 @@ export default function NewsClient({ initialNews }: { initialNews: any[] }) {
   const gridNews = remainingNews.slice(4, 10);
   const listNews = remainingNews.slice(10);
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date | string) => {
     try {
       return format(new Date(date), "dd MMM yyyy", { locale: id });
-    } catch (e) {
+    } catch (err) {
       return "Baru saja";
     }
   };
@@ -158,7 +168,7 @@ export default function NewsClient({ initialNews }: { initialNews: any[] }) {
                       {news.title}
                     </h3>
                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
-                      {getExcerpt(news.content)}
+                      {getExcerpt(news.content || "")}
                     </p>
                     <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-medium text-gray-400">
                       <span className="flex items-center gap-1"><RiTimeLine /> {formatDate(news.createdAt)}</span>
