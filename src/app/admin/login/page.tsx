@@ -19,7 +19,7 @@ import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
-  const supabase = createClient();
+  const [supabase, setSupabase] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,8 +28,11 @@ export default function LoginPage() {
   const [checkingSession, setCheckingSession] = useState(true);
 
   useEffect(() => {
+    const client = createClient();
+    setSupabase(client);
+    
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await client.auth.getSession();
       setSession(session);
       setCheckingSession(false);
       if (session) {
@@ -37,10 +40,11 @@ export default function LoginPage() {
       }
     };
     checkSession();
-  }, [supabase.auth]);
+  }, [router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) return;
     setLoading(true);
     setError("");
 
@@ -107,8 +111,9 @@ export default function LoginPage() {
             </button>
             <button
               onClick={async () => {
+                if (!supabase) return;
                 await supabase.auth.signOut();
-                console.log(`[AUTH] Logout from login page: ${session.user.email}`);
+                console.log(`[AUTH] Logout from login page: ${session?.user?.email}`);
                 setSession(null);
                 router.refresh();
               }}
