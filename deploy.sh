@@ -33,7 +33,7 @@ if [ "$DEPLOY_MODE" == "1" ]; then
     echo -e "${YELLOW}Building for Static Export...${NC}"
     # Use the specific ENV variable to trigger static config in next.config.ts
     export DEPLOY_TARGET="static"
-    npm run build
+    npx prisma generate && npx next build
     
     if [ ! -d "out" ]; then
         echo -e "${RED}Error: Build failed! 'out' directory not found.${NC}"

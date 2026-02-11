@@ -2,6 +2,18 @@ import { getNewsById, getNews } from "@/actions/cms";
 import NewsDetailClient from "./NewsDetailClient";
 import { notFound } from "next/navigation";
 
+export async function generateStaticParams() {
+  try {
+    const allNews = await getNews();
+    return (allNews || []).map((news) => ({
+      id: news.id,
+    }));
+  } catch (error) {
+    console.error("Error generating static params for news:", error);
+    return [];
+  }
+}
+
 export default async function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const news = await getNewsById(id);
