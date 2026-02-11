@@ -37,7 +37,7 @@ export default function DirectorMessageSection() {
             initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, type: "spring", bounce: 0.4 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px" }}
             className="lg:col-span-5 relative"
           >
             <div className="relative z-10 rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-[#0A1128] w-full max-w-[500px] mx-auto lg:max-w-full">
@@ -58,7 +58,7 @@ export default function DirectorMessageSection() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px" }}
             className="lg:col-span-7 space-y-8"
           >
             <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-5 py-2 bg-white/5 border border-white/10 rounded-full">

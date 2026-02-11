@@ -69,13 +69,13 @@ export default function Footer() {
                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-[#F15A24] group-hover:bg-[#F15A24] group-hover:text-white transition-all">
                      <RiMapPin2Line />
                   </div>
-                  <span>Jl. Hankam Raya No. 132, Jatiwarna, Bekasi</span>
+                  <span>Jl. Setu Cipayung No.89, RT.009/RW.05, Kel. Bambu Apus, kec. Cipayung, Jakarta Timur</span>
                </div>
                <div className="flex items-center gap-4 text-xs font-bold group cursor-pointer hover:text-white transition-colors">
                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-[#F15A24] group-hover:bg-[#F15A24] group-hover:text-white transition-all">
                      <RiMailLine />
                   </div>
-                  <span>info@politekpresma.ac.id</span>
+                   <span>politeknik@prestasiprima.ac.id</span>
                </div>
             </div>
 
@@ -153,7 +153,7 @@ export default function Footer() {
                    Punya pertanyaan seputar pendaftaran atau program studi? Tim kami siap memberikan konsultasi gratis untuk masa depan Anda.
                  </p>
                  <Link 
-                   href="https://wa.me/6285199328825" 
+                    href="https://wa.me/6281380008079" 
                    className="inline-flex items-center gap-4 bg-white text-[#080C1B] px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
                  >
                     Chat on WhatsApp <RiArrowRightLine className="text-xl" />

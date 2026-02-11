@@ -22,7 +22,7 @@ export default function FaqPendaftaranPage() {
   return (
     <PremiumFAQHub 
       title="Tentang Pendaftaran"
-      subtitle="Info PMB 2026/2027"
+      subtitle="Informasi Pendaftaran 2026/2027"
       description="Temukan informasi lengkap mengenai alur, persyaratan, dan jadwal pendaftaran mahasiswa baru di Politeknik Prestasi Prima."
       initialFaqs={faqs}
       showCategories={false} 

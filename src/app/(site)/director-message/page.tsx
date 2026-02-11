@@ -159,15 +159,15 @@ export default function DirectorMessagePage() {
                   <InfoCard 
                     icon={RiMailSendLine} 
                     label="Official Email" 
-                    value="direktur@politeknikpratama.ac.id" 
-                    href="mailto:direktur@politeknikpratama.ac.id"
+                    value="politeknik@prestasiprima.ac.id" 
+                    href="mailto:politeknik@prestasiprima.ac.id"
                     delay={0.2}
                   />
                   <InfoCard 
                     icon={RiWhatsappLine} 
                     label="WhatsApp Center" 
-                    value="+62 851-9932-8825" 
-                    href="https://wa.me/6285199328825"
+                    value="0813 8000 8079" 
+                    href="https://wa.me/6281380008079"
                     delay={0.3}
                   />
                </div>

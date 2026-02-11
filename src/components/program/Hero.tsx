@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   program: "manajemen" | "administrasi" | "rpl";
@@ -51,7 +52,12 @@ export default function Hero({ program }: HeroProps) {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left */}
-        <div className="space-y-6">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-6"
+        >
           <span
             className="inline-block bg-[#F15A24]/10 text-[#F15A24] text-sm px-4 py-1 rounded-full border border-[#F15A24]/30"
           >
@@ -88,10 +94,15 @@ export default function Hero({ program }: HeroProps) {
               Download Brosur
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right */}
-        <div className="relative w-full">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="relative w-full"
+        >
           <div
             className="absolute -top-4 -right-4 bg-[#F15A24] text-white p-3 rounded-full shadow-lg z-10"
           >
@@ -107,7 +118,7 @@ export default function Hero({ program }: HeroProps) {
               className="w-full h-auto object-cover rounded-2xl"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}

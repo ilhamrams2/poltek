@@ -108,11 +108,11 @@ export default function HeroMedia() {
             y: [0, 40, 0]
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#1D234E]/5 rounded-full blur-[120px]" 
+          className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-brand-purple/5 rounded-full blur-[120px]" 
         />
         
         {/* Animated pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231D234E' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23352079' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
       </div>
 
       <div className="w-[94%] md:w-[90%] max-w-[1440px] mx-auto relative">
@@ -179,7 +179,7 @@ export default function HeroMedia() {
                         variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } }}
                         className="flex items-center gap-3 mb-4 sm:mb-6"
                       >
-                        <span className="h-[2px] w-8 sm:w-12 bg-[#FF6B00]"></span>
+                        <span className="h-[2px] w-8 sm:w-12 bg-brand-orange"></span>
                         <span className="text-white/80 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[8px] sm:text-xs">Excellence in Technology</span>
                       </motion.div>
 
@@ -188,7 +188,7 @@ export default function HeroMedia() {
                         className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-white leading-[0.95] uppercase tracking-tighter"
                       >
                         POLITEKNIK <br />
-                        <span className="text-[#FF6B00] relative italic">
+                        <span className="text-brand-orange relative italic">
                            PRESTASI PRIMA
                            <motion.span 
                              initial={{ width: 0 }}
@@ -210,7 +210,7 @@ export default function HeroMedia() {
                         variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
                         className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-5"
                       >
-                         <Link href="/program" className="group pointer-events-auto relative overflow-hidden bg-[#FF6B00] text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm lg:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
+                         <Link href="/program" className="group pointer-events-auto relative overflow-hidden bg-brand-orange text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm lg:text-base uppercase tracking-wider sm:tracking-widest shadow-2xl shadow-orange-500/40 transition-all hover:shadow-orange-500/60 active:scale-95 flex-1 sm:flex-none justify-center">
                             <span className="relative z-10 flex items-center justify-center gap-2 text-nowrap">
                                 MULAI JELAJAHI <RiArrowRightSLine className="text-lg sm:text-xl group-hover:translate-x-1 transition-transform" />
                             </span>
@@ -223,7 +223,7 @@ export default function HeroMedia() {
                             />
                          </Link>
                          
-                         <button className="pointer-events-auto group flex items-center justify-center gap-3 sm:gap-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-2xl font-bold text-xs sm:text-sm lg:text-base tracking-wider sm:tracking-widest hover:bg-white hover:text-[#1D234E] transition-all flex-1 sm:flex-none">
+                          <button className="pointer-events-auto group flex items-center justify-center gap-3 sm:gap-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white px-5 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-2xl font-bold text-xs sm:text-sm lg:text-base tracking-wider sm:tracking-widest hover:bg-white hover:text-brand-purple transition-all flex-1 sm:flex-none">
                             < RiPlayFill className="text-xl sm:text-2xl" /> VIRTUAL TOUR
                          </button>
                       </motion.div>
@@ -238,11 +238,11 @@ export default function HeroMedia() {
                   transition={{ delay: 0.5, duration: 1 }}
                   className="absolute top-4 right-4 sm:top-12 sm:right-12 lg:top-20 lg:right-20 w-12 h-12 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white/10 backdrop-blur-2xl rounded-full border border-white/20 p-1 shadow-2xl overflow-hidden group hover:rotate-6 transition-transform cursor-pointer"
                >
-                  <img src="/images/logo_politeknik.png" alt="Logo" className="w-full h-full object-contain filter drop-shadow-xl" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00]/0 to-white/20 pointer-events-none" />
+                   <img src="/images/logo_politeknik.png" alt="Logo" className="w-full h-full object-contain filter drop-shadow-xl" />
+                   <div className="absolute inset-0 bg-gradient-to-tr from-brand-orange/0 to-white/20 pointer-events-none" />
                </motion.div>
 
-               {/* Bottom Stats/Info Bar (Modern Detail) - Only on Video - HIDDEN ON MOBILE */}
+               {/* Bottom Stats/Info Bar (Modern Detail) - Only on Video - NOW VISIBLE ON MOBILE */}
                <AnimatePresence>
                  {!showCarousel && (
                    <motion.div 
@@ -250,22 +250,22 @@ export default function HeroMedia() {
                      animate={{ opacity: 1, y: 0 }}
                      exit={{ opacity: 0, y: 20 }}
                      transition={{ delay: 0.5, duration: 0.8 }}
-                     className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-12 bg-black/40 backdrop-blur-2xl px-12 py-5 rounded-3xl border border-white/10"
+                     className="absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 sm:gap-12 bg-black/40 backdrop-blur-2xl px-6 sm:px-12 py-3 sm:py-5 rounded-2xl sm:rounded-3xl border border-white/10 w-[90%] sm:w-auto justify-center"
                    >
-                      <div className="flex flex-col items-center">
-                          <span className="text-[#FF6B00] text-2xl font-black">100%</span>
-                          <span className="text-white/60 text-[10px] uppercase tracking-widest font-bold">Teknologi Digital</span>
-                      </div>
-                      <div className="w-[1px] h-8 bg-white/20" />
-                      <div className="flex flex-col items-center">
-                          <span className="text-[#FF6B00] text-2xl font-black">360°</span>
-                          <span className="text-white/60 text-[10px] uppercase tracking-widest font-bold">Virtual Experience</span>
-                      </div>
-                      <div className="w-[1px] h-8 bg-white/20" />
-                      <div className="flex flex-col items-center">
-                          <span className="text-[#FF6B00] text-2xl font-black">PREMIUM</span>
-                          <span className="text-white/60 text-[10px] uppercase tracking-widest font-bold">Standard Edu</span>
-                      </div>
+                       <div className="flex flex-col items-center">
+                           <span className="text-brand-orange text-sm sm:text-2xl font-black">100%</span>
+                           <span className="text-white/60 text-[7px] sm:text-[10px] uppercase tracking-widest font-bold">Teknologi</span>
+                       </div>
+                      <div className="w-[1px] h-4 sm:h-8 bg-white/20" />
+                       <div className="flex flex-col items-center">
+                           <span className="text-brand-orange text-sm sm:text-2xl font-black">360°</span>
+                           <span className="text-white/60 text-[7px] sm:text-[10px] uppercase tracking-widest font-bold">Virtual</span>
+                       </div>
+                      <div className="w-[1px] h-4 sm:h-8 bg-white/20" />
+                       <div className="flex flex-col items-center">
+                           <span className="text-brand-orange text-sm sm:text-2xl font-black">PREMIUM</span>
+                           <span className="text-white/60 text-[7px] sm:text-[10px] uppercase tracking-widest font-bold">Standard</span>
+                       </div>
                    </motion.div>
                  )}
                </AnimatePresence>
@@ -277,31 +277,31 @@ export default function HeroMedia() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 whileHover={{ scale: 1.05 }}
-                onClick={() => transitionToCarousel(true)}
-                className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 z-30 bg-[#FF6B00] text-white px-4 py-3 sm:pr-6 sm:pl-5 sm:py-4 rounded-2xl text-[10px] sm:text-xs font-black uppercase tracking-wider sm:tracking-[0.2em] shadow-2xl flex items-center gap-2 sm:gap-3 transition-all hover:bg-white hover:text-orange-600 group"
+                 onClick={() => transitionToCarousel(true)}
+                 className="absolute bottom-20 sm:bottom-10 left-4 sm:left-10 z-30 bg-brand-orange text-white px-3 py-2 sm:pr-6 sm:pl-5 sm:py-4 rounded-xl sm:rounded-2xl text-[8px] sm:text-xs font-black uppercase tracking-wider sm:tracking-[0.2em] shadow-2xl flex items-center gap-2 sm:gap-3 transition-all hover:bg-white hover:text-orange-600 group"
               >
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
-                  <RiPlayFill className="text-xs sm:text-sm" />
+                <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                  <RiPlayFill className="text-[10px] sm:text-sm" />
                 </div>
                 SKIP VIDEO
               </motion.button>
             )}
 
-            {/* Floating Decorative Elements when hovered */}
+            {/* Floating Decorative Elements when hovered or on mobile */}
             <AnimatePresence>
-              {isHovered && (
+              {(isHovered || showCarousel) && (
                 <>
                   <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="absolute top-1/2 right-10 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4"
+                    exit={{ opacity: 0, x: 20 }}
+                    className="absolute top-1/2 right-4 sm:right-10 -translate-y-1/2 z-40 flex flex-col gap-2 sm:gap-4 scale-75 sm:scale-100"
                   >
-                    {[RiCompass3Line, RiFocus3Line, RiGlobalLine].map((Icon, idx) => (
-                      <div key={idx} className="w-12 h-12 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 flex items-center justify-center text-white text-xl hover:bg-[#FF6B00] transition-colors cursor-pointer">
-                        <Icon />
-                      </div>
-                    ))}
+                     {[RiCompass3Line, RiFocus3Line, RiGlobalLine].map((Icon, idx) => (
+                       <div key={idx} className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/20 flex items-center justify-center text-white text-lg hover:bg-brand-orange transition-colors cursor-pointer">
+                         <Icon />
+                       </div>
+                     ))}
                   </motion.div>
                 </>
               )}
@@ -315,20 +315,19 @@ export default function HeroMedia() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="mt-6 flex flex-col items-center gap-2 relative z-10"
-      >
-        <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#1D234E]/40">
-          Scroll to Discovery
-        </span>
-        <div className="w-[1px] h-10 bg-[#1D234E]/10 relative overflow-hidden">
-          <motion.div 
-             animate={{ top: ["-100%", "100%"] }}
-             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-             className="absolute left-0 w-full h-1/2 bg-[#FF6B00]"
-          />
-        </div>
+         className="mt-6 flex flex-col items-center gap-2 relative z-10"
+       >
+         <span className="text-[10px] uppercase tracking-[0.5em] font-black text-brand-purple/40">
+           Scroll to Discovery
+         </span>
+         <div className="w-[1px] h-10 bg-brand-purple/10 relative overflow-hidden">
+           <motion.div 
+              animate={{ top: ["-100%", "100%"] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute left-0 w-full h-1/2 bg-brand-orange"
+           />
+         </div>
       </motion.div>
     </section>
   );
 }
-

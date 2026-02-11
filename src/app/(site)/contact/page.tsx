@@ -108,15 +108,15 @@ export default function ContactPage() {
 
             <div className="space-y-4 text-white/90">
               <p className="flex items-start gap-3">
-                <FaMapMarkerAlt size={22} /> Jl. Hankam Raya No. 89, Jakarta Timur
+                <FaMapMarkerAlt size={22} className="shrink-0" /> Jl. Setu Cipayung No.89, RT.009/RW.05, Kec. Cipayung, Jakarta Timur 13890
               </p>
 
               <p className="flex items-center gap-3">
-                <FaEnvelope size={20} /> info@poltekpresma.ac.id
+                <FaEnvelope size={20} /> politeknik@prestasiprima.ac.id
               </p>
 
               <p className="flex items-center gap-3">
-                <FaPhone size={20} /> +62 851-9592-8886
+                <FaPhone size={20} /> 0813 8000 8079 / 021 8430 6823
               </p>
             </div>
 
@@ -145,7 +145,7 @@ export default function ContactPage() {
             {/* WhatsApp Button */}
             <div className="pt-4">
               <a
-                href="#"
+                href="https://wa.me/6281380008079"
                 className="block w-full text-center bg-white text-[#5320C0] font-semibold py-3 rounded-xl shadow-md hover:bg-gray-100 transition"
               >
                 Hubungi via WhatsApp

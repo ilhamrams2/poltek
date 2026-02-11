@@ -4,7 +4,7 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 
 import { 
-  RiMacbookLine, 
+  RiFilePaperLine, 
   RiWallet3Line, 
   RiFileList3Line, 
   RiArrowRightLine 
@@ -73,17 +73,18 @@ const cards = [
   {
     id: 1,
     theme: "light",
-    title: "Daftar Kuliah Bisa Dari Mana Saja",
-    desc: "Banyak pilihan beasiswa menarik sampai dengan beasiswa kuliah gratis 100%. Daftarkan dirimu sekarang!",
-    linkText: "INFO LENGKAP",
-    linkUrl: "/pendaftaran",
-    icon: <RiMacbookLine />,
+    title: "Unduh Profil & Brosur",
+    desc: "Dapatkan informasi lengkap mengenai program studi, fasilitas, dan biaya kuliah dalam satu file PDF. Unduh brosur resmi kami sekarang.",
+    linkText: "DOWNLOAD BROSUR",
+    linkUrl: "/Brosur.pdf",
+    isDownload: true,
+    icon: <RiFilePaperLine />,
   },
   {
     id: 2,
     theme: "dark",
-    title: "Kuliah Berkualitas Tidak Harus Mahal",
-    desc: "Cek rincian biaya perkuliahan dan skema pembayaran yang fleksibel sesuai kebutuhanmu.",
+    title: "Investasi Pendidikan Terpercaya",
+    desc: "Pendidikan berkualitas kini lebih terjangkau. Akses rincian biaya transparan dengan berbagai skema pembayaran yang fleksibel sesuai kebutuhan Anda.",
     linkText: "RINCIAN BIAYA",
     linkUrl: "/biaya",
     icon: <RiWallet3Line />,
@@ -91,10 +92,10 @@ const cards = [
   {
     id: 3,
     theme: "orange",
-    title: "Sudah Siap Gabung Bersama Kami?",
-    desc: "Klik tombol di bawah untuk memulai proses pendaftaran online yang cepat dan mudah.",
-    linkText: "DAFTAR SEKARANG",
-    linkUrl: "/daftar",
+    title: "Siap Bergabung Dengan Kami?",
+    desc: "Persiapkan diri Anda untuk menjadi bagian dari generasi unggul. Cek daftar persyaratan lengkap untuk memulai langkah pendidikan Anda hari ini.",
+    linkText: "LIHAT SYARAT",
+    linkUrl: "/syarat",
     icon: <RiFileList3Line />,
   },
 ];
@@ -103,15 +104,15 @@ export default function QuickActionSection() {
   return (
     <section className="relative py-12 sm:py-24 px-4 sm:px-6 overflow-hidden bg-white">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#FF6B00]/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-brand-orange/5 blur-[120px] rounded-full -z-10" />
 
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-20px" }}
       >
         {cards.map((card) => (
           <Card key={card.id} data={card} />
@@ -130,6 +131,7 @@ function Card({ data }: { data: any }) {
   return (
     <motion.a
       href={data.linkUrl}
+      download={data.isDownload ? "Brosur_Poltek.pdf" : undefined}
       variants={cardVariants}
       whileHover="hover"
       initial="rest"
@@ -139,17 +141,17 @@ function Card({ data }: { data: any }) {
         transition-all duration-500 ease-out
         ${
           isLight
-            ? "bg-white text-[#050A1F] shadow-[0_15px_50px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_70px_-20px_rgba(0,0,0,0.15)]"
+            ? "bg-white text-brand-dark shadow-[0_15px_50px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_70px_-20px_rgba(0,0,0,0.15)]"
             : ""
         }
         ${
           isDark
-            ? "bg-[#050A1F] text-white shadow-[0_20px_60px_-15px_rgba(5,10,31,0.4)] hover:shadow-[0_30px_80px_-20px_rgba(5,10,31,0.6)] border border-white/5"
+            ? "bg-brand-dark text-white shadow-[0_20px_60px_-15px_rgba(5,10,31,0.4)] hover:shadow-[0_30px_80px_-20px_rgba(5,10,31,0.6)] border border-white/5"
             : ""
         }
         ${
           isOrange
-            ? "bg-gradient-to-br from-[#FF6B00] to-[#FF8C00] text-white shadow-[0_25px_60px_-15px_rgba(255,107,0,0.4)] hover:shadow-[0_35px_80px_-20px_rgba(255,107,0,0.6)]"
+            ? "bg-gradient-to-br from-brand-orange to-[#FF8C00] text-white shadow-[0_25px_60px_-15px_rgba(244,121,32,0.4)] hover:shadow-[0_35px_80px_-20px_rgba(244,121,32,0.6)]"
             : ""
         }
         transform hover:-translate-y-2
@@ -180,7 +182,7 @@ function Card({ data }: { data: any }) {
             w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center mb-6 sm:mb-8
             ${
               isLight
-                ? "bg-slate-50 text-[#FF6B00]"
+                ? "bg-slate-50 text-brand-orange"
                 : "bg-white/10 text-white backdrop-blur-sm"
             }
           `}

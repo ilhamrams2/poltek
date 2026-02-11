@@ -118,7 +118,7 @@ export default function NewsSection() {
     <section className="py-20 lg:py-32 bg-gray-50/50 px-4 sm:px-6 overflow-hidden relative">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-white to-transparent pointer-events-none -z-10" />
-      <div className="absolute right-0 top-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-purple-200/20 rounded-full blur-3xl -z-10" />
+      <div className="absolute right-0 top-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-brand-purple/5 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
@@ -128,12 +128,12 @@ export default function NewsSection() {
           viewport={{ once: true }}
           className="text-center mb-12 md:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 text-purple-600 font-bold text-[10px] sm:text-xs uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple/5 text-brand-purple font-bold text-[10px] sm:text-xs uppercase tracking-widest mb-6">
             <RiNewspaperLine className="text-base sm:text-lg" />
             Berita Terkini
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-[#1D234E] leading-[1.1] tracking-tight px-4">
-            Ikuti informasi & perkembangan <br className="hidden sm:block"/> terbaru seputar <span className="text-purple-600 underline decoration-purple-200 decoration-4 underline-offset-4">kampus</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-brand-dark leading-[1.1] tracking-tight px-4">
+            Ikuti informasi & perkembangan <br className="hidden sm:block"/> terbaru seputar <span className="text-brand-orange underline decoration-brand-orange/20 decoration-4 underline-offset-4">kampus</span>
           </h2>
         </motion.div>
 
@@ -147,7 +147,7 @@ export default function NewsSection() {
           <div className="absolute top-1/2 left-0 lg:-left-6 xl:-left-16 -translate-y-1/2 z-20 hidden lg:block opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300">
             <button 
               onClick={scrollLeft} 
-              className="w-14 h-14 xl:w-16 xl:h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:border-purple-200 hover:shadow-xl hover:scale-110 transition-all duration-300"
+              className="w-14 h-14 xl:w-16 xl:h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-orange hover:border-brand-orange/20 hover:shadow-xl hover:scale-110 transition-all duration-300"
               aria-label="Previous slide"
             >
               <RiArrowLeftSLine size={32} />
@@ -156,7 +156,7 @@ export default function NewsSection() {
           <div className="absolute top-1/2 right-0 lg:-right-6 xl:-right-16 -translate-y-1/2 z-20 hidden lg:block opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300">
             <button 
               onClick={scrollRight} 
-              className="w-14 h-14 xl:w-16 xl:h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:border-purple-200 hover:shadow-xl hover:scale-110 transition-all duration-300"
+              className="w-14 h-14 xl:w-16 xl:h-16 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-orange hover:border-brand-orange/20 hover:shadow-xl hover:scale-110 transition-all duration-300"
               aria-label="Next slide"
             >
               <RiArrowRightSLine size={32} />
@@ -202,7 +202,7 @@ export default function NewsSection() {
                     
                     {/* Floating Category Badge */}
                     <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
-                      <span className="px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold text-white shadow-lg bg-purple-600/90 backdrop-blur-md border border-white/20">
+                      <span className="px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold text-white shadow-lg bg-brand-orange/90 backdrop-blur-md border border-white/20">
                         {item.category}
                       </span>
                     </div>
@@ -211,13 +211,13 @@ export default function NewsSection() {
                   {/* Content Section */}
                   <div className="p-6 sm:p-8 flex flex-col flex-1 relative">
                     {/* Date Tag */}
-                    <div className="absolute -top-6 right-6 sm:right-8 bg-white shadow-lg rounded-xl sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-3 flex flex-col items-center border border-gray-100 group-hover/card:bg-purple-600 group-hover/card:text-white transition-colors duration-300">
+                    <div className="absolute -top-6 right-6 sm:right-8 bg-white shadow-lg rounded-xl sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-3 flex flex-col items-center border border-gray-100 group-hover/card:bg-brand-orange group-hover/card:text-white transition-colors duration-300">
                       <span className="text-lg sm:text-xl font-black leading-none">{item.date.split(' ')[0]}</span>
                       <span className="text-[8px] sm:text-[10px] font-bold uppercase mt-1">{item.date.split(' ')[1]}</span>
                     </div>
 
                     <div className="mt-2 sm:mt-4 mb-3 sm:mb-4">
-                      <h3 className="text-xl sm:text-2xl font-black text-[#1D234E] leading-snug group-hover/card:text-purple-600 transition-colors line-clamp-2">
+                      <h3 className="text-xl sm:text-2xl font-black text-brand-dark leading-snug group-hover/card:text-brand-orange transition-colors line-clamp-2">
                         {item.title}
                       </h3>
                     </div>
@@ -240,7 +240,7 @@ export default function NewsSection() {
                               initial: { y: 0 },
                               hover: { y: -25 }
                             }}
-                            className="transition-colors group-hover/link:text-purple-700"
+                            className="transition-colors group-hover/link:text-brand-orange"
                           >
                             Selengkapnya
                           </motion.span>
@@ -249,7 +249,7 @@ export default function NewsSection() {
                               initial: { y: 25 },
                               hover: { y: 0 }
                             }}
-                            className="absolute inset-0 text-purple-900"
+                            className="absolute inset-0 text-brand-orange/80"
                           >
                             Selengkapnya
                           </motion.span>
@@ -261,7 +261,7 @@ export default function NewsSection() {
                             initial: { x: 0, scale: 1 },
                             hover: { x: 5, scale: 1.1 }
                           }}
-                          className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-600 flex items-center justify-center text-white text-base sm:text-lg shadow-[0_4px_15px_rgba(160,32,240,0.3)] group-hover/link:shadow-[0_8px_25px_rgba(160,32,240,0.5)] transition-shadow duration-300 overflow-hidden"
+                          className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-orange flex items-center justify-center text-white text-base sm:text-lg shadow-[0_4px_15px_rgba(244,121,32,0.3)] group-hover/link:shadow-[0_8px_25px_rgba(244,121,32,0.5)] transition-shadow duration-300 overflow-hidden"
                         >
                           <motion.div
                             variants={{
@@ -308,8 +308,8 @@ export default function NewsSection() {
                 onClick={() => scrollTo(idx)}
                 className={`transition-all duration-500 rounded-full h-1.5 sm:h-2 ${
                   activeIndex === idx 
-                    ? "w-8 sm:w-12 bg-purple-600" 
-                    : "w-1.5 sm:w-2 bg-gray-300 hover:bg-purple-400"
+                    ? "w-8 sm:w-12 bg-brand-orange" 
+                    : "w-1.5 sm:w-2 bg-gray-300 hover:bg-brand-orange/40"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -353,14 +353,14 @@ export default function NewsSection() {
               variants={{
                 hover: { scale: 1.5, rotate: 15, y: -40 },
               }}
-              className="absolute -inset-4 bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-[40%] blur-2xl"
+              className="absolute -inset-4 bg-gradient-to-tr from-brand-orange via-brand-orange/80 to-brand-orange/60 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-[40%] blur-2xl"
             />
             
             {/* Animated border/glow */}
             <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-full transition-colors duration-500" />
 
             {/* Content */}
-            <span className="relative z-10 text-[#1D234E] group-hover:text-white transition-colors duration-300">
+            <span className="relative z-10 text-brand-dark group-hover:text-white transition-colors duration-300">
               Lihat Semua Berita
             </span>
             
@@ -369,7 +369,7 @@ export default function NewsSection() {
                 initial: { x: 0 },
                 hover: { x: 5, scale: 1.2 }
               }}
-              className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 group-hover:bg-white group-hover:text-purple-600 transition-all duration-300 shadow-md"
+              className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-orange/5 flex items-center justify-center text-brand-orange group-hover:bg-white group-hover:text-brand-orange transition-all duration-300 shadow-md"
             >
                <RiArrowRightLine className="text-xl" />
             </motion.span>

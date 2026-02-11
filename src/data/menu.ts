@@ -85,17 +85,14 @@ export const MENU: MenuItem[] = [
   },
 
   /* ===========================
-   *           PMB
+   *         INFORMASI
    * =========================== */
   {
-    id: "pmb",
-    title: "PMB",
+    id: "informasi",
+    title: "Informasi",
     items: [
-      { label: "Alur Pendaftaran", url: "/pmb/alur" },
-      { label: "Syarat Pendaftaran", url: "/pmb/syarat" },
-      { label: "Biaya Kuliah", url: "/pmb/biaya" },
-      { label: "Pendaftaran Online", url: "/pmb/pendaftaran" },
-      { label: "Cek Status Pendaftaran", url: "/pmb/status" },
+      { label: "Biaya Kuliah", url: "/biaya" },
+      { label: "Syarat Pendaftaran", url: "/syarat" },
     ],
   },
 

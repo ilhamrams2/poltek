@@ -13,21 +13,22 @@ export default function Topbar() {
 
           <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
             <RiPhoneLine size={12} className="text-[#FF6B00] group-hover:scale-110 transition-transform" />
-            <span>+62 851-9932-8825</span>
+            <span>0813-8000-8079</span>
           </div>
 
           <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
             <RiMailLine size={12} className="text-[#FF6B00] group-hover:scale-110 transition-transform" />
-            <span>info@politekpresma.ac.id</span>
+            <span>politeknik@prestasiprima.ac.id</span>
           </div>
 
-          <Link
-            href="/download-brosur"
+          <a
+            href="/Brosur.pdf"
+            download="Brosur_Poltek.pdf"
             className="flex items-center gap-2 text-[#FF6B00] hover:text-white transition-colors group"
           >
             <RiDownload2Line size={12} className="group-hover:translate-y-0.5 transition-transform" />
             <span>Download Brosur</span>
-          </Link>
+          </a>
 
         </div>
       </div>

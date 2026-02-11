@@ -141,7 +141,7 @@ export default function HistoryPage() {
                     <motion.div 
                       initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: true, margin: "0px" }}
                       className="w-full lg:w-1/2"
                     >
                       <div className={`flex flex-col ${isEven ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'}`}>
@@ -171,7 +171,7 @@ export default function HistoryPage() {
                     <motion.div 
                       initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: true, margin: "0px" }}
                       className="w-full lg:w-1/2"
                     >
                       <div className="relative group rounded-[2.5rem] overflow-hidden bg-[#1D234E]/20 border border-white/5 p-4 shadow-2xl">

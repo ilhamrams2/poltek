@@ -115,7 +115,7 @@ export default function MobileNavbar() {
 
               <div className="pt-6 px-4">
                  <Link 
-                   href="/pmb/pendaftaran"
+                   href="https://wa.me/6281380008079"
                    onClick={() => setOpen(false)}
                    className="block w-full text-center py-4 bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-[#FF6B00]/20"
                  >

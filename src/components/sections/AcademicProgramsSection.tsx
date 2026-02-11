@@ -63,8 +63,8 @@ export default function AcademicProgramsSection() {
   return (
     <section className="w-full py-12 sm:py-24 lg:py-32 bg-white flex flex-col items-center overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
-      <div className="absolute top-48 right-0 w-96 h-96 bg-orange-50/50 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-brand-purple/5 to-transparent -z-10" />
+      <div className="absolute top-48 right-0 w-96 h-96 bg-brand-orange/5 rounded-full blur-[100px] -z-10" />
 
       {/* Title */}
       <motion.div 
@@ -74,14 +74,14 @@ export default function AcademicProgramsSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-center px-6 mb-16 lg:mb-20"
       >
-        <div className="inline-flex items-center gap-3 px-5 py-2 bg-[#FF6B00]/5 border border-[#FF6B00]/10 rounded-full mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-          <span className="text-[#FF6B00] font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px]">Academic Overview</span>
+        <div className="inline-flex items-center gap-3 px-5 py-2 bg-brand-orange/5 border border-brand-orange/10 rounded-full mb-6">
+          <span className="w-2 h-2 rounded-full bg-brand-orange" />
+          <span className="text-brand-orange font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px]">Academic Overview</span>
         </div>
         
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-[#020617] leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-black text-brand-dark leading-[1.05] mb-6 sm:mb-8 tracking-tighter">
           Pilihan Program <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-orange-500">Studi Unggulan</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-500">Studi Unggulan</span>
         </h2>
 
         <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed font-semibold">
@@ -90,7 +90,7 @@ export default function AcademicProgramsSection() {
       </motion.div>
 
       {/* Tabs Container */}
-      <div className="flex bg-[#050A1F] p-1.5 sm:p-2 rounded-[1.5rem] sm:rounded-[2rem] shadow-[0_20px_50px_rgba(2,6,23,0.15)] mb-12 md:mb-20 relative z-10">
+      <div className="flex bg-brand-dark p-1.5 sm:p-2 rounded-[1.5rem] sm:rounded-[2rem] shadow-[0_20px_50px_rgba(2,6,23,0.15)] mb-12 md:mb-20 relative z-10">
         {(["D3", "D4"] as const).map((tab) => (
           <button
             key={tab}
@@ -101,7 +101,7 @@ export default function AcademicProgramsSection() {
             {activeTab === tab && (
               <motion.div 
                 layoutId="activeTabBg"
-                className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-orange-500 rounded-[1rem] sm:rounded-[1.5rem] -z-10 shadow-lg shadow-[#FF6B00]/20"
+                className="absolute inset-0 bg-gradient-to-r from-brand-orange to-orange-500 rounded-[1rem] sm:rounded-[1.5rem] -z-10 shadow-lg shadow-brand-orange/20"
                 transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
               />
             )}
@@ -172,7 +172,7 @@ function ProgramCard({ prog, idx }: { prog: ProgramItem; idx: number }) {
         }`}
       />
       <div
-        className={`absolute inset-0 bg-linear-to-tr from-[#FF6B00]/70 via-transparent to-transparent transition-opacity duration-1000 ${
+        className={`absolute inset-0 bg-linear-to-tr from-brand-orange/70 via-transparent to-transparent transition-opacity duration-1000 ${
           isClicked ? "opacity-100" : "opacity-0 group-hover:opacity-100"
         }`}
       />
@@ -182,7 +182,7 @@ function ProgramCard({ prog, idx }: { prog: ProgramItem; idx: number }) {
         <motion.span
           initial={{ y: -20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          className="inline-block bg-[#FF6B00] text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-xl"
+          className="inline-block bg-brand-orange text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-xl"
         >
           {prog.label}
         </motion.span>
@@ -216,7 +216,7 @@ function ProgramCard({ prog, idx }: { prog: ProgramItem; idx: number }) {
 
               <a
                 href={prog.link}
-                className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-gradient-to-r from-[#FF6B00] to-[#FF8C00] px-6 py-4 rounded-xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest"
+                className="inline-flex items-center gap-3 text-white font-black text-[10px] md:text-xs bg-gradient-to-r from-brand-orange to-[#FF8C00] px-6 py-4 rounded-xl hover:scale-105 transition-all shadow-xl uppercase tracking-widest"
               >
                 Detail Program <RiArrowRightUpLine className="text-lg" />
               </a>

@@ -1,21 +1,75 @@
 @import "tailwindcss";
 
+@theme {
+  /* Logo Colors - Politeknik Prestasi Prima */
+  --color-brand-purple: #352079;
+  --color-brand-orange: #F47920;
+  --color-brand-dark: #131432;
+  
+  /* Overriding default tailwind colors to match logo */
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #F47920; /* Logo Orange */
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+  --color-orange-950: #431407;
+
+  --color-indigo-50: #f0f9ff;
+  --color-indigo-500: #352079;
+  --color-indigo-600: #2d1b66;
+  --color-indigo-700: #261754;
+  --color-indigo-800: #1f1242;
+  --color-indigo-900: #352079; /* Logo Purple */
+  --color-indigo-950: #131432; /* Logo Dark Blue */
+
+  --color-slate-900: #131432;
+  --color-slate-950: #0a0b1a;
+
+  /* Custom utility extensions */
+  --shadow-brand: 0 20px 50px -12px rgba(53, 32, 121, 0.25);
+  --shadow-brand-orange: 0 20px 50px -12px rgba(244, 121, 32, 0.25);
+}
+
 @layer utilities {
   @keyframes fade-in {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
+  }
+  .animate-fade-up {
+    animation: fade-up 0.8s ease-out forwards;
+  }
+  .animate-fade-down {
+    animation: fade-down 0.8s ease-out forwards;
   }
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #131432;
+  
+  /* Brand Variable overrides */
+  --brand-primary: #352079;
+  --brand-secondary: #F47920;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: inherit;
 }
