@@ -96,7 +96,7 @@ export default function DirectorMessageSection() {
 
             <motion.div variants={itemVariants} className="pt-8 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 border-t border-white/10">
               <div className="flex flex-col text-center sm:text-left">
-                <p className="text-white font-black text-xl sm:text-2xl tracking-tighter">Dr. (Cand) Antonius S.Kom., M.TI</p>
+                <p className="text-white font-black text-xl sm:text-2xl tracking-tighter">Dr. Wannen Pakpahan, MM.</p>
                 <div className="flex items-center justify-center sm:justify-start gap-3 mt-1">
                   <div className="h-[2px] w-8 bg-[#FF6B00]" />
                   <p className="text-[#FF6B00] font-black text-[11px] tracking-[0.3em] uppercase">Direktur Utama</p>

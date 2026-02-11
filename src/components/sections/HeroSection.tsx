@@ -3,17 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Carousel from "./Carousel";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { RiArrowRightSLine, RiPlayFill, RiCompass3Line, RiFocus3Line, RiGlobalLine } from "react-icons/ri";
+import { RiArrowRightSLine, RiPlayFill } from "react-icons/ri";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function HeroMedia() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const lastTimeRef = useRef(0);
   const timeoutRef = useRef<number | null>(null);
 
@@ -288,25 +286,7 @@ export default function HeroMedia() {
               </motion.button>
             )}
 
-            {/* Floating Decorative Elements when hovered or on mobile */}
-            <AnimatePresence>
-              {(isHovered || showCarousel) && (
-                <>
-                  <motion.div 
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    className="absolute top-1/2 right-4 sm:right-10 -translate-y-1/2 z-40 flex flex-col gap-2 sm:gap-4 scale-75 sm:scale-100"
-                  >
-                     {[RiCompass3Line, RiFocus3Line, RiGlobalLine].map((Icon, idx) => (
-                       <div key={idx} className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/20 flex items-center justify-center text-white text-lg hover:bg-brand-orange transition-colors cursor-pointer">
-                         <Icon />
-                       </div>
-                     ))}
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
+
           </div>
         </motion.div>
       </div>
