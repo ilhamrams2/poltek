@@ -40,9 +40,14 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = createClient();
+  const [supabase, setSupabase] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Initialize Supabase client only on the client side
+  useEffect(() => {
+    setSupabase(createClient());
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +58,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   }, []);
 
   const handleLogout = async () => {
+    if (!supabase) return;
     const { data: { user } } = await supabase.auth.getUser();
     await supabase.auth.signOut();
     console.log(`[AUTH] Logout success for: ${user?.email} at ${new Date().toLocaleString()}`);
