@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { getNews, deleteNews } from "@/actions/cms";
-import { Plus, Edit, Trash2, Eye, Newspaper, Loader2, Search, Filter } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, Newspaper, Loader2, Search, Filter, Check, FileText } from "lucide-react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import { useAdminUI } from "@/providers/AdminUIProvider";
@@ -91,6 +91,55 @@ export default function NewsAdminPage() {
           <Plus size={20} strokeWidth={3} />
           Berita Baru
         </Link>
+      </div>
+
+      {/* Stats Quick View */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Total News */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-blue-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-blue-600 group-hover:text-white">
+             <Newspaper size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Artikel</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">{news.length}</h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Warta</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Published */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-emerald-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-emerald-600 group-hover:text-white">
+             <Check size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Terbit (Live)</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">
+                {news.filter(n => n.published).length}
+              </h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Public</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Drafts */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-amber-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-amber-600 group-hover:text-white">
+             <FileText size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Drafting</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">
+                {news.filter(n => !n.published).length}
+              </h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Editing</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Toolbar */}

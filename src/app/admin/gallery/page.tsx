@@ -14,7 +14,8 @@ import {
   Video,
   Link as LinkIcon,
   Info,
-  Youtube
+  Youtube,
+  Clock
 } from "lucide-react";
 
 import { useAdminUI } from "@/providers/AdminUIProvider";
@@ -110,11 +111,48 @@ export default function GalleryAdminPage() {
 
   return (
     <div className="space-y-10 animate-fade-in">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-8">
-        <div>
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight">Media Gallery</h2>
-          <p className="text-slate-500 font-medium mt-1 uppercase tracking-widest text-[11px]">Kelola dokumentasi video YouTube kampus</p>
+      {/* Stats Quick View */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {/* Total Videos */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-red-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-red-600 group-hover:text-white">
+             <Video size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Video</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">{items.length}</h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Docs</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Platform Info */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-blue-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-blue-600 group-hover:text-white">
+             <Youtube size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Main Platform</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-xl font-black text-slate-900 tracking-tighter uppercase">YouTube</h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Last Activity */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-amber-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-amber-600 group-hover:text-white">
+             <Clock size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Update Terakhir</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">
+                {items.length > 0 ? "Baru Saja" : "Belum Ada"}
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, GraduationCap, Edit, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { Plus, GraduationCap, Edit, Trash2, ExternalLink, Loader2, Award, Briefcase } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { deleteProgram } from "@/actions/cms";
@@ -69,13 +69,49 @@ export default function ProgramsList({ initialPrograms }: ProgramsListProps) {
 
       {/* Stats Quick View */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center gap-4 group">
-          <div className="w-12 h-12 bg-indigo-50 text-[#4338CA] rounded-2xl flex items-center justify-center group-hover:bg-[#4338CA] group-hover:text-white transition-all">
-             <GraduationCap size={24} />
+        {/* Total Programs */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-indigo-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-indigo-50 text-[#4338CA] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-indigo-600 group-hover:text-white">
+             <GraduationCap size={28} />
           </div>
           <div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Program</p>
-            <h3 className="text-2xl font-black text-slate-900">{programs.length}</h3>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Total Program</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">{programs.length}</h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Active</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Total Competencies */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-orange-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-orange-600 group-hover:text-white">
+             <Award size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Kompetensi</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">
+                {programs.reduce((acc, p) => acc + (p.competencies?.length || 0), 0)}
+              </h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Skills</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Total Careers */}
+        <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-emerald-200 transition-all duration-500">
+          <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner group-hover:bg-emerald-600 group-hover:text-white">
+             <Briefcase size={28} />
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Prospek Karir</p>
+            <div className="flex items-baseline gap-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tighter">
+                {programs.reduce((acc, p) => acc + (p.careers?.length || 0), 0)}
+              </h3>
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Paths</span>
+            </div>
           </div>
         </div>
       </div>
