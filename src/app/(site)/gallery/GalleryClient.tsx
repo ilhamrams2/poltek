@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { 
   Play, 
@@ -16,7 +16,9 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
-import { getYoutubeVideoId } from "@/lib/youtube";
+import { getYoutubeVideoId, getYoutubeViews } from "@/lib/youtube";
+
+import * as RiIcons from "react-icons/ri";
 
 // --- TYPES & DATA ---
 interface GalleryItem {
@@ -24,12 +26,83 @@ interface GalleryItem {
   title: string;
   videoUrl: string;
   description?: string | null;
+  category: string;
+  categoryIcon: string;
   createdAt: Date | string;
 }
 
-const CATEGORIES = [
-  { name: "Show All", icon: <LayoutGrid size={16} /> },
-];
+const VideoCard = ({ 
+  item, 
+  onPlay, 
+  formatDate 
+}: { 
+  item: GalleryItem & { youtubeId: string }; 
+  onPlay: (id: string) => void;
+  formatDate: (d: Date | string) => string;
+}) => {
+  const [views, setViews] = useState<string>("...");
+
+  useEffect(() => {
+    const fetchViews = async () => {
+      const liveViews = await getYoutubeViews(item.videoUrl);
+      setViews(liveViews);
+    };
+    fetchViews();
+  }, [item.videoUrl]);
+
+  return (
+    <motion.div 
+      layout
+      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+      whileHover={{ y: -12, scale: 1.02 }}
+      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+      key={item.id} 
+      className="group cursor-pointer flex flex-col bg-white rounded-[2.5rem] shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-50"
+      onClick={() => onPlay(item.youtubeId)}
+    >
+      <div className="relative aspect-video w-full bg-gray-100 overflow-hidden">
+        <Image
+          src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
+          alt={item.title}
+          fill
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+        />
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <span className="bg-[#F97316] text-white text-[9px] font-black px-3 py-1.5 rounded-lg uppercase tracking-wider shadow-lg flex items-center gap-2 backdrop-blur-md bg-orange-500/90">
+            {RiIcons[item.categoryIcon as keyof typeof RiIcons] ? 
+              (RiIcons[item.categoryIcon as keyof typeof RiIcons] as any)({ size: 12 }) : 
+              <Video size={12} />
+            }
+            {item.category}
+          </span>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
+           <div className="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-2xl">
+              <Play size={18} className="text-[#F97316] fill-[#F97316] ml-1" />
+           </div>
+        </div>
+      </div>
+
+      <div className="p-6 space-y-4">
+        <h3 className="font-black text-[#0F172A] text-base leading-tight group-hover:text-[#F97316] transition-colors duration-300 line-clamp-2 uppercase">
+          {item.title}
+        </h3>
+        <div className="flex items-center justify-between text-[11px] text-[#94A3B8] font-bold pt-4 border-t border-[#F1F5F9]">
+          <div className="flex items-center gap-1.5">
+            <Calendar size={14} className="text-[#CBD5E1]" />
+            <span className="uppercase">{formatDate(item.createdAt)}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Eye size={14} className="text-[#CBD5E1]" />
+            <span className="uppercase">{views} VIEWS</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const VideoModal = ({ 
   isOpen, 
@@ -82,18 +155,49 @@ export default function GalleryClient({ initialData }: { initialData: GalleryIte
   const [activeCategory, setActiveCategory] = useState("Show All");
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
-  const galleryItems = initialData.map(item => ({
+  // Normalize data to avoid matching issues
+  const normalizedData = initialData.map(item => ({
     ...item,
+    category: item.category?.trim() || "Uncategorized",
     youtubeId: getYoutubeVideoId(item.videoUrl)
-  })).filter(item => item.youtubeId);
+  }));
 
-  const FEATURED_VIDEO = galleryItems[0] || {
+  // Extract unique categories efficiently
+  const uniqueCategories = Array.from(new Set(normalizedData.map(item => item.category)))
+    .filter(Boolean)
+    .map(name => {
+      const firstItem = normalizedData.find(i => i.category === name);
+      return {
+        name,
+        iconName: firstItem?.categoryIcon || "RiVideoLine"
+      };
+    });
+
+  const CATEGORIES = [
+    { name: "Show All", icon: <LayoutGrid size={16} /> },
+    ...uniqueCategories.map(cat => ({
+      name: cat.name,
+      icon: RiIcons[cat.iconName as keyof typeof RiIcons] ? 
+        (RiIcons[cat.iconName as keyof typeof RiIcons] as any)({ size: 16 }) : 
+        <Video size={16} />
+    }))
+  ];
+
+  const galleryItems = normalizedData.filter(item => {
+    const isAll = activeCategory === "Show All";
+    const isMatch = item.category.toLowerCase() === activeCategory.toLowerCase();
+    return item.youtubeId && (isAll || isMatch);
+  });
+
+  const FEATURED_VIDEO = galleryItems[0] || (normalizedData[0] ? {
+    ...normalizedData[0]
+  } : {
     id: "featured",
     title: "Belum ada video",
     youtubeId: "",
     category: "GALLERY",
     createdAt: new Date()
-  };
+  });
 
   const formatDate = (date: Date | string) => {
     try {
@@ -196,70 +300,60 @@ export default function GalleryClient({ initialData }: { initialData: GalleryIte
 
         {/* GRID */}
         <section className="space-y-12">
-          <div className="flex flex-wrap justify-center gap-6 px-4">
-            {CATEGORIES.map((cat, idx) => (
-              <button
-                key={cat.name}
-                onClick={() => setActiveCategory(cat.name)}
-                className={`flex items-center h-16 px-8 bg-white border border-orange-500 rounded-[2rem] shadow-lg text-orange-500`}
-              >
-                <div className="mr-2">{cat.icon}</div>
-                <span className="text-[11px] font-[900] uppercase tracking-[0.2em]">{cat.name}</span>
-                <span className="ml-3 flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-orange-50 text-orange-600 rounded-full text-[9px] font-black">
-                  {galleryItems.length}
-                </span>
-              </button>
-            ))}
+          <div className="flex flex-wrap justify-center gap-4 px-4 relative z-20">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory.toLowerCase() === cat.name.toLowerCase();
+              return (
+                <button
+                  key={cat.name}
+                  onClick={() => setActiveCategory(cat.name)}
+                  className={`relative flex items-center h-14 px-6 rounded-2xl transition-all duration-500 group outline-none`}
+                >
+                  {/* Active Highlight Background */}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-[#F97316] rounded-2xl shadow-xl shadow-orange-200"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+
+                  {/* Content */}
+                  <div className="relative z-10 flex items-center">
+                    <div className={`mr-2.5 transition-colors duration-500 ${isActive ? "text-white" : "text-orange-500 group-hover:scale-110"}`}>
+                      {cat.icon}
+                    </div>
+                    <span className={`text-[11px] font-black uppercase tracking-widest transition-colors duration-500 ${isActive ? "text-white" : "text-slate-500"}`}>
+                      {cat.name}
+                    </span>
+                    <span className={`ml-3 flex items-center justify-center min-w-[22px] h-5.5 px-2 rounded-full text-[9px] font-black transition-all duration-500 ${
+                      isActive ? "bg-white/20 text-white" : "bg-orange-50 text-orange-600 shadow-inner"
+                    }`}>
+                      {cat.name === "Show All" 
+                        ? normalizedData.length 
+                        : normalizedData.filter(i => i.category.toLowerCase() === cat.name.toLowerCase()).length
+                      }
+                    </span>
+                  </div>
+
+                  {/* Hover Border for inactive tabs */}
+                  {!isActive && (
+                    <div className="absolute inset-0 border border-slate-100 rounded-2xl group-hover:border-orange-200 transition-colors bg-white/50 -z-10" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             <AnimatePresence mode="popLayout">
               {galleryItems.map((item) => (
-                <motion.div 
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ y: -10 }}
+                <VideoCard 
                   key={item.id} 
-                  className="group cursor-pointer flex flex-col bg-white rounded-[2rem] shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden"
-                  onClick={() => setPlayingVideo(item.youtubeId)}
-                >
-                  <div className="relative aspect-video w-full bg-gray-100 overflow-hidden">
-                    <Image
-                      src={`https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-[#F97316] text-white text-[9px] font-black px-3 py-1.5 rounded-lg uppercase tracking-wider shadow-lg">
-                        GALLERY
-                      </span>
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
-                       <div className="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-2xl">
-                          <Play size={18} className="text-[#F97316] fill-[#F97316] ml-1" />
-                       </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 space-y-4">
-                    <h3 className="font-black text-[#0F172A] text-base leading-tight group-hover:text-[#F97316] transition-colors duration-300 line-clamp-2 uppercase">
-                      {item.title}
-                    </h3>
-                    <div className="flex items-center justify-between text-[11px] text-[#94A3B8] font-bold pt-4 border-t border-[#F1F5F9]">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar size={14} className="text-[#CBD5E1]" />
-                        <span className="uppercase">{formatDate(item.createdAt)}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Eye size={14} className="text-[#CBD5E1]" />
-                        <span className="uppercase">1K VIEWS</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                  item={item as any} 
+                  onPlay={setPlayingVideo} 
+                  formatDate={formatDate} 
+                />
               ))}
             </AnimatePresence>
           </motion.div>

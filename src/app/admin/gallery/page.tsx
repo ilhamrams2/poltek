@@ -19,12 +19,16 @@ import {
 } from "lucide-react";
 
 import { useAdminUI } from "@/providers/AdminUIProvider";
+import * as RiIcons from "react-icons/ri";
+import IconPicker from "@/components/cms/IconPicker";
 
 interface GalleryItem {
   id: string;
   title: string;
   videoUrl: string;
   description: string | null;
+  category: string;
+  categoryIcon: string;
   createdAt: Date | string;
 }
 
@@ -36,12 +40,14 @@ export default function GalleryAdminPage() {
     title: "",
     videoUrl: "",
     description: "",
+    category: "Kegiatan",
+    categoryIcon: "RiVideoLine"
   });
   const { confirm, toast } = useAdminUI();
 
   const fetchItems = useCallback(async () => {
     const data = await getGallery();
-    setItems(data);
+    setItems(data as any[]);
     setLoading(false);
   }, []);
 
@@ -50,7 +56,7 @@ export default function GalleryAdminPage() {
     const loadData = async () => {
       const data = await getGallery();
       if (isMounted) {
-        setItems(data);
+        setItems(data as any[]);
         setLoading(false);
       }
     };
@@ -65,7 +71,13 @@ export default function GalleryAdminPage() {
     setSubmitting(true);
     const result = await createGallery(formData);
     if (result.success) {
-      setFormData({ title: "", videoUrl: "", description: "" });
+      setFormData({ 
+        title: "", 
+        videoUrl: "", 
+        description: "",
+        category: "Kegiatan",
+        categoryIcon: "RiVideoLine"
+      });
       fetchItems();
       toast({
         title: "Success",
@@ -203,9 +215,64 @@ export default function GalleryAdminPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  rows={4}
+                  rows={2}
                   placeholder="Berikan deskripsi singkat untuk video ini..."
                   className="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border-transparent focus:bg-white focus:border-blue-500/30 focus:ring-4 focus:ring-blue-500/5 outline-none transition-all font-bold text-slate-700 placeholder:text-slate-300 shadow-inner resize-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-6 p-4 bg-slate-50 rounded-3xl border border-slate-100">
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    Kategori
+                  </label>
+                  
+                  {/* Existing Categories Suggestions */}
+                  {items.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {Array.from(new Set(items.map(i => i.category))).map(catName => {
+                        const sample = items.find(i => i.category === catName);
+                        return (
+                          <button
+                            key={catName}
+                            type="button"
+                            onClick={() => setFormData({ 
+                              ...formData, 
+                              category: catName,
+                              categoryIcon: sample?.categoryIcon || "RiVideoLine"
+                            })}
+                            className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-tight transition-all border flex items-center gap-2 ${
+                              formData.category === catName 
+                              ? "bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200" 
+                              : "bg-white text-slate-500 border-slate-100 hover:border-indigo-200 hover:text-indigo-600"
+                            }`}
+                          >
+                            <span className="opacity-70">
+                              {sample?.categoryIcon && (RiIcons as any)[sample.categoryIcon] ? 
+                                (RiIcons as any)[sample.categoryIcon]({ size: 12 }) : 
+                                <Play size={12} />
+                              }
+                            </span>
+                            {catName}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <input
+                    required
+                    type="text"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    placeholder="Misal: Seminar, Wisuda"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 focus:border-indigo-500 outline-none font-bold text-slate-700 placeholder:text-slate-300 shadow-sm"
+                  />
+                </div>
+                <IconPicker 
+                  value={formData.categoryIcon}
+                  onChange={(val) => setFormData({ ...formData, categoryIcon: val })}
+                  label="Ikon Kategori"
                 />
               </div>
 
@@ -268,8 +335,13 @@ export default function GalleryAdminPage() {
                         </div>
                       </div>
                       <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-2">
-                         <LinkIcon className="text-white" size={12} />
-                         <span className="text-[10px] font-black text-white uppercase tracking-widest">YouTube</span>
+                         <div className="text-white text-xs">
+                           {RiIcons[item.categoryIcon as keyof typeof RiIcons] ? 
+                             (RiIcons[item.categoryIcon as keyof typeof RiIcons] as any)({ size: 14 }) : 
+                             <Play size={14} />
+                           }
+                         </div>
+                         <span className="text-[10px] font-black text-white uppercase tracking-widest">{item.category}</span>
                       </div>
                     </div>
                     

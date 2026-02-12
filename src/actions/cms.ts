@@ -274,6 +274,8 @@ export async function createGallery(data: {
   title: string;
   description?: string;
   videoUrl: string;
+  category?: string;
+  categoryIcon?: string;
 }) {
   try {
     const admin = await checkRole(["SUPER_ADMIN", "NEWS_EDITOR"]);
