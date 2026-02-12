@@ -4,29 +4,167 @@ import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { getNews, deleteNews } from "@/actions/cms";
-import { Plus, Edit, Trash2, Eye, Newspaper, Loader2, Search, Filter, Check, FileText } from "lucide-react";
+import { 
+  Plus, 
+  Edit, 
+  Trash2, 
+  Eye, 
+  Newspaper, 
+  Loader2, 
+  Search, 
+  Filter, 
+  Check, 
+  FileText,
+  ExternalLink,
+  X,
+  Calendar
+} from "lucide-react";
 import { format } from "date-fns";
-import { id } from "date-fns/locale";
+import { id as idLocale } from "date-fns/locale";
 import { useAdminUI } from "@/providers/AdminUIProvider";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface NewsItem {
   id: string;
   title: string;
   slug: string;
+  content: string; // Add content for preview
   published: boolean;
   createdAt: string | Date;
   image?: string;
+  metaTitle?: string;
+  metaDesc?: string;
 }
+
+const NewsPreviewModal = ({ 
+  news, 
+  isOpen, 
+  onClose 
+}: { 
+  news: NewsItem | null; 
+  isOpen: boolean; 
+  onClose: () => void; 
+}) => {
+  if (!news) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col"
+          >
+            {/* Modal Header */}
+            <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                   <Eye size={20} strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">Pratinjau Artikel</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-widest ${news.published ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-400'}`}>
+                      {news.published ? 'Live' : 'Draft'}
+                    </span>
+                    <span className="text-[9px] font-bold text-slate-300 uppercase tracking-widest leading-none border-l border-slate-200 pl-2">
+                       {format(new Date(news.createdAt), "dd MMMM yyyy", { locale: idLocale })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={onClose}
+                className="p-2 hover:bg-slate-100 rounded-xl text-slate-400 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="flex-1 overflow-y-auto p-8 sm:p-12 custom-scrollbar space-y-8">
+              {news.image && (
+                <div className="relative aspect-video rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200 border border-slate-100">
+                   <Image 
+                     src={news.image} 
+                     alt={news.title} 
+                     fill 
+                     className="object-cover"
+                   />
+                </div>
+              )}
+
+              <div className="max-w-3xl mx-auto space-y-6">
+                 <h1 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
+                    {news.title}
+                 </h1>
+                 
+                 <div 
+                   className="prose prose-slate prose-lg max-w-none text-slate-600 font-medium leading-relaxed"
+                   dangerouslySetInnerHTML={{ __html: news.content }}
+                 />
+
+                 {/* SEO Stats */}
+                 <div className="pt-10 border-t border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">SEO Title</p>
+                       <p className="text-xs font-bold text-slate-700">{news.metaTitle || news.title}</p>
+                    </div>
+                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">SEO Description</p>
+                       <p className="text-xs font-bold text-slate-700 line-clamp-2">{news.metaDesc || "Tidak ada deskripsi SEO"}</p>
+                    </div>
+                 </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-6 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
+               <button 
+                 onClick={onClose}
+                 className="px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest text-slate-500 hover:bg-white transition-all border border-transparent hover:border-slate-200"
+               >
+                 Tutup
+               </button>
+               <Link
+                 href={`/admin/news/${news.id}/edit`}
+                 className="px-6 py-3 bg-emerald-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200"
+               >
+                 Edit Artikel
+               </Link>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 export default function NewsAdminPage() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { confirm, toast } = useAdminUI();
+
+  const handleReview = (item: NewsItem) => {
+    setSelectedNews(item);
+    setIsPreviewOpen(true);
+  };
 
   const fetchNews = useCallback(async () => {
     const data = await getNews();
-    setNews(data as NewsItem[]);
+    setNews(data as any[]);
     setLoading(false);
   }, []);
 
@@ -35,7 +173,7 @@ export default function NewsAdminPage() {
     const loadData = async () => {
       const data = await getNews();
       if (isMounted) {
-        setNews(data as NewsItem[]);
+        setNews(data as any[]);
         setLoading(false);
       }
     };
@@ -78,6 +216,12 @@ export default function NewsAdminPage() {
 
   return (
     <div className="space-y-10 animate-fade-in">
+      <NewsPreviewModal 
+        isOpen={isPreviewOpen} 
+        onClose={() => setIsPreviewOpen(false)} 
+        news={selectedNews} 
+      />
+
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-100 pb-8">
         <div>
@@ -209,19 +353,26 @@ export default function NewsAdminPage() {
                       </span>
                     </td>
                     <td className="px-8 py-6">
-                      <div className="text-sm font-bold text-slate-500 uppercase tracking-tighter">
-                        {format(new Date(item.createdAt), "dd MMM yyyy", { locale: id })}
+                      <div className="text-sm font-bold text-slate-500 uppercase tracking-tighter text-[11px]">
+                        {format(new Date(item.createdAt), "dd MMM yyyy", { locale: idLocale })}
                       </div>
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex items-center justify-end gap-1">
+                        <button
+                          onClick={() => handleReview(item)}
+                          className="p-3 text-slate-300 hover:text-blue-600 hover:bg-blue-50 rounded-2xl transition-all"
+                          title="Review Konten"
+                        >
+                          <Eye size={20} strokeWidth={2.5} />
+                        </button>
                         <Link
                           href={`/news/${item.id}`}
                           target="_blank"
-                          className="p-3 text-slate-300 hover:text-blue-600 hover:bg-blue-50 rounded-2xl transition-all"
-                          title="Preview Konten"
+                          className="p-3 text-slate-300 hover:text-indigo-600 hover:bg-indigo-50 rounded-2xl transition-all"
+                          title="Buka di Tab Baru"
                         >
-                          <Eye size={20} strokeWidth={2.5} />
+                          <ExternalLink size={20} strokeWidth={2.5} />
                         </Link>
                         <Link
                           href={`/admin/news/${item.id}/edit`}
@@ -243,7 +394,6 @@ export default function NewsAdminPage() {
                 ))}
               </tbody>
             </table>
-            
             {filteredNews.length === 0 && (
               <div className="py-32 text-center flex flex-col items-center gap-6">
                 <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center text-slate-200">
