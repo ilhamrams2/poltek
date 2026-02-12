@@ -1,13 +1,26 @@
+import { getSession } from "./auth-paseto";
 import { createClient } from "./supabase-server";
 import { prisma } from "./prisma";
 
 export async function getCurrentAdmin() {
+  // 1. Try PASETO session first (The new primary auth)
+  const pasetoSession = await getSession();
+  if (pasetoSession) {
+    return {
+      id: pasetoSession.userId,
+      email: pasetoSession.email,
+      role: pasetoSession.role,
+      name: pasetoSession.email.split('@')[0]
+    };
+  }
+
+  // 2. Fallback to Supabase (For backward compatibility or transition)
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) return null;
 
-  // Check if this admin exists
+  // Check if this admin exists in Database
   let admin = await prisma.admin.findUnique({
     where: { email: user.email },
   });

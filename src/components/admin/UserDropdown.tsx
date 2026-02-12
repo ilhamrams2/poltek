@@ -63,6 +63,17 @@ export function UserDropdown({ admin, onLogout }: UserDropdownProps) {
                </div>
 
                <Link 
+                 href="/admin/profile" 
+                 onClick={() => setIsOpen(false)}
+                 className="flex items-center gap-3 w-full px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl transition-all font-bold group"
+               >
+                 <div className="p-2 rounded-xl bg-slate-50 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                    <User size={16} />
+                 </div>
+                 <span className="text-xs">Profil Saya</span>
+               </Link>
+
+               <Link 
                  href="/admin/settings/password" 
                  onClick={() => setIsOpen(false)}
                  className="flex items-center gap-3 w-full px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl transition-all font-bold group"

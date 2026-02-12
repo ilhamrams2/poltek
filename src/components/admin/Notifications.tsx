@@ -17,8 +17,8 @@ export function Notifications() {
       setCount(c);
     };
     fetchCount();
-    // Poll every 30 seconds
-    const interval = setInterval(fetchCount, 30000);
+    // Poll every 60 seconds to reduce server load
+    const interval = setInterval(fetchCount, 60000);
     return () => clearInterval(interval);
   }, []);
 

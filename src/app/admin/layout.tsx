@@ -101,15 +101,19 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   }, []);
 
   const handleLogout = async () => {
-    if (!supabase) return;
     setIsLoggingOut(true);
     
-    // Give time for animation
-    setTimeout(async () => {
-      await supabase.auth.signOut();
-      router.push("/admin/login");
-      router.refresh();
-    }, 400);
+    try {
+      await fetch("/api/logout", { method: "POST" });
+      // Give time for animation
+      setTimeout(() => {
+        router.push("/admin/login");
+        router.refresh();
+      }, 400);
+    } catch (err) {
+      console.error("Logout failed:", err);
+      setIsLoggingOut(false);
+    }
   };
 
   const [isLoggingOut, setIsLoggingOut] = useState(false);

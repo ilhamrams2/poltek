@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { Settings, Building2, Phone, Mail, Globe, MapPin } from "lucide-react";
+import { Settings, Building2, Phone, Mail, Globe, MapPin, Key } from "lucide-react";
 import SettingsForm from "@/components/SettingsForm";
+import Link from "next/link";
 
 async function getSettings() {
   const settings = await prisma.setting.findMany();
@@ -33,14 +34,21 @@ export default async function SettingsPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Quick Actions */}
-          <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-[2.5rem] p-8 text-white shadow-xl shadow-orange-500/20">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+          <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-[2.5rem] p-8 text-white shadow-xl shadow-orange-500/20 relative group">
+            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <Settings size={24} />
             </div>
             <h3 className="text-xl font-black mb-2">Pengaturan Sistem</h3>
-            <p className="text-orange-50 text-sm font-medium leading-relaxed">
-              Kelola semua konfigurasi website kampus Anda dari satu tempat.
+            <p className="text-orange-50 text-sm font-medium leading-relaxed mb-6">
+              Kelola semua konfigurasi website kampus Anda dari satu tempat secara aman.
             </p>
+            <Link 
+              href="/admin/settings/password"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-orange-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-orange-50 transition-all active:scale-95 shadow-lg shadow-orange-950/20"
+            >
+              <Key size={14} />
+              Ganti Password
+            </Link>
           </div>
 
           {/* Info Box */}

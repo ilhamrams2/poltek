@@ -8,37 +8,31 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum Role {
-  SUPER_ADMIN
-  NEWS_EDITOR
-  ACADEMIC_ADMIN
-}
-
 model News {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  content     String   @db.Text
-  image       String?
-  published   Boolean  @default(true)
-  views       Int      @default(0)
-  metaTitle   String?
-  metaDesc    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  image     String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  metaDesc  String?
+  metaTitle String?
+  views     Int      @default(0)
 
   @@map("news")
 }
 
 model Gallery {
-  id            String   @id @default(cuid())
-  title         String
-  description   String?
-  videoUrl      String
-  category      String   @default("Kegiatan")
-  categoryIcon  String   @default("RiVideoLine")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  videoUrl     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  category     String   @default("Kegiatan")
+  categoryIcon String   @default("RiVideoLine")
 
   @@map("gallery")
 }
@@ -47,16 +41,16 @@ model Program {
   id              String   @id @default(cuid())
   title           String
   slug            String   @unique
-  degree          String   // D3 or D4
+  degree          String
   subtitle        String
-  description     String   @db.Text
-  longDescription String   @db.Text
+  description     String
+  longDescription String
   heroImage       String
   color           String   @default("#F15A24")
-  competencies    Json     // Array of {title, desc, icon}
-  careers         Json     // Array of strings
-  tools           Json     // Array of {name, icon}
-  stats           Json     // Array of {label, value}
+  competencies    Json
+  careers         Json
+  tools           Json
+  stats           Json
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
@@ -64,15 +58,15 @@ model Program {
 }
 
 model Admin {
-  id                String     @id @default(cuid())
-  email             String     @unique
-  name              String?
-  role              Role       @default(NEWS_EDITOR)
-  twoFactorEnabled  Boolean    @default(false)
-  twoFactorSecret   String?
-  auditLogs         AuditLog[]
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  id               String     @id @default(cuid())
+  email            String     @unique
+  name             String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  role             Role       @default(NEWS_EDITOR)
+  twoFactorEnabled Boolean    @default(false)
+  twoFactorSecret  String?
+  auditLogs        AuditLog[]
 
   @@map("admins")
 }
@@ -80,14 +74,14 @@ model Admin {
 model AuditLog {
   id        String   @id @default(cuid())
   adminId   String
-  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
   action    String
-  entity    String   // e.g., "News", "Program"
+  entity    String
   entityId  String?
   details   Json?
   ipAddress String?
   userAgent String?
   createdAt DateTime @default(now())
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
   @@map("audit_logs")
 }
@@ -96,12 +90,12 @@ model ContactMessage {
   id        String   @id @default(cuid())
   name      String
   email     String
-  phone     String?
-  category  String?
   subject   String?
-  message   String   @db.Text
+  message   String
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+  category  String?
+  phone     String?
 
   @@map("contact_messages")
 }
@@ -118,9 +112,14 @@ model DailyStat {
 model Setting {
   id        String   @id @default(cuid())
   key       String   @unique
-  value     String   @db.Text
+  value     String
   updatedAt DateTime @updatedAt
 
   @@map("settings")
 }
 
+enum Role {
+  SUPER_ADMIN
+  NEWS_EDITOR
+  ACADEMIC_ADMIN
+}

@@ -1,89 +1,49 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { decryptPaseto } from "@/lib/auth-paseto";
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    return response;
-  }
-
-  const supabase = createServerClient(
-    supabaseUrl,
-    supabaseKey,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value;
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          const { maxAge, ...rest } = options;
-          request.cookies.set({
-            name,
-            value,
-            ...rest,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value,
-            ...rest,
-          });
-        },
-        remove(name: string, options: CookieOptions) {
-          const { maxAge, ...rest } = options;
-          request.cookies.set({
-            name,
-            value: "",
-            ...rest,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value: "",
-            ...rest,
-          });
-        },
-      },
-    }
-  );
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get("admin_token")?.value;
 
   // Proteksi rute admin
-  if (request.nextUrl.pathname.startsWith("/admin")) {
-    if (!session && !request.nextUrl.pathname.startsWith("/admin/login")) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+  if (pathname.startsWith("/admin")) {
+    // Jika mencoba akses login tapi sudah punya token valid
+    if (pathname.startsWith("/admin/login") && token) {
+      const payload = await decryptPaseto(token);
+      if (payload) {
+        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+      }
     }
-    
-    /* 
-    // Redirect ke dashboard jika sudah login tapi akses halaman login
-    if (session && request.nextUrl.pathname.startsWith("/admin/login")) {
-      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+
+    // Proteksi area admin umum
+    if (!pathname.startsWith("/admin/login")) {
+      if (!token) {
+        return NextResponse.redirect(new URL("/admin/login", request.url));
+      }
+
+      const payload = await decryptPaseto(token);
+      if (!payload) {
+        // Token expired atau dimanipulasi
+        const response = NextResponse.redirect(new URL("/admin/login", request.url));
+        response.cookies.delete("admin_token");
+        return response;
+      }
     }
-    */
   }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder assets
+     */
+    '/admin/:path*',
+  ],
 };

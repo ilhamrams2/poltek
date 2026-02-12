@@ -44,23 +44,29 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) return;
     setLoading(true);
     setError("");
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (error) {
-      console.error(`[AUTH] Login failed for ${email}:`, error.message);
-      setError(error.message);
+      const result = await response.json();
+
+      if (result.success) {
+        console.log(`[AUTH] Login success for PASETO session at ${new Date().toLocaleString()}`);
+        router.push("/admin/dashboard");
+        router.refresh();
+      } else {
+        setError(result.error || "Login gagal");
+        setLoading(false);
+      }
+    } catch (err) {
+      setError("Terjadi kesalahan koneksi");
       setLoading(false);
-    } else {
-      console.log(`[AUTH] Login success for: ${data.user?.email} at ${new Date().toLocaleString()}`);
-      router.push("/admin/dashboard");
-      router.refresh();
     }
   };
 
