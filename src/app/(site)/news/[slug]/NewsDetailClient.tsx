@@ -68,7 +68,7 @@ export default function NewsDetailClient({
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-orange-50/30 pb-32 pt-11 md:pt-11">
+    <main className="min-h-screen bg-gradient-to-br from-white via-orange-50/50 to-purple-50/50 pb-32 pt-11 md:pt-11">
       <section className="px-6 pt-8 pb-4">
         <div className="max-w-[1280px] mx-auto">
           <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -193,7 +193,7 @@ export default function NewsDetailClient({
               {relatedNews.map((news) => (
                 <Link
                   key={news.id}
-                  href={`/news/${news.id}`}
+                  href={`/news/${news.slug}`}
                   className="group bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -232,7 +232,7 @@ export default function NewsDetailClient({
                 {hotNews.map((news, idx) => (
                   <Link
                     key={news.id}
-                    href={`/news/${news.id}`}
+                    href={`/news/${news.slug}`}
                     className="group flex items-start gap-4 cursor-pointer relative p-3 rounded-2xl hover:bg-gray-50 transition"
                   >
                     <div className="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden">

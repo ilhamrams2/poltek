@@ -112,10 +112,11 @@ export default function NewsSection({ initialNews = [] }: NewsSectionProps) {
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-gray-50/50 px-4 sm:px-6 overflow-hidden relative">
+    <section className="py-20 lg:py-32 bg-gradient-to-br from-white via-orange-50/20 to-purple-50/30 px-4 sm:px-6 overflow-hidden relative">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-white to-transparent pointer-events-none -z-10" />
-      <div className="absolute right-0 top-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-brand-purple/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-white via-orange-50/10 to-transparent pointer-events-none -z-10" />
+      <div className="absolute right-0 top-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-purple-100/20 rounded-full blur-[120px] -z-10" />
+      <div className="absolute left-0 bottom-1/4 w-96 h-96 bg-orange-100/10 rounded-full blur-[100px] -z-10 animate-pulse" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}

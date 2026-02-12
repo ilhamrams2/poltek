@@ -46,6 +46,7 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
     image: null,
     createdAt: new Date(),
     published: true,
+    slug: "#",
   };
 
   const remainingNews = filteredNews.slice(1);
@@ -68,7 +69,7 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
   };
 
   return (
-    <main className="min-h-screen bg-[#F8F9FA] pb-32 pt-11 md:pt-16">
+    <main className="min-h-screen bg-gradient-to-br from-white via-orange-50/40 to-purple-50/40 pb-32 pt-11 md:pt-16">
       
       {/* HEADER */}
       <section className="px-6 mb-8 md:mb-12">
@@ -109,8 +110,9 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
         {/* LEFT COLUMN */}
         <div className="lg:col-span-8 flex flex-col gap-16">
           
+
           {/* Highlight Card */}
-          <Link href={`/news/${mainHighlight.id}`}>
+          <Link href={`/news/${mainHighlight.slug}`}>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -143,7 +145,7 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
           {/* Grid News */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {gridNews.map((news, idx) => (
-              <Link key={news.id} href={`/news/${news.id}`}>
+              <Link key={news.id} href={`/news/${news.slug}`}>
                 <motion.article 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -212,7 +214,7 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
 
             <div className="flex flex-col gap-6">
               {listNews.map((item, idx) => (
-                <Link key={item.id} href={`/news/${item.id}`}>
+                <Link key={item.id} href={`/news/${item.slug}`}>
                   <motion.div 
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -259,7 +261,7 @@ export default function NewsClient({ initialNews }: { initialNews: NewsItem[] })
                  
                  <div className="flex flex-col gap-6">
                     {trendingItems.map((item, idx) => (
-                       <Link key={item.id} href={`/news/${item.id}`}>
+                       <Link key={item.id} href={`/news/${item.slug}`}>
                           <article className="group flex items-start gap-4 cursor-pointer relative">
                             <div className="relative shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-md">
                                <Image 

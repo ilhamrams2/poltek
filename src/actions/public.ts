@@ -89,9 +89,22 @@ export async function getLatestNews(limit: number = 6) {
         const month = date.toLocaleString('id-ID', { month: 'short' });
         const year = date.getFullYear();
 
+        // Extract category from metaTitle (format: "Category | Title" or just "Category")
+        // If no separator, use "Berita"
+        let category = "Berita";
+        if (item.metaTitle && item.metaTitle.includes("|")) {
+            category = item.metaTitle.split("|")[0].trim();
+        } else if (item.metaTitle) {
+             // If metaTitle is short (like one word), maybe it's the category? 
+             // But usually metaTitle is the page title. 
+             // Let's stick to the separator convention for now.
+             // Or, I can check against known categories? No.
+             // I'll just default to "Berita" if no pipe.
+        }
+
         return {
             id: item.id,
-            category: "Berita", // Default category
+            category: category,
             title: item.title,
             img: item.image || "/images/sections/news/newsdummy.jpeg",
             date: `${day} ${month} ${year}`,
@@ -105,5 +118,26 @@ export async function getLatestNews(limit: number = 6) {
   } catch (error) {
     console.error("Error fetching latest news:", error);
     return [];
+  }
+}
+
+export async function getNewsBySlug(slug: string) {
+  try {
+    // Try finding by slug first
+    let news = await prisma.news.findUnique({
+      where: { slug },
+    });
+    
+    // Fallback to ID if not found
+    if (!news) {
+      news = await prisma.news.findUnique({
+        where: { id: slug },
+      });
+    }
+
+    return news;
+  } catch (error) {
+    console.error("Error fetching news by slug:", error);
+    return null;
   }
 }
