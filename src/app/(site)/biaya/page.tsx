@@ -188,7 +188,7 @@ export default function BiayaKuliahPage() {
               <h2 className="text-4xl font-black mb-6 leading-tight">Subsidi <br/><span className="text-brand-orange">Pengembangan</span> (PSP)</h2>
               <p className="text-gray-400 font-medium">Investasi pengembangan sarana prasarana sebesar Rp 10.000.000 menjadi lebih ringan dengan skema benefit gelombang pendaftaran.</p>
               <div className="mt-8 p-6 rounded-3xl bg-white/5 border border-white/10">
-                 <p className="text-xs font-bold uppercase tracking-widest text-[#53C79F]">📌 Fleksibilitas</p>
+                 <p className="text-xs font-bold uppercase tracking-widest text-[#53C79F]">Fleksibilitas</p>
                  <p className="text-gray-400 text-sm mt-2 font-medium">Bisa dicicil 2x setiap semester untuk setiap gelombang.</p>
               </div>
             </div>

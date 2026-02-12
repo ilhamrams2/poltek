@@ -152,7 +152,7 @@ export default async function DashboardPage() {
           <div className="bg-gradient-to-br from-[#1E1B4B] to-[#4338CA] p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
             <h3 className="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
-              Aksi Cepat <span className="text-orange-500">⚡</span>
+              Aksi Cepat
             </h3>
             <div className="grid grid-cols-2 gap-4">
               {[

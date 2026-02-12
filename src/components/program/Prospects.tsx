@@ -25,7 +25,7 @@ interface ProspectsProps {
 export default function Prospects({ program }: ProspectsProps) {
   const data = {
     // =========================
-    // 1️⃣ RPL / PPLG
+    // 1. RPL / PPLG
     // =========================
     rpl: [
       { icon: Cpu, title: "Front-End Developer", salary: "6–12 jt/bulan" },
@@ -37,7 +37,7 @@ export default function Prospects({ program }: ProspectsProps) {
     ],
 
     // =========================
-    // 2️⃣ Manajemen Pemasaran
+    // 2. Manajemen Pemasaran
     // =========================
     manajemen: [
       { icon: Megaphone, title: "Digital Marketing Specialist", salary: "5–12 jt/bulan" },
@@ -49,7 +49,7 @@ export default function Prospects({ program }: ProspectsProps) {
     ],
 
     // =========================
-    // 3️⃣ Administrasi Perkantoran
+    // 3. Administrasi Perkantoran
     // =========================
     administrasi: [
       { icon: FileText, title: "Staff Administrasi", salary: "4–8 jt/bulan" },
