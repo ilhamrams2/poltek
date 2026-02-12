@@ -12,7 +12,7 @@ import {
   Lock, 
   ArrowRight,
   Sparkles,
-  Command
+  GraduationCap
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -104,7 +104,7 @@ export default function LoginPage() {
           <div className="flex flex-col gap-4 pt-4">
             <button
               onClick={() => router.push("/admin/dashboard")}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold transition-all shadow-xl shadow-orange-600/20 active:scale-95 flex items-center justify-center gap-2 group"
+              className="w-full bg-[#4338CA] hover:bg-indigo-700 text-white py-4 rounded-2xl font-bold transition-all shadow-xl shadow-indigo-600/20 active:scale-95 flex items-center justify-center gap-2 group"
             >
               <span>Lanjut ke Dashboard</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -128,12 +128,40 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 font-sans">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 font-sans relative overflow-hidden"
+    >
+      {/* Background Decorative Elements for the whole page */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.2, 0.1] 
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-orange-500/10 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.3, 0.1] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, delay: 2 }}
+          className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-indigo-500/10 rounded-full blur-[150px]"
+        />
+      </div>
+
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-6xl h-[650px] bg-white rounded-[3rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] overflow-hidden flex flex-col md:flex-row border border-white"
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ 
+          duration: 0.8,
+          ease: [0.16, 1, 0.3, 1] // Custom easeOutExpo
+        }}
+        className="w-full max-w-6xl h-[650px] bg-white rounded-[3rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] overflow-hidden flex flex-col md:flex-row border border-white relative z-10"
       >
         {/* LEFT PANEL - BRANDING */}
         <div className="md:w-[45%] bg-[#0F172A] relative overflow-hidden p-12 flex flex-col justify-between text-white">
@@ -149,12 +177,12 @@ export default function LoginPage() {
             className="relative z-10"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-tr from-orange-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
-                <Command size={24} className="text-white" />
+              <div className="w-12 h-12 bg-gradient-to-tr from-[#4338CA] to-[#6366F1] rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <GraduationCap size={24} className="text-white" />
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-xl tracking-tight leading-none uppercase">
-                  Poltek<span className="text-orange-500">CMS</span>
+                  Admin<span className="text-orange-500">PP</span>
                 </span>
                 <span className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Management Portal</span>
               </div>
@@ -178,7 +206,7 @@ export default function LoginPage() {
             </div>
             <h1 className="text-5xl font-black leading-[1.1] tracking-tight">
               Navigasi <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-purple-400">Digital</span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-indigo-400">Digital</span> <br />
               Pendidikan.
             </h1>
             <p className="text-slate-400 text-sm font-medium max-w-xs leading-relaxed">
@@ -283,13 +311,13 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#0F172A] hover:bg-orange-600 disabled:bg-slate-300 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-3 transition-all shadow-xl shadow-slate-900/10 active:scale-[0.98] group relative overflow-hidden uppercase tracking-widest text-xs"
+                  className="w-full bg-[#1E1B4B] hover:bg-[#4338CA] disabled:bg-slate-300 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-3 transition-all shadow-xl shadow-indigo-900/10 active:scale-[0.98] group relative overflow-hidden uppercase tracking-widest text-xs"
                 >
                   {loading ? (
                     <Loader2 size={24} className="animate-spin" />
                   ) : (
                     <>
-                      <span>Masuk Sekarang</span>
+                      <span>Masuk ke Panel</span>
                       <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                       
                       {/* Hover Flash Effect */}
@@ -322,7 +350,7 @@ export default function LoginPage() {
           }
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 }
 

@@ -7,7 +7,11 @@ import {
   ArrowUpRight,
   TrendingUp,
   Clock,
-  Plus
+  Plus,
+  Inbox,
+  Settings,
+  HelpCircle,
+  X
 } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -49,156 +53,172 @@ async function getDashboardData() {
 }
 
 export default async function DashboardPage() {
-  const { stats, latestNews, latestGallery } = await getDashboardData();
+  const { stats, latestNews } = await getDashboardData();
 
-  const cards = [
-    { title: "Total Berita", count: stats.news, icon: Newspaper, color: "text-orange-600", bg: "bg-orange-50", href: "/admin/news" },
-    { title: "Program Studi", count: stats.programs, icon: Users, color: "text-indigo-600", bg: "bg-indigo-50", href: "/admin/programs" },
-    { title: "Pesan Baru", count: stats.unreadMessages, icon: Activity, color: "text-emerald-600", bg: "bg-emerald-50", href: "/admin/inbox" },
-    { title: "Views Hari Ini", count: stats.todayViews, icon: TrendingUp, color: "text-amber-600", bg: "bg-amber-50", href: "/admin/audit" },
+  const statsCards = [
+    { title: "Total Berita", count: stats.news, icon: Newspaper, iconColor: "text-white", iconBg: "bg-gradient-to-tr from-[#4338CA] to-indigo-400" },
+    { title: "Pengunjung Hari Ini", count: stats.todayViews, icon: Users, iconColor: "text-white", iconBg: "bg-gradient-to-tr from-orange-500 to-amber-400" },
+    { title: "Pesan Unread", count: stats.unreadMessages, icon: Inbox, iconColor: "text-white", iconBg: "bg-gradient-to-tr from-orange-600 to-indigo-600" },
+    { title: "Visitor Bulanan", count: 4, icon: TrendingUp, iconColor: "text-white", iconBg: "bg-gradient-to-tr from-[#1E1B4B] to-slate-700" },
   ];
 
   return (
-    <div className="space-y-10 animate-fade-in">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Overview Dashboard</h2>
-          <p className="text-slate-500 mt-1 font-medium uppercase tracking-widest text-[11px]">Control center for poltek management</p>
-        </div>
-        <div className="flex items-center gap-3">
-            <Link 
-              href="/admin/news/new" 
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20 active:scale-95 text-sm uppercase tracking-widest"
-            >
-              <Plus size={18} strokeWidth={3} />
-              <span>Berita Baru</span>
-            </Link>
-        </div>
-      </div>
-
-      {/* Stats Cards */}
+    <div className="space-y-8 pb-10">
+      {/* Stats Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {cards.map((card) => (
-          <div key={card.title} className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col gap-4 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 group">
-            <div className="flex justify-between items-start">
-              <div className={`${card.bg} ${card.color} p-4 rounded-2xl transition-transform group-hover:scale-110`}>
-                <card.icon size={26} strokeWidth={2.5} />
+        {statsCards.map((card, i) => (
+          <div key={i} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm relative overflow-hidden group">
+            <div className="flex justify-between items-start mb-4">
+              <div className={`${card.iconBg} ${card.iconColor} p-3 rounded-2xl`}>
+                <card.icon size={24} />
               </div>
-              <Link href={card.href} className="text-slate-300 hover:text-blue-600 transition-colors p-2">
-                 <ArrowUpRight size={22} strokeWidth={2.5} />
-              </Link>
+              <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest mt-1">Data Real-time</span>
             </div>
             <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{card.title}</p>
+              <p className="text-xs font-bold text-slate-400">{card.title}</p>
               <h3 className="text-3xl font-black text-slate-900 mt-1">{card.count}</h3>
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-black text-emerald-600 mt-2 uppercase tracking-tight">
-               <TrendingUp size={14} />
-               <span>+12.5% vs last month</span>
+              <p className="text-[9px] font-bold text-slate-400 mt-2 uppercase tracking-tight flex items-center gap-1">
+                 <Clock size={10} />
+                 {i === 1 ? "Unik (Hari ini)" : i === 0 ? "Publikasi Aktif" : "Butuh Respon"}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lists Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Latest News */}
-        <div className="lg:col-span-7 bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-          <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Berita Terbaru</h3>
-            <Link href="/admin/news" className="text-blue-600 text-xs font-black uppercase tracking-widest hover:underline">Lihat Semua</Link>
+      {/* Main Content Row: Graph & Quick Actions */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Visitor Trend Graph */}
+        <div className="lg:col-span-8 bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h3 className="text-lg font-bold text-slate-800">Tren Pengunjung</h3>
+              <p className="text-xs text-slate-400 font-medium">Total pengunjung unik 7 hari terakhir</p>
+            </div>
+            <div className="flex items-center gap-2 bg-orange-50 text-orange-600 px-3 py-1 rounded-full text-[10px] font-bold">
+               <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse" />
+               HARI INI
+            </div>
           </div>
-          <div className="p-4">
-            {latestNews.length > 0 ? (
-               <div className="space-y-1">
-                 {latestNews.map((news) => (
-                    <Link 
-                      key={news.id} 
-                      href={`/admin/news/${news.id}/edit`}
-                      className="flex items-center gap-5 p-4 rounded-2xl hover:bg-slate-50 transition-all group border border-transparent hover:border-slate-100"
-                    >
-                      <div className="w-14 h-14 rounded-[1.25rem] bg-slate-100 overflow-hidden flex-shrink-0 shadow-inner relative">
-                        {news.image ? (
-                           <Image src={news.image} alt={news.title} fill className="object-cover transition-transform group-hover:scale-110 duration-500" />
-                        ) : (
-                           <div className="w-full h-full flex items-center justify-center text-slate-300">
-                             <Newspaper size={20} />
-                           </div>
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors text-base tracking-tight">
-                          {news.title}
-                        </h4>
-                        <div className="flex items-center gap-4 mt-1 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                          <span className="flex items-center gap-1.5 font-bold">
-                            <Clock size={12} className="text-slate-300" />
-                            {format(new Date(news.createdAt), 'dd MMM yyyy', { locale: id })}
-                          </span>
-                          <span className={`px-2 py-0.5 rounded-md ${news.published ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-400"}`}>
-                            {news.published ? "PUBLISHED" : "DRAFT"}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
-                         <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
-                           <ArrowUpRight size={18} strokeWidth={3} />
-                         </div>
-                      </div>
-                    </Link>
-                 ))}
-               </div>
-            ) : (
-              <div className="py-24 text-center flex flex-col items-center gap-4">
-                 <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-200">
-                    <Newspaper size={36} />
-                 </div>
-                 <p className="text-slate-400 font-black text-sm uppercase tracking-widest">Belum ada berita yang dibuat.</p>
-              </div>
-            )}
+          
+          {/* SVG Placeholder for Graph to match style */}
+          <div className="h-64 w-full relative">
+            <svg className="w-full h-full" viewBox="0 0 800 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#4338CA" stopOpacity="0.2" />
+                  <stop offset="50%" stopColor="#f97316" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                   <stop offset="0%" stopColor="#4338CA" />
+                   <stop offset="100%" stopColor="#f97316" />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M0,50 L100,60 L200,50 L300,55 L400,160 L500,160 L600,155 L700,160 L800,50" 
+                fill="none" 
+                stroke="url(#lineGradient)" 
+                strokeWidth="4" 
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path 
+                d="M0,50 L100,60 L200,50 L300,55 L400,160 L500,160 L600,155 L700,160 L800,50 L800,200 L0,200 Z" 
+                fill="url(#chartGradient)"
+              />
+              {/* Dots */}
+              {[0, 100, 200, 300, 400, 500, 600, 700, 800].map((x, i) => {
+                const y = [50, 60, 50, 55, 160, 160, 155, 160, 50][i];
+                return (
+                  <circle key={i} cx={x} cy={y} r="5" fill="white" stroke={i < 4 ? "#4338CA" : "#f97316"} strokeWidth="3" />
+                )
+              })}
+            </svg>
+            <div className="flex justify-between mt-4 text-[10px] font-bold text-slate-400 capitalize">
+               <span>04 Feb</span>
+               <span>05 Feb</span>
+               <span>06 Feb</span>
+               <span>07 Feb</span>
+               <span>08 Feb</span>
+               <span>09 Feb</span>
+               <span>10 Feb</span>
+            </div>
           </div>
         </div>
 
-        {/* Latest Gallery */}
-        <div className="lg:col-span-5 bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-          <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Media Galeri</h3>
-            <Link href="/admin/gallery" className="text-blue-600 text-xs font-black uppercase tracking-widest hover:underline">Lihat Semua</Link>
+        {/* Quick Actions (Dark Card) */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="bg-gradient-to-br from-[#1E1B4B] to-[#4338CA] p-8 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
+              Aksi Cepat <span className="text-orange-500">⚡</span>
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: "POST BERITA", icon: Newspaper, href: "/admin/news/new" },
+                { label: "UPLOAD GALERI", icon: ImageIcon, href: "/admin/gallery" },
+                { label: "PENGATURAN", icon: Settings, href: "/admin/settings" },
+                { label: "BANTUAN", icon: HelpCircle, href: "#" },
+              ].map((action, i) => (
+                <Link 
+                  key={i} 
+                  href={action.href}
+                  className="bg-white/5 hover:bg-white/10 border border-white/5 p-4 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all group active:scale-95"
+                >
+                  <action.icon size={20} className="text-slate-400 group-hover:text-white transition-colors" />
+                  <span className="text-[9px] font-black tracking-widest text-slate-400 group-hover:text-white transition-colors">{action.label}</span>
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="p-4">
-            {latestGallery.length > 0 ? (
-               <div className="space-y-1">
-                 {latestGallery.map((item) => (
-                    <div key={item.id} className="flex items-center gap-5 p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group">
-                      <div className="w-24 aspect-video rounded-xl bg-slate-900 flex-shrink-0 relative overflow-hidden ring-1 ring-white/10">
-                         <div className="absolute inset-0 flex items-center justify-center text-white/20">
-                            <ImageIcon size={18} />
-                         </div>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-slate-800 truncate text-sm uppercase tracking-tighter group-hover:text-blue-600 transition-colors">{item.title}</h4>
-                        <p className="text-[10px] font-black text-slate-400 mt-1 uppercase tracking-[0.15em] flex items-center gap-2">
-                           <TrendingUp size={12} className="text-emerald-500" />
-                           {format(new Date(item.createdAt), 'dd MMM yyyy', { locale: id })}
-                        </p>
-                      </div>
-                    </div>
-                 ))}
-               </div>
-            ) : (
-              <div className="py-24 text-center flex flex-col items-center gap-4">
-                 <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-slate-200">
-                    <ImageIcon size={36} />
-                 </div>
-                 <p className="text-slate-400 font-black text-sm uppercase tracking-widest">Belum ada item galeri.</p>
-              </div>
-            )}
+
+          <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+             <div className="flex justify-between items-center mb-6">
+                <h3 className="text-lg font-bold text-slate-800">Pesan Terbaru</h3>
+                <div className="w-2 h-2 bg-orange-500 rounded-full" />
+             </div>
+             <div className="py-10 text-center space-y-4">
+                <p className="text-xs font-bold text-slate-300 italic">Belum ada pesan masuk</p>
+                <Link href="/admin/inbox" className="inline-block w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
+                  Buka Seluruh Inbox
+                </Link>
+             </div>
           </div>
         </div>
       </div>
 
+      {/* Bottom Row: Activity Log */}
+      <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden">
+         <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50/50 rounded-full blur-3xl"></div>
+         <div className="flex justify-between items-center mb-8 px-2 relative z-10">
+            <div className="flex items-center gap-3">
+               <div className="w-1.5 h-6 bg-gradient-to-b from-[#4338CA] to-orange-500 rounded-full" />
+               <h3 className="text-lg font-bold text-slate-800">Log Aktivitas Terbaru</h3>
+            </div>
+            <Link href="/admin/audit" className="text-indigo-600 text-[10px] font-black uppercase tracking-widest hover:underline flex items-center gap-1 group">
+               Lihat Semua <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+         </div>
 
+         <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex items-center gap-5 p-4 rounded-3xl hover:bg-slate-50/50 transition-all group relative z-10">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${i === 3 ? "bg-slate-100 text-slate-400" : "bg-gradient-to-tr from-indigo-50 to-orange-50 text-indigo-600"}`}>
+                   {i === 3 ? <X size={20} /> : <TrendingUp size={20} className={i % 2 === 0 ? "text-orange-500" : "text-indigo-600"} />}
+                </div>
+                <div className="flex-1 min-w-0">
+                   <h4 className="font-bold text-slate-800 text-sm tracking-tight">
+                     {i === 3 ? "Menghapus pengguna: bk@smkprestasiprima.sch.id" : "Admin Super Admin berhasil login"}
+                   </h4>
+                   <p className="text-[10px] font-black text-slate-400 mt-1 uppercase tracking-widest">
+                     SUPER ADMIN • {i} MENIT YANG LALU
+                   </p>
+                </div>
+              </div>
+            ))}
+         </div>
+      </div>
     </div>
   );
 }

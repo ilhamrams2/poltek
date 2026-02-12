@@ -18,36 +18,61 @@ import {
   GraduationCap,
   Inbox,
   ShieldAlert,
-  Moon,
-  Sun
+  ChevronDown,
+  Layers,
+  FileText,
+  Globe,
+  HelpCircle,
+  Plus
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { createClient } from "@/lib/supabase-browser";
 import { useRouter } from "next/navigation";
 
-const sidebarItems = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { name: "News Management", href: "/admin/news", icon: Newspaper },
-  { name: "Program Studies", href: "/admin/programs", icon: GraduationCap },
-  { name: "Media Gallery", href: "/admin/gallery", icon: ImageIcon },
-  { name: "Inbox Messages", href: "/admin/inbox", icon: Inbox },
-  { name: "Audit Logs", href: "/admin/audit", icon: ShieldAlert },
-  { name: "System Settings", href: "/admin/settings", icon: Settings },
+const sidebarCategories = [
+  {
+    label: "MAIN MENU",
+    items: [
+      { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+      { name: "News Management", href: "/admin/news", icon: Newspaper },
+      { name: "Program Studies", href: "/admin/programs", icon: GraduationCap },
+      { name: "Media Gallery", href: "/admin/gallery", icon: ImageIcon },
+      { name: "Inbox Messages", href: "/admin/inbox", icon: Inbox },
+      { name: "Audit Logs", href: "/admin/audit", icon: ShieldAlert },
+      { name: "System Settings", href: "/admin/settings", icon: Settings },
+    ]
+  },
+  {
+    label: "EKSTERNAL",
+    items: [
+      { name: "Dokumentasi API", href: "#", icon: FileText },
+      { name: "Dokumentasi Sistem", href: "#", icon: HelpCircle },
+      { name: "Lihat Website Utama", href: "/", icon: Globe, external: true },
+    ]
+  }
 ];
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
   const [supabase, setSupabase] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [openMenus, setOpenMenus] = useState<string[]>(["Akademik"]);
 
   // Initialize Supabase client only on the client side
   useEffect(() => {
     setSupabase(createClient());
   }, []);
+
+  const toggleMenu = (name: string) => {
+    setOpenMenus(prev => 
+      prev.includes(name) ? prev.filter(m => m !== name) : [...prev, name]
+    );
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,11 +84,14 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     if (!supabase) return;
-    const { data: { user } } = await supabase.auth.getUser();
-    await supabase.auth.signOut();
-    console.log(`[AUTH] Logout success for: ${user?.email} at ${new Date().toLocaleString()}`);
-    router.push("/admin/login");
-    router.refresh();
+    setIsLoggingOut(true);
+    
+    // Give time for animation
+    setTimeout(async () => {
+      await supabase.auth.signOut();
+      router.push("/admin/login");
+      router.refresh();
+    }, 400);
   };
 
   // Skip layout for login page
@@ -72,159 +100,201 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className={`flex h-screen ${theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-[#F8FAFC] text-slate-900'} font-sans overflow-hidden transition-colors duration-500`}>
+    <AnimatePresence mode="wait">
+      {isLoggingOut ? (
+        <motion.div
+          key="logout-loader"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[9999] bg-[#0F172A]/90 backdrop-blur-sm flex flex-col items-center justify-center p-4"
+        >
+          <div className="relative">
+            {/* Unique Circular Progress Decoration */}
+            <svg className="w-32 h-32 transform -rotate-90">
+              <circle
+                cx="64"
+                cy="64"
+                r="60"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="transparent"
+                className="text-slate-800"
+              />
+              <motion.circle
+                cx="64"
+                cy="64"
+                r="60"
+                stroke="currentColor"
+                strokeWidth="3"
+                fill="transparent"
+                strokeDasharray="377"
+                initial={{ strokeDashoffset: 377 }}
+                animate={{ strokeDashoffset: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="text-orange-500"
+              />
+            </svg>
+            
+            {/* Center Icon */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-tr from-[#4338CA] via-indigo-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-indigo-500/20">
+                <GraduationCap size={28} className="text-white" />
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-8 text-center"
+          >
+            <h2 className="text-white text-sm font-black uppercase tracking-[0.3em] mb-1">
+              Admin<span className="text-orange-500">PP</span>
+            </h2>
+            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest opacity-60">Sesi Berakhir</p>
+          </motion.div>
+        </motion.div>
+      ) : (
+        <motion.div 
+          key="admin-layout"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
+          transition={{ duration: 0.3 }}
+          className={`flex h-screen bg-[#FDFDFD] text-slate-800 font-sans overflow-hidden`}
+        >
       
       {/* SIDEBAR */}
       <aside 
         className={`${
-          isSidebarOpen ? "w-72" : "w-24"
-        } ${theme === 'dark' ? 'bg-slate-900 border-r border-slate-800' : 'bg-[#0F172A]'} text-white transition-all duration-500 ease-in-out flex flex-col relative z-30 shadow-[4px_0_24px_rgba(0,0,0,0.1)]`}
+          isSidebarOpen ? "w-72" : "w-0"
+        } bg-white transition-all duration-300 ease-in-out flex flex-col relative z-30 border-r border-slate-100`}
       >
         {/* Sidebar Header */}
-        <div className="p-6 flex items-center h-24 border-b border-slate-800/50">
+        <div className="p-8 pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
-               <Settings size={22} className="text-white animate-spin-slow" />
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#4338CA] to-orange-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 relative group">
+               <GraduationCap size={24} className="text-white" />
+               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
+                  <div className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse"></div>
+               </div>
             </div>
             {isSidebarOpen && (
               <div className="flex flex-col">
-                <span className="font-black text-lg tracking-tight leading-none uppercase">
-                  Poltek<span className="text-orange-500">CMS</span>
+                <span className="font-extrabold text-xl tracking-tight leading-none text-slate-900">
+                  Admin<span className="text-orange-500">PP</span>
                 </span>
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Management System</span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Portal Management</span>
               </div>
             )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-8 space-y-2 overflow-y-auto custom-scrollbar">
-          {sidebarItems.map((item) => {
-            const isActive = pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`group flex items-center gap-3 p-4 rounded-2xl transition-all duration-300 relative ${
-                  isActive
-                    ? "bg-orange-600 text-white shadow-xl shadow-orange-600/20"
-                    : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
-                }`}
-              >
-                <div className={`${isActive ? "text-white" : "text-slate-500 group-hover:text-orange-400"} transition-colors`}>
-                  <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
-                </div>
-                {isSidebarOpen && (
-                  <>
-                    <span className="flex-1 font-bold text-sm tracking-tight">
-                      {item.name}
-                    </span>
-                    {isActive && <ChevronRight size={16} className="text-orange-200" />}
-                  </>
-                )}
-                {isActive && (
-                  <div className="absolute left-0 w-1.5 h-8 bg-white rounded-r-full shadow-[0_0_12px_rgba(255,255,255,0.5)]" />
-                )}
-              </Link>
-            );
-          })}
+        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto custom-scrollbar">
+          {sidebarCategories.map((category) => (
+            <div key={category.label} className="space-y-4">
+              {isSidebarOpen && (
+                <h3 className="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{category.label}</h3>
+              )}
+              <div className="space-y-1">
+                {category.items.map((item) => {
+                  const isActive = pathname === item.href;
+                  
+                  return (
+                    <div key={item.name} className="space-y-1">
+                      <Link
+                        href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        className={`group flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all duration-300 relative ${
+                          isActive
+                            ? "bg-gradient-to-r from-indigo-50 to-orange-50 text-[#4338CA] border border-orange-100 shadow-md shadow-orange-500/5 ring-1 ring-orange-200"
+                            : "text-slate-500 hover:bg-slate-50 hover:text-[#4338CA]"
+                        }`}
+                      >
+                        <div className={`${isActive ? "text-[#4338CA]" : "text-slate-400 group-hover:text-indigo-500"}`}>
+                          <item.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                        </div>
+                        {isSidebarOpen && (
+                          <span className={`flex-1 font-bold text-[13px] ${isActive ? "text-slate-900" : ""}`}>
+                            {item.name}
+                          </span>
+                        )}
+                        {isActive && isSidebarOpen && (
+                          <div className={`absolute left-0 w-1.5 h-6 bg-gradient-to-b from-[#4338CA] to-orange-500 rounded-r-full shadow-lg`} />
+                        )}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-slate-800/50 bg-slate-900/50">
+        <div className="p-4 border-t border-slate-50">
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full p-4 text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 rounded-2xl transition-all duration-300 font-bold group"
+            className="flex items-center gap-3 w-full px-5 py-4 text-slate-400 hover:bg-rose-50 hover:text-rose-600 rounded-2xl transition-all duration-300 font-bold group"
           >
-            <div className="p-2 bg-slate-800 rounded-xl group-hover:bg-rose-500/20 transition-colors">
-              <LogOut size={20} />
-            </div>
+            <LogOut size={20} className="text-slate-400 group-hover:text-rose-600" />
             {isSidebarOpen && (
-              <span className="text-sm uppercase tracking-widest">Logout</span>
+              <span className="text-[13px] font-bold">Keluar Panel</span>
             )}
           </button>
         </div>
-
-        {/* Toggle Button */}
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className={`absolute -right-4 top-10 w-8 h-8 ${theme === 'dark' ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-white text-slate-600 border-slate-200'} border rounded-full shadow-lg flex items-center justify-center hover:text-orange-600 transition-all z-40 group`}
-        >
-          {isSidebarOpen ? <X size={14} className="group-hover:rotate-90 transition-transform" /> : <Menu size={14} />}
-        </button>
       </aside>
 
       {/* MAIN CONTENT AREA */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         
         {/* Top Header */}
-        <header className={`h-24 px-10 flex items-center justify-between transition-all duration-300 z-20 ${
-          isScrolled 
-            ? theme === 'dark' ? 'bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 shadow-lg' : 'bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm'
-            : "bg-transparent"
-        }`}>
-          <div className="flex items-center gap-6">
-             <div className="relative group hidden md:block">
-                <Search className={`absolute left-4 top-1/2 -translate-y-1/2 ${theme === 'dark' ? 'text-slate-500' : 'text-slate-400'} group-focus-within:text-orange-500 transition-colors`} size={18} />
-                <input 
-                  type="text" 
-                  placeholder="Cari fitur atau data..." 
-                  className={`pl-12 pr-6 py-2.5 ${theme === 'dark' ? 'bg-slate-800/50 focus:bg-slate-800 text-slate-200 border-slate-700' : 'bg-slate-100/50 focus:bg-white text-slate-900 border-transparent'} border focus:border-orange-200 rounded-xl outline-none w-80 text-sm font-medium transition-all focus:ring-4 focus:ring-orange-500/5`} 
-                />
+        <header className={`h-20 px-10 flex items-center justify-between z-20 bg-white/50 backdrop-blur-md`}>
+          <div className="flex items-center gap-4">
+             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-slate-100 rounded-lg text-slate-400">
+                <Menu size={20} />
+             </button>
+             <div>
+                <h1 className="text-xl font-bold text-slate-800 leading-none">Dashboard Overview</h1>
+                <p className="text-[10px] font-medium text-slate-400 mt-1">Selamat datang kembali, Admin!</p>
              </div>
           </div>
 
-          <div className="flex items-center gap-4">
-             <button 
-               onClick={toggleTheme}
-               className={`p-2.5 rounded-xl border transition-all ${
-                 theme === 'dark' 
-                   ? 'bg-slate-800 border-slate-700 text-amber-400 shadow-lg shadow-amber-500/5' 
-                   : 'bg-white border-slate-100 text-slate-500 hover:shadow-md'
-               }`}
-             >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-             </button>
-
-             <Link href="/" target="_blank" className={`flex items-center gap-2 px-4 py-2 ${theme === 'dark' ? 'text-slate-400 hover:text-orange-400' : 'text-slate-500 hover:text-orange-600'} font-bold text-xs uppercase tracking-widest transition-colors`}>
-               <ExternalLink size={14} />
-               <span>Lihat Web</span>
-             </Link>
-             
-             <button className={`relative p-2.5 ${theme === 'dark' ? 'text-slate-400 bg-slate-800 hover:bg-slate-700 border-slate-700' : 'text-slate-500 bg-white hover:bg-slate-50 border-transparent'} transition-all rounded-xl border hover:shadow-md`}>
+          <div className="flex items-center gap-6">
+             <button className="relative p-2.5 text-slate-400 hover:bg-slate-50 transition-all rounded-full border border-slate-100">
                 <Bell size={20} />
-                <span className="absolute top-2 right-2.5 w-2 h-2 bg-rose-500 border-2 border-slate-800 rounded-full" />
+                <span className="absolute top-2 right-2.5 w-2 h-2 bg-rose-500 border-2 border-white rounded-full" />
              </button>
 
-             <div className={`h-10 w-[1px] ${theme === 'dark' ? 'bg-slate-800' : 'bg-slate-200'} mx-2`} />
-             
-             <div className="flex items-center gap-3 group cursor-pointer">
+             <div className="flex items-center gap-4 pl-4 border-l border-slate-100">
                 <div className="flex flex-col items-end">
-                   <span className={`text-sm font-black ${theme === 'dark' ? 'text-slate-200' : 'text-slate-900'} leading-none`}>Super Admin</span>
-                   <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1">Online</span>
+                   <span className="text-sm font-bold text-slate-900 leading-none">Super Admin</span>
+                   <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mt-1">SUPER ADMIN</span>
                 </div>
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 p-[2px] shadow-lg shadow-orange-500/20">
-                  <div className={`w-full h-full rounded-[14px] ${theme === 'dark' ? 'bg-slate-900' : 'bg-white'} flex items-center justify-center font-black text-orange-600`}>
-                    SA
-                  </div>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4338CA] via-indigo-600 to-orange-500 flex items-center justify-center font-black text-white shadow-lg shadow-indigo-500/20 text-sm">
+                   S
                 </div>
              </div>
           </div>
         </header>
 
         {/* Scrollable Workspace */}
-        <main className={`flex-1 overflow-y-auto p-10 custom-scrollbar ${theme === 'dark' ? 'bg-slate-950' : 'bg-[#F8FAFC]'}`}>
-           <div className="max-w-7xl mx-auto">
+        <main className={`flex-1 overflow-y-auto px-10 py-6 custom-scrollbar bg-[#FDFDFD]`}>
+           <div className="max-w-[1600px] mx-auto">
              {children}
            </div>
            
            {/* Footer Copyright */}
-           <footer className={`mt-20 py-8 border-t ${theme === 'dark' ? 'border-slate-800' : 'border-slate-200'} flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 font-bold text-[10px] uppercase tracking-[0.2em]`}>
-              <span>&copy; 2026 Politeknik Prestasi Prima - All Rights Reserved.</span>
-              <div className="flex items-center gap-6">
-                 <Link href="#" className="hover:text-orange-600 transition-colors">Privacy Policy</Link>
-                 <Link href="#" className="hover:text-orange-600 transition-colors">Terms of Service</Link>
-              </div>
+           <footer className={`mt-20 py-8 text-center text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em]`}>
+              <span>&copy; 2026 SMK PRESTASI PRIMA • DEVELOPED BY ARDY & ABI</span>
            </footer>
         </main>
       </div>
@@ -237,21 +307,16 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: ${theme === 'dark' ? '#1E293B' : '#E2E8F0'};
+          background: #F1F5F9;
           border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: ${theme === 'dark' ? '#334155' : '#CBD5E1'};
-        }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
+          background: #E2E8F0;
         }
       `}</style>
-    </div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -261,8 +326,6 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider>
-      <AdminLayoutContent>{children}</AdminLayoutContent>
-    </ThemeProvider>
+    <AdminLayoutContent>{children}</AdminLayoutContent>
   );
 }
