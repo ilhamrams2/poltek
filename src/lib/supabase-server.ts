@@ -31,7 +31,8 @@ export async function createClient() {
         },
         set(name: string, value: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value, ...options });
+            const { maxAge, ...rest } = options;
+            cookieStore.set({ name, value, ...rest });
           } catch (error) {
             // The `set` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
@@ -40,7 +41,8 @@ export async function createClient() {
         },
         remove(name: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value: "", ...options });
+            const { maxAge, ...rest } = options;
+            cookieStore.set({ name, value: "", ...rest });
           } catch (error) {
             // The `remove` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing

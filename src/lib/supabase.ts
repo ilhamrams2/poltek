@@ -5,7 +5,12 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 // Create client with fallback for build time
 export const supabase = (supabaseUrl && supabaseAnonKey)
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        storage: typeof window !== 'undefined' ? window.sessionStorage : undefined,
+      }
+    })
   : {
       auth: {
         getUser: async () => ({ data: { user: null }, error: null }),
