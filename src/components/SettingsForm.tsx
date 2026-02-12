@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { updateMultipleSettings } from "@/actions/settings";
 import { Save, Loader2 } from "lucide-react";
+import { useAdminUI } from "@/providers/AdminUIProvider";
 
 interface SettingsFormProps {
   initialSettings: Record<string, string>;
@@ -11,7 +12,7 @@ interface SettingsFormProps {
 export default function SettingsForm({ initialSettings }: SettingsFormProps) {
   const [settings, setSettings] = useState(initialSettings);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
+  const { toast } = useAdminUI();
 
   const handleChange = (key: string, value: string) => {
     setSettings(prev => ({ ...prev, [key]: value }));
@@ -20,16 +21,22 @@ export default function SettingsForm({ initialSettings }: SettingsFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
-    setSaveMessage("");
 
     const result = await updateMultipleSettings(settings);
     
     setIsSaving(false);
     if (result.success) {
-      setSaveMessage("✓ Pengaturan berhasil disimpan!");
-      setTimeout(() => setSaveMessage(""), 3000);
+      toast({
+        title: "Success",
+        message: "Pengaturan berhasil disimpan!",
+        type: "success"
+      });
     } else {
-      setSaveMessage("✗ Gagal menyimpan pengaturan");
+      toast({
+        title: "Error",
+        message: "Gagal menyimpan pengaturan",
+        type: "error"
+      });
     }
   };
 
@@ -183,11 +190,6 @@ export default function SettingsForm({ initialSettings }: SettingsFormProps) {
 
       {/* Save Button */}
       <div className="flex items-center justify-between bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
-        {saveMessage && (
-          <span className={`text-sm font-bold ${saveMessage.includes('✓') ? 'text-emerald-600' : 'text-rose-600'}`}>
-            {saveMessage}
-          </span>
-        )}
         <div className="ml-auto">
           <button 
             type="submit"

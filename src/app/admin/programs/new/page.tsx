@@ -10,8 +10,11 @@ import { Save, ArrowLeft, Loader2, Minus, Plus, Award, Briefcase, Database, Tras
 import Link from "next/link";
 import * as RiIcons from "react-icons/ri";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 export default function NewProgramPage() {
   const router = useRouter();
+  const { toast } = useAdminUI(); // Get toast
   const [loading, setLoading] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -82,10 +85,19 @@ export default function NewProgramPage() {
     const result = await createProgram(formData);
 
     if (result.success) {
+      toast({
+        title: "Success",
+        message: "Program studi berhasil dibuat.",
+        type: "success"
+      });
       router.push("/admin/programs");
       router.refresh();
     } else {
-      alert("Gagal membuat program studi: " + result.error);
+       toast({
+        title: "Error",
+        message: "Gagal membuat program studi: " + result.error,
+        type: "error"
+      });
       setLoading(false);
     }
   };

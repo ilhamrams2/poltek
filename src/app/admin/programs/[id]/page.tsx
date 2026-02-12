@@ -10,10 +10,13 @@ import { Save, ArrowLeft, Loader2, Minus, Plus, Award, Briefcase, Database, Tras
 import Link from "next/link";
 import * as RiIcons from "react-icons/ri";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 export default function EditProgramPage() {
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
+  const { toast } = useAdminUI();
   
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
@@ -39,29 +42,29 @@ export default function EditProgramPage() {
       const data = await getProgramById(id);
       if (data) {
         setFormData({
-          title: data.title,
-          slug: data.slug,
-          degree: data.degree,
-          subtitle: data.subtitle,
-          description: data.description,
-          longDescription: data.longDescription,
-          heroImage: data.heroImage,
-          color: data.color || "#4F46E5",
-          // Safely map/cast data
-          competencies: (data.competencies as any[])?.map(c => ({
+            title: data.title,
+            slug: data.slug,
+            degree: data.degree,
+            subtitle: data.subtitle,
+            description: data.description,
+            longDescription: data.longDescription,
+            heroImage: data.heroImage,
+            color: data.color || "#4F46E5",
+            // Safely map/cast data
+            competencies: (data.competencies as any[])?.map(c => ({
             title: c.title || "",
             desc: c.desc || "",
             icon: c.icon || "RiCheckboxCircleLine"
-          })) || [],
-          careers: (data.careers as string[]) || [],
-          tools: (data.tools as any[])?.map(t => ({
-             name: t.name || "",
-             icon: t.icon || "RiToolsLine" 
-          })) || [],
-          stats: (data.stats as any[])?.map(s => ({
-             label: s.label || "",
-             value: s.value || ""
-          })) || [],
+            })) || [],
+            careers: (data.careers as string[]) || [],
+            tools: (data.tools as any[])?.map(t => ({
+                name: t.name || "",
+                icon: t.icon || "RiToolsLine" 
+            })) || [],
+            stats: (data.stats as any[])?.map(s => ({
+                label: s.label || "",
+                value: s.value || ""
+            })) || [],
         });
       }
       setFetching(false);
@@ -85,10 +88,19 @@ export default function EditProgramPage() {
     const result = await updateProgram(id, formData);
 
     if (result.success) {
+      toast({
+        title: "Success",
+        message: "Program studi berhasil diperbarui.",
+        type: "success"
+      });
       router.push("/admin/programs");
       router.refresh();
     } else {
-      alert("Gagal memperbarui program studi: " + result.error);
+       toast({
+        title: "Error",
+        message: "Gagal memperbarui program studi: " + result.error,
+        type: "error"
+      });
       setLoading(false);
     }
   };

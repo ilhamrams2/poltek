@@ -8,8 +8,11 @@ import { updateNews, getNewsById } from "@/actions/cms";
 import { Save, ArrowLeft, Loader2, Globe, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 export default function EditNewsClient({ id }: { id: string }) {
   const router = useRouter();
+  const { toast } = useAdminUI();
   
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -49,10 +52,19 @@ export default function EditNewsClient({ id }: { id: string }) {
     const result = await updateNews(id, formData);
 
     if (result.success) {
+      toast({
+        title: "Success",
+        message: "Berita berhasil diperbarui.",
+        type: "success"
+      });
       router.push("/admin/news");
       router.refresh();
     } else {
-      alert("Gagal memperbarui berita: " + result.error);
+       toast({
+        title: "Error",
+        message: "Gagal memperbarui berita: " + result.error,
+        type: "error"
+      });
       setSubmitting(false);
     }
   };

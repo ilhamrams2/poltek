@@ -7,28 +7,47 @@ import Image from "next/image";
 import { deleteProgram } from "@/actions/cms";
 import { useRouter } from "next/navigation";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 interface ProgramsListProps {
   initialPrograms: any[];
 }
 
 export default function ProgramsList({ initialPrograms }: ProgramsListProps) {
   const router = useRouter();
+  const { confirm, toast } = useAdminUI();
   const [programs, setPrograms] = useState(initialPrograms);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Apakah Anda yakin ingin menghapus program studi "${title}"?`)) return;
+  const handleDelete = (id: string, title: string) => {
+    confirm({
+      title: "Hapus Program Studi?",
+      description: `Apakah Anda yakin ingin menghapus program "${title}"? Tindakan ini tidak dapat dibatalkan.`,
+      type: "danger",
+      confirmLabel: "Ya, Hapus",
+      cancelLabel: "Batal",
+      onConfirm: async () => {
+        setDeletingId(id);
+        const result = await deleteProgram(id);
 
-    setDeletingId(id);
-    const result = await deleteProgram(id);
-
-    if (result.success) {
-      setPrograms(programs.filter(p => p.id !== id));
-      router.refresh();
-    } else {
-      alert("Gagal menghapus program: " + result.error);
-    }
-    setDeletingId(null);
+        if (result.success) {
+          setPrograms((prev) => prev.filter((p) => p.id !== id));
+          toast({
+            title: "Deleted",
+            message: "Program studi berhasil dihapus.",
+            type: "success"
+          });
+          router.refresh();
+        } else {
+          toast({
+            title: "Error",
+            message: "Gagal menghapus program: " + result.error,
+            type: "error"
+          });
+        }
+        setDeletingId(null);
+      }
+    });
   };
 
   return (

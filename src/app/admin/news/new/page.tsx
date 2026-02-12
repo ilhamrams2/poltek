@@ -8,8 +8,11 @@ import { createNews } from "@/actions/cms";
 import { Save, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 export default function NewNewsPage() {
   const router = useRouter();
+  const { toast } = useAdminUI();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -45,10 +48,19 @@ export default function NewNewsPage() {
     const result = await createNews(formData);
 
     if (result.success) {
+      toast({
+        title: "Success",
+        message: "Berita berhasil dibuat.",
+        type: "success"
+      });
       router.push("/admin/news");
       router.refresh();
     } else {
-      alert("Gagal membuat berita: " + result.error);
+       toast({
+        title: "Error",
+        message: "Gagal membuat berita: " + result.error,
+        type: "error"
+      });
       setLoading(false);
     }
   };

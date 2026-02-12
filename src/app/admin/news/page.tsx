@@ -7,6 +7,7 @@ import { getNews, deleteNews } from "@/actions/cms";
 import { Plus, Edit, Trash2, Eye, Newspaper, Loader2, Search, Filter } from "lucide-react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { useAdminUI } from "@/providers/AdminUIProvider";
 
 interface NewsItem {
   id: string;
@@ -21,6 +22,7 @@ export default function NewsAdminPage() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const { confirm, toast } = useAdminUI();
 
   const fetchNews = useCallback(async () => {
     const data = await getNews();
@@ -43,15 +45,31 @@ export default function NewsAdminPage() {
     };
   }, []);
 
-  const handleDelete = async (id: string, title: string) => {
-    if (confirm(`Apakah Anda yakin ingin menghapus berita "${title}"?`)) {
-      const result = await deleteNews(id);
-      if (result.success) {
-        setNews(news.filter(item => item.id !== id));
-      } else {
-        alert("Gagal menghapus berita: " + result.error);
+  const handleDelete = (id: string, title: string) => {
+    confirm({
+      title: "Hapus Berita?",
+      description: `Apakah Anda yakin ingin menghapus berita "${title}"? Tindakan ini tidak dapat dibatalkan.`,
+      type: "danger",
+      confirmLabel: "Ya, Hapus",
+      cancelLabel: "Batal",
+      onConfirm: async () => {
+        const result = await deleteNews(id);
+        if (result.success) {
+          setNews((current) => current.filter(item => item.id !== id));
+          toast({
+            title: "Deleted",
+            message: "Berita berhasil dihapus.",
+            type: "success"
+          });
+        } else {
+          toast({
+            title: "Error",
+            message: "Gagal menghapus berita: " + result.error,
+            type: "error"
+          });
+        }
       }
-    }
+    });
   };
 
   const filteredNews = news.filter(n => 

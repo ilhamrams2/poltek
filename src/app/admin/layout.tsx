@@ -372,12 +372,16 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { AdminUIProvider } from "@/providers/AdminUIProvider";
+
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <AdminLayoutContent>{children}</AdminLayoutContent>
+    <AdminUIProvider>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </AdminUIProvider>
   );
 }

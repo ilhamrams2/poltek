@@ -17,6 +17,8 @@ import {
   Youtube
 } from "lucide-react";
 
+import { useAdminUI } from "@/providers/AdminUIProvider";
+
 interface GalleryItem {
   id: string;
   title: string;
@@ -34,6 +36,7 @@ export default function GalleryAdminPage() {
     videoUrl: "",
     description: "",
   });
+  const { confirm, toast } = useAdminUI();
 
   const fetchItems = useCallback(async () => {
     const data = await getGallery();
@@ -63,19 +66,46 @@ export default function GalleryAdminPage() {
     if (result.success) {
       setFormData({ title: "", videoUrl: "", description: "" });
       fetchItems();
+      toast({
+        title: "Success",
+        message: "Galeri berhasil ditambahkan.",
+        type: "success"
+      });
     } else {
-      alert("Gagal menambah galeri: " + result.error);
+      toast({
+        title: "Error",
+        message: "Gagal menambah galeri: " + result.error,
+        type: "error"
+      });
     }
     setSubmitting(false);
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm("Hapus video ini dari galeri?")) {
-      const result = await deleteGallery(id);
-      if (result.success) {
-        fetchItems();
+  const handleDelete = (id: string) => {
+    confirm({
+      title: "Hapus Video?",
+      description: "Apakah Anda yakin ingin menghapus video ini dari galeri?",
+      type: "danger",
+      confirmLabel: "Hapus",
+      cancelLabel: "Batal",
+      onConfirm: async () => {
+        const result = await deleteGallery(id);
+        if (result.success) {
+          fetchItems();
+          toast({
+            title: "Deleted",
+            message: "Video berhasil dihapus.",
+            type: "success"
+          });
+        } else {
+          toast({
+            title: "Error",
+            message: "Gagal menghapus video: " + result.error,
+            type: "error"
+          });
+        }
       }
-    }
+    });
   };
 
   return (
