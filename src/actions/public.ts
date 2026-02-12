@@ -40,3 +40,30 @@ export async function getAllProgramsMenu() {
     return { D3: [], D4: [], S1: [] };
   }
 }
+
+export async function submitContactForm(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  category?: string;
+  subject?: string;
+  message: string;
+}) {
+  try {
+    const contactMessage = await prisma.contactMessage.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        category: data.category,
+        subject: data.subject || "No Subject",
+        message: data.message,
+      },
+    });
+
+    return { success: true, data: contactMessage };
+  } catch (error) {
+    console.error("Error submitting contact form:", error);
+    return { success: false, error: "Gagal mengirim pesan. Silakan coba lagi nanti." };
+  }
+}

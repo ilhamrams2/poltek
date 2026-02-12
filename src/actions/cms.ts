@@ -337,3 +337,45 @@ export async function getAdminProfile() {
     return null;
   }
 }
+
+// INBOX ACTIONS
+export async function markMessageAsRead(id: string) {
+  try {
+    await checkRole(["SUPER_ADMIN"]);
+    await prisma.contactMessage.update({
+      where: { id },
+      data: { isRead: true },
+    });
+    revalidatePath("/admin/inbox");
+    return { success: true };
+  } catch (error) {
+    console.error("Error marking message as read:", error);
+    return { success: false, error: "Gagal memperbarui status pesan" };
+  }
+}
+
+export async function deleteMessage(id: string) {
+  try {
+    await checkRole(["SUPER_ADMIN"]);
+    await prisma.contactMessage.delete({
+      where: { id },
+    });
+    revalidatePath("/admin/inbox");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    return { success: false, error: "Gagal menghapus pesan" };
+  }
+}
+
+export async function clearMessages() {
+  try {
+    await checkRole(["SUPER_ADMIN"]);
+    await prisma.contactMessage.deleteMany({});
+    revalidatePath("/admin/inbox");
+    return { success: true };
+  } catch (error) {
+    console.error("Error clearing messages:", error);
+    return { success: false, error: "Gagal membersihkan kotak masuk" };
+  }
+}

@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
-import { Inbox, Mail, User, Clock, CheckCircle2, Search, Filter, Trash2 } from "lucide-react";
+import { Inbox, Mail, Clock, Trash2, HelpCircle } from "lucide-react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { MessageActions, ClearInboxButton } from "@/components/admin/InboxActions";
 
 async function getMessages() {
   return await prisma.contactMessage.findMany({
@@ -25,10 +26,7 @@ export default async function InboxPage() {
           <p className="text-slate-500 mt-1 font-bold uppercase tracking-widest text-[11px]">Kelola pesan dan pertanyaan dari publik</p>
         </div>
         <div className="flex items-center gap-3">
-            <div className="bg-white border border-slate-100 rounded-xl px-4 py-2.5 flex items-center gap-2 text-xs font-black text-slate-500 uppercase tracking-widest cursor-pointer hover:bg-slate-50 transition-colors">
-               <Trash2 size={14} className="text-rose-500" />
-               <span>Bersihkan Pesan</span>
-            </div>
+            <ClearInboxButton />
         </div>
       </div>
 
@@ -45,58 +43,100 @@ export default async function InboxPage() {
         </div>
       </div>
 
-      {/* Messages List Area */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-         {/* List View */}
-         <div className="lg:col-span-12 space-y-4">
-            {messages.map((msg) => (
-              <div key={msg.id} className={`bg-white p-6 rounded-[2rem] border ${msg.isRead ? 'border-slate-50 opacity-70' : 'border-orange-100 shadow-lg shadow-orange-500/5'} transition-all hover:scale-[1.01] cursor-pointer flex flex-col md:flex-row gap-6 items-start md:items-center`}>
-                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${msg.isRead ? 'bg-slate-50 text-slate-300' : 'bg-orange-50 text-orange-600'}`}>
-                    <Mail size={22} />
-                 </div>
-                 
-                 <div className="flex-1 space-y-1">
+      {/* Messages Table-like List area */}
+      <div className="bg-white rounded-[3.5rem] shadow-sm border border-slate-100 overflow-hidden relative">
+         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-transparent to-transparent opacity-10" />
+         
+         <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
+            <div className="flex gap-12">
+               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest min-w-[200px]">Sender Information</span>
+               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex-1">Message Content</span>
+               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest w-[120px] text-right">Timeline</span>
+            </div>
+         </div>
+
+         <div className="divide-y divide-slate-50">
+            {messages.map((m) => {
+              const msg = m as any;
+              return (
+              <div key={msg.id} className={`p-10 transition-all hover:bg-slate-50/50 flex gap-12 items-start relative group`}>
+                 {/* Selection / Status indicator */}
+                 {!msg.isRead && (
+                   <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-12 bg-orange-500 rounded-r-full shadow-[4px_0_15px_rgba(249,115,22,0.3)]" />
+                 )}
+
+                 {/* Sender Info Column */}
+                 <div className="min-w-[200px] space-y-3">
                     <div className="flex items-center gap-3">
-                       <h4 className="font-black text-slate-900 tracking-tight">{msg.name}</h4>
-                       <span className="text-[9px] font-black text-slate-400 bg-slate-50 px-2 py-0.5 rounded uppercase tracking-tighter italic">{msg.email}</span>
-                       {!msg.isRead && (
-                          <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-                       )}
+                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${msg.isRead ? 'bg-slate-100 text-slate-400' : 'bg-orange-50 text-orange-600'}`}>
+                          <Mail size={18} strokeWidth={2.5} />
+                       </div>
+                       <div>
+                          <h4 className="font-black text-slate-900 tracking-tight text-sm">{msg.name}</h4>
+                          <p className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mt-0.5">{msg.category || "General Query"}</p>
+                       </div>
                     </div>
-                    <p className="text-slate-500 text-sm font-medium line-clamp-1 italic">
-                       {msg.subject || "No Subject"} - <span className="text-slate-400 font-normal">{msg.message}</span>
+                    <div className="space-y-1.5 pl-1.5">
+                       <p className="text-[10px] font-bold text-slate-400 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-slate-200" />
+                          {msg.email}
+                       </p>
+                       <p className="text-[10px] font-bold text-slate-400 flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-slate-200" />
+                          {msg.phone || "No Phone"}
+                       </p>
+                    </div>
+                 </div>
+
+                 {/* Message Content Column */}
+                 <div className="flex-1 space-y-3">
+                    <div className="flex items-center gap-2">
+                       <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter ${msg.isRead ? 'bg-slate-100 text-slate-400' : 'bg-orange-500 text-white shadow-lg shadow-orange-500/20'}`}>
+                          {msg.isRead ? 'Archived' : 'New Priority'}
+                       </span>
+                       <h5 className="font-bold text-slate-800 text-sm tracking-tight">{msg.subject || "No Subject"}</h5>
+                    </div>
+                    <p className="text-slate-500 text-xs font-medium leading-[1.6] line-clamp-3">
+                       {msg.message}
                     </p>
                  </div>
 
-                 <div className="flex flex-col items-end gap-2 shrink-0">
-                    <div className="flex items-center gap-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                       <Clock size={12} />
-                       {format(msg.createdAt, 'dd MMM yyyy', { locale: id })}
+                 {/* Timeline & Actions Column */}
+                 <div className="w-[150px] flex flex-col items-end gap-4">
+                    <div className="text-right">
+                       <p className="text-[10px] font-black text-slate-900 tracking-wider">
+                          {format(msg.createdAt, 'dd MMMM yyyy', { locale: id })}
+                       </p>
+                       <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mt-1">
+                          {format(msg.createdAt, 'HH:mm', { locale: id })} WIB
+                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <button className="p-2 bg-slate-50 text-slate-400 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all">
-                           <CheckCircle2 size={16} />
-                        </button>
-                        <button className="p-2 bg-slate-50 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all">
-                           <Trash2 size={16} />
-                        </button>
+                    
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                       <MessageActions id={msg.id} isRead={msg.isRead} />
                     </div>
                  </div>
               </div>
-            ))}
-
-            {messages.length === 0 && (
-              <div className="py-32 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center space-y-4">
-                 <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-slate-200 shadow-sm">
-                    <Mail size={32} />
-                 </div>
-                 <div>
-                    <p className="text-slate-400 font-black text-sm uppercase tracking-widest italic">Belum ada pesan masuk.</p>
-                    <p className="text-slate-400 text-xs font-medium mt-1 italic">Semua pesan dari form kontak akan muncul di sini.</p>
-                 </div>
-              </div>
-            )}
+              );
+            })}
          </div>
+
+         {messages.length === 0 && (
+            <div className="py-40 flex flex-col items-center justify-center gap-6">
+               <div className="relative">
+                  <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center text-slate-200">
+                    <Inbox size={48} strokeWidth={1} />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white shadow-xl rounded-2xl flex items-center justify-center">
+                     <HelpCircle size={20} className="text-slate-300" />
+                  </div>
+               </div>
+               <div className="text-center">
+                  <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest">Inbox Zero</h3>
+                  <p className="text-slate-400 text-xs font-bold mt-1 uppercase tracking-tighter">Semua pesan dari form kontak akan muncul di sini</p>
+               </div>
+            </div>
+         )}
       </div>
     </div>
   );

@@ -3,10 +3,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { RiFacebookFill, RiInstagramLine, RiYoutubeFill, RiArrowRightLine, RiMapPin2Line, RiMailLine, RiPhoneLine } from "react-icons/ri";
+import { RiFacebookFill, RiInstagramLine, RiYoutubeFill, RiArrowRightLine, RiMapPin2Line, RiMailLine, RiPhoneLine, RiLoader4Line, RiCheckboxCircleLine } from "react-icons/ri";
 import { MENU } from "@/data/menu";
+import { useState } from "react";
+import { submitContactForm } from "@/actions/public";
 
 export default function Footer() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const message = formData.get("message") as string;
+
+    const result = await submitContactForm({
+      name,
+      email,
+      phone,
+      subject: "Footer Inquiry",
+      message: message,
+      category: "Pertanyaan", 
+    });
+
+    setLoading(false);
+    if (result.success) {
+      setSuccess(true);
+      (e.target as HTMLFormElement).reset();
+      setTimeout(() => setSuccess(false), 5000);
+    } else {
+      setError(result.error || "Gagal mengirim pesan.");
+    }
+  };
+
   return (
     <footer className="relative bg-[#080C1B] text-gray-400 overflow-hidden font-sans">
       {/* Decorative Background Elements */}
@@ -76,6 +112,12 @@ export default function Footer() {
                      <RiMailLine />
                   </div>
                    <span>politeknik@prestasiprima.ac.id</span>
+               </div>
+               <div className="flex items-center gap-4 text-xs font-bold group cursor-pointer hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-[#F15A24] group-hover:bg-[#F15A24] group-hover:text-white transition-all">
+                     <RiPhoneLine />
+                  </div>
+                   <span>+62 813 8000 8079</span>
                </div>
             </div>
 
@@ -160,24 +202,56 @@ export default function Footer() {
                  </Link>
               </div>
 
-              <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                  <input 
+                   name="name"
                    type="text" 
+                   required
                    placeholder="Full Name" 
-                   className="col-span-2 sm:col-span-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-[#F15A24] focus:ring-1 focus:ring-[#F15A24] transition-all"
+                   className="col-span-2 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-[#F15A24] focus:ring-1 focus:ring-[#F15A24] transition-all"
                  />
                  <input 
+                   name="email"
                    type="email" 
+                   required
                    placeholder="Email Address" 
                    className="col-span-2 sm:col-span-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-[#F15A24] focus:ring-1 focus:ring-[#F15A24] transition-all"
                  />
+                 <input 
+                   name="phone"
+                   type="tel" 
+                   required
+                   placeholder="Phone Number" 
+                   className="col-span-2 sm:col-span-1 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-[#F15A24] focus:ring-1 focus:ring-[#F15A24] transition-all"
+                 />
                  <textarea 
+                   name="message"
+                   required
                    placeholder="Your Message..." 
                    rows={3}
                    className="col-span-2 bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-sm focus:outline-none focus:border-[#F15A24] focus:ring-1 focus:ring-[#F15A24] transition-all"
                  />
-                 <button className="col-span-2 bg-[#F15A24] text-white py-5 rounded-xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/20 hover:bg-orange-600 transition-all">
-                    Send Inquiry
+                 
+                 {error && <p className="col-span-2 text-red-500 text-xs font-bold px-2">{error}</p>}
+                 {success && (
+                   <div className="col-span-2 flex items-center gap-2 text-emerald-500 text-xs font-bold px-2 animate-fade-in">
+                     <RiCheckboxCircleLine className="text-lg" />
+                     <span>Pesan Anda berhasil terkirim!</span>
+                   </div>
+                 )}
+
+                 <button 
+                   disabled={loading}
+                   className="col-span-2 bg-[#F15A24] text-white py-5 rounded-xl font-black text-xs uppercase tracking-widest shadow-2xl shadow-[#F15A24]/20 hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                 >
+                    {loading ? (
+                      <>
+                        <RiLoader4Line className="text-xl animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      "Send Inquiry"
+                    )}
                  </button>
               </form>
            </div>

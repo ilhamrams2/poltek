@@ -1,5 +1,5 @@
-import React from "react";
 import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import ContactForm from "@/components/sections/ContactForm";
 
 export default function ContactPage() {
   return (
@@ -24,75 +24,7 @@ export default function ContactPage() {
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-stretch">
-
-        {/* Form */}
-        <div className="bg-white border border-gray-200 shadow-xl rounded-3xl p-6 sm:p-8 h-full animate-fade-up">
-          <h3 className="text-2xl font-bold mb-6 border-b pb-3 border-gray-200">Kirim Pesan</h3>
-
-          <form className="space-y-5">
-            <div>
-              <label className="block font-semibold mb-2">Nama Lengkap</label>
-              <input
-                type="text"
-                placeholder="Masukkan nama anda"
-                className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:ring-2 focus:ring-[#5320C0] outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="Masukkan email aktif"
-                className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:ring-2 focus:ring-[#5320C0] outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2">Nomor Telepon</label>
-              <input
-                type="tel"
-                placeholder="Masukkan nomor telepon"
-                className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:ring-2 focus:ring-[#5320C0] outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2">Kategori Pesan</label>
-              <select className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:ring-2 focus:ring-[#5320C0] outline-none">
-                <option value="">-- Pilih kategori --</option>
-                <option value="pertanyaan">Pertanyaan</option>
-                <option value="kerjasama">Kerja Sama</option>
-                <option value="pengaduan">Pengaduan</option>
-                <option value="lainnya">Lainnya</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block font-semibold mb-2">Pesan</label>
-              <textarea
-                rows={5}
-                placeholder="Tuliskan pesan anda"
-                className="w-full p-3 rounded-xl bg-gray-50 border border-gray-300 focus:ring-2 focus:ring-[#5320C0] outline-none"
-              ></textarea>
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                type="submit"
-                className="w-full py-3 bg-[#FF6700] hover:bg-[#d45700] text-white text-lg font-semibold rounded-xl shadow-lg transition-all hover:-translate-y-1"
-              >
-                Kirim Sekarang
-              </button>
-              <button
-                type="reset"
-                className="w-1/3 py-3 border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-xl font-semibold"
-              >
-                Reset
-              </button>
-            </div>
-          </form>
-        </div>
+        <ContactForm />
 
         {/* Contact Info */}
         <div className="bg-gradient-to-br from-[#5320C0] to-[#7D42FD] rounded-3xl shadow-2xl p-8 sm:p-10 relative overflow-hidden animate-fade-up delay-300">
@@ -130,13 +62,13 @@ export default function ContactPage() {
             <div>
               <h4 className="text-lg font-semibold mb-3">Ikuti Kami</h4>
               <div className="flex items-center gap-4">
-                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition shadow-lg cursor-pointer">
                   <FaFacebookF />
                 </a>
-                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition shadow-lg cursor-pointer">
                   <FaInstagram />
                 </a>
-                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                <a className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition shadow-lg cursor-pointer">
                   <FaYoutube />
                 </a>
               </div>
@@ -146,7 +78,9 @@ export default function ContactPage() {
             <div className="pt-4">
               <a
                 href="https://wa.me/6281380008079"
-                className="block w-full text-center bg-white text-[#5320C0] font-semibold py-3 rounded-xl shadow-md hover:bg-gray-100 transition"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-white text-[#5320C0] font-semibold py-4 rounded-xl shadow-md hover:bg-gray-100 transition active:scale-95"
               >
                 Hubungi via WhatsApp
               </a>

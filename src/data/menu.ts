@@ -93,6 +93,7 @@ export const MENU: MenuItem[] = [
     items: [
       { label: "Biaya Kuliah", url: "/biaya" },
       { label: "Syarat Pendaftaran", url: "/syarat" },
+      { label: "Hubungi Kami", url: "/contact" },
     ],
   },
 
