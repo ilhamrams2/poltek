@@ -172,64 +172,82 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       {/* SIDEBAR */}
       <aside 
         className={`${
-          isSidebarOpen ? "w-72" : "w-0"
-        } bg-white transition-all duration-300 ease-in-out flex flex-col relative z-30 border-r border-slate-100`}
+          isSidebarOpen ? "w-80" : "w-24"
+        } bg-white transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) flex flex-col relative z-30 border-r border-slate-100 overflow-hidden shrink-0 group/sidebar`}
       >
         {/* Sidebar Header */}
-        <div className="p-8 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#4338CA] to-orange-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 relative group">
-               <GraduationCap size={24} className="text-white" />
-               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
-                  <div className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse"></div>
+        <div className={`p-6 ${isSidebarOpen ? "pb-4" : "pb-6 flex justify-center"}`}>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-purple to-brand-orange flex items-center justify-center shadow-xl shadow-brand-purple/20 relative shrink-0">
+               <GraduationCap size={26} className="text-white" />
+               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                </div>
             </div>
             {isSidebarOpen && (
-              <div className="flex flex-col">
-                <span className="font-extrabold text-xl tracking-tight leading-none text-slate-900">
-                  Admin<span className="text-orange-500">PP</span>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex flex-col whitespace-nowrap"
+              >
+                <span className="font-black text-xl tracking-tight leading-none text-brand-dark">
+                  Admin<span className="text-brand-orange">PP</span>
                 </span>
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Portal Management</span>
-              </div>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1 opacity-70">Portal Management</span>
+              </motion.div>
             )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto custom-scrollbar">
+        <nav className="flex-1 px-4 py-8 space-y-10 overflow-y-auto custom-scrollbar overflow-x-hidden">
           {sidebarCategories.map((category) => (
             <div key={category.label} className="space-y-4">
-              {isSidebarOpen && (
-                <h3 className="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{category.label}</h3>
+              {isSidebarOpen ? (
+                <h3 className="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] opacity-80">{category.label}</h3>
+              ) : (
+                <div className="flex justify-center">
+                  <div className="w-8 h-[2px] bg-slate-100 rounded-full" />
+                </div>
               )}
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {category.items.map((item) => {
                   const isActive = pathname === item.href;
                   
                   return (
-                    <div key={item.name} className="space-y-1">
-                      <Link
-                        href={item.href}
-                        target={item.external ? "_blank" : undefined}
-                        className={`group flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all duration-300 relative ${
-                          isActive
-                            ? "bg-gradient-to-r from-indigo-50 to-orange-50 text-[#4338CA] border border-orange-100 shadow-md shadow-orange-500/5 ring-1 ring-orange-200"
-                            : "text-slate-500 hover:bg-slate-50 hover:text-[#4338CA]"
-                        }`}
-                      >
-                        <div className={`${isActive ? "text-[#4338CA]" : "text-slate-400 group-hover:text-indigo-500"}`}>
-                          <item.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      className={`group flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 relative ${
+                        isActive
+                          ? "bg-slate-900 text-white shadow-xl shadow-slate-900/20"
+                          : "text-slate-500 hover:bg-slate-50 hover:text-brand-purple"
+                      } ${!isSidebarOpen ? "justify-center" : ""}`}
+                    >
+                      <div className={`${isActive ? "text-brand-orange" : "text-slate-400 group-hover:text-brand-purple"} transition-colors shrink-0`}>
+                        <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                      </div>
+                      
+                      {isSidebarOpen && (
+                        <span className={`font-bold text-[13px] whitespace-nowrap ${isActive ? "text-white" : "text-slate-600 group-hover:text-brand-purple"}`}>
+                          {item.name}
+                        </span>
+                      )}
+
+                      {!isSidebarOpen && (
+                        <div className="absolute left-full ml-4 px-3 py-1.5 bg-brand-dark text-white text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all z-[100] whitespace-nowrap">
+                           {item.name}
                         </div>
-                        {isSidebarOpen && (
-                          <span className={`flex-1 font-bold text-[13px] ${isActive ? "text-slate-900" : ""}`}>
-                            {item.name}
-                          </span>
-                        )}
-                        {isActive && isSidebarOpen && (
-                          <div className={`absolute left-0 w-1.5 h-6 bg-gradient-to-b from-[#4338CA] to-orange-500 rounded-r-full shadow-lg`} />
-                        )}
-                      </Link>
-                    </div>
+                      )}
+
+                      {isActive && isSidebarOpen && (
+                        <motion.div 
+                          layoutId="activeTab"
+                          className="absolute right-4 w-1.5 h-1.5 bg-brand-orange rounded-full" 
+                        />
+                      )}
+                    </Link>
                   );
                 })}
               </div>
@@ -241,34 +259,63 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
         <div className="p-4 border-t border-slate-50">
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-5 py-4 text-slate-400 hover:bg-rose-50 hover:text-rose-600 rounded-2xl transition-all duration-300 font-bold group"
+            className={`flex items-center gap-4 w-full px-5 py-4 text-slate-400 hover:bg-rose-50 hover:text-rose-600 rounded-2xl transition-all duration-300 font-bold group ${!isSidebarOpen ? "justify-center" : ""}`}
           >
-            <LogOut size={20} className="text-slate-400 group-hover:text-rose-600" />
+            <LogOut size={22} className="text-slate-400 group-hover:text-rose-600 shrink-0" />
             {isSidebarOpen && (
               <span className="text-[13px] font-bold">Keluar Panel</span>
+            )}
+            {!isSidebarOpen && (
+              <div className="absolute left-full ml-4 px-3 py-1.5 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all z-[100] whitespace-nowrap">
+                 Logout
+              </div>
             )}
           </button>
         </div>
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
         
         {/* Top Header */}
-        <header className={`h-22 px-10 flex items-center justify-between z-20 bg-white/70 backdrop-blur-xl border-b border-slate-50`}>
-          <div className="flex items-center gap-4">
-             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-3 hover:bg-slate-100 rounded-2xl text-slate-400 transition-all flex items-center justify-center active:scale-90">
-                <Menu size={20} />
+        <header className="h-24 px-10 flex items-center justify-between z-20 bg-white/80 backdrop-blur-2xl border-b border-slate-100 shrink-0">
+          <div className="flex items-center gap-6">
+             <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+              className="w-12 h-12 flex items-center justify-center bg-slate-50 hover:bg-slate-100 rounded-2xl text-slate-500 transition-all active:scale-95 group"
+             >
+                <div className="relative">
+                   <motion.div
+                     animate={isSidebarOpen ? { rotate: 0 } : { rotate: 180 }}
+                     transition={{ duration: 0.5 }}
+                   >
+                     {isSidebarOpen ? <Layers size={20} className="group-hover:text-brand-purple transition-colors" /> : <Menu size={20} className="group-hover:text-brand-orange transition-colors" />}
+                   </motion.div>
+                </div>
              </button>
-             <div>
-                <h1 className="text-lg font-black text-slate-900 leading-none tracking-tight">{currentTitle.title}</h1>
-                <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter opacity-70">{currentTitle.subtitle}</p>
+             
+             <div className="flex flex-col">
+                <h1 className="text-xl font-black text-brand-dark leading-tight tracking-tight">{currentTitle.title}</h1>
+                <div className="flex items-center gap-2 mt-1">
+                   <div className="w-1.5 h-1.5 bg-brand-orange rounded-full animate-pulse" />
+                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest opacity-80">{currentTitle.subtitle}</p>
+                </div>
              </div>
           </div>
 
-          <div className="flex items-center gap-6">
-             <Notifications />
-             <UserDropdown admin={admin} onLogout={handleLogout} />
+          <div className="flex items-center gap-8">
+             <div className="hidden lg:flex items-center gap-4 px-4 py-2 bg-slate-50 rounded-2xl border border-slate-100">
+                <Search size={16} className="text-slate-400" />
+                <input 
+                  type="text" 
+                  placeholder="Cari fitur..." 
+                  className="bg-transparent border-none outline-none text-xs font-bold text-slate-600 placeholder:text-slate-300 w-48"
+                />
+             </div>
+             <div className="flex items-center gap-4">
+               <Notifications />
+               <UserDropdown admin={admin} onLogout={handleLogout} />
+             </div>
           </div>
         </header>
 
