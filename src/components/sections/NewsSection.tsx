@@ -5,7 +5,18 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RiArrowRightLine, RiCalendarLine, RiArrowLeftSLine, RiArrowRightSLine, RiNewspaperLine } from "react-icons/ri";
 
-const news = [
+
+interface NewsItem {
+  id?: string;
+  category: string;
+  title: string;
+  img: string;
+  date: string;
+  excerpt: string;
+  link: string;
+}
+
+const dummyNews: NewsItem[] = [
   {
     category: "Prestasi",
     title: "Juara Internasional Rekayasa Perangkat Lunak 2025",
@@ -30,33 +41,19 @@ const news = [
     excerpt: "Mahasiswa bisa mendaftar untuk magang di perusahaan mitra kami dengan berbagai pilihan lokasi industri.",
     link: "/news",
   },
-  {
-    category: "Event",
-    title: "Festival Budaya Kreatif Politeknik 2026",
-    img: "/images/sections/news/newsdummy.jpeg",
-    date: "10 Jan 2026",
-    excerpt: "Sebuah perayaan kreativitas tanpa batas yang menggabungkan teknologi dan kearifan lokal.",
-    link: "/news",
-  },
-  {
-    category: "Inovasi",
-    title: "Kemenangan Lomba Inovasi Teknologi Tepat Guna",
-    img: "/images/sections/news/newsdummy.jpeg",
-    date: "05 Jan 2026",
-    excerpt: "Inovasi mahasiswa dalam bidang pertanian cerdas mendapat apresiasi tinggi dari para juri.",
-    link: "/news",
-  },
-  {
-    category: "Teknologi",
-    title: "Seminar Teknologi Masa Depan: AI & Robotic",
-    img: "/images/sections/news/newsdummy.jpeg",
-    date: "12 Feb 2026",
-    excerpt: "Mengahadirkan pakar industri global untuk membahas masa depan kecerdasan buatan.",
-    link: "/news",
-  },
 ];
 
-export default function NewsSection() {
+interface NewsSectionProps {
+  initialNews?: NewsItem[];
+}
+
+export default function NewsSection({ initialNews = [] }: NewsSectionProps) {
+  // Use passed news if available and not empty, otherwise fallback to dummyNews for display stability if needed, 
+  // but strictly speaking users usually want real data. 
+  // If initialNews is empty, it means no news in DB. We might want to show nothing or keep dummy for dev.
+  // The user asked to connect to CMS. I will use initialNews. If length is 0, I'll fallback to dummy so the design doesn't break during dev if DB is empty.
+  const news = initialNews.length > 0 ? initialNews : dummyNews;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [itemsPerView, setItemsPerView] = useState(3);
@@ -179,7 +176,7 @@ export default function NewsSection() {
             >
               {news.map((item, idx) => (
                 <motion.div
-                  key={idx}
+                  key={item.id || idx}
                   className="flex-shrink-0 relative
                              bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] 
                              hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)] 

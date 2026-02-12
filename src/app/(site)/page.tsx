@@ -9,7 +9,13 @@ import NewsSection from "@/components/sections/NewsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection";
 
-export default function Home() {
+import { getLatestNews } from "@/actions/public";
+
+export const revalidate = 60;
+
+export default async function Home() {
+  const latestNews = await getLatestNews();
+
   return (
     <main className="min-h-screen w-full">
       
@@ -38,7 +44,7 @@ export default function Home() {
       <VirtualTourSection />
 
       {/* 8. Berita Terbaru */}
-      <NewsSection />
+      <NewsSection initialNews={latestNews} />
 
       {/* 9. FAQ */}
       <FAQSection />
