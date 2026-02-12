@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Editor from "@/components/cms/Editor";
+import MediaUpload from "@/components/cms/MediaUpload";
 import { createNews } from "@/actions/cms";
 import { Save, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -128,23 +129,11 @@ export default function NewNewsPage() {
            <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 space-y-6">
               <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest border-b border-slate-50 pb-4">Pengaturan Media</h3>
               <div className="space-y-4">
-                 <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">URL Gambar Utama</label>
-                    <input
-                      type="text"
-                      value={formData.image}
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                      placeholder="https://..."
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border-transparent focus:bg-white border focus:border-orange-200 outline-none transition-all font-bold text-xs"
-                    />
-                 </div>
-                 <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-200">
-                    {formData.image ? (
-                       <img src={formData.image} className="w-full h-full object-cover" alt="Preview" />
-                    ) : (
-                       <div className="w-full h-full flex items-center justify-center text-slate-300 italic text-[10px] font-black uppercase">Preview Media</div>
-                    )}
-                 </div>
+                 <MediaUpload 
+                   label="Gambar Utama Berita"
+                   value={formData.image}
+                   onChange={(url) => setFormData({ ...formData, image: url })}
+                 />
               </div>
            </div>
 

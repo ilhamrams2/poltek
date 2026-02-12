@@ -148,24 +148,29 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
 
       {/* 2. STATS BAR - High-End Glassmorphism */}
       <section className="relative z-20 py-10 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 p-12 bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-3xl">
-           {data.stats.map((stat, i) => (
-             <div key={i} className="flex-1 min-w-[150px] text-center lg:text-left">
-                <div className="text-xs font-black text-[#F15A24] uppercase tracking-widest mb-2 opacity-60">{stat.label}</div>
-                <div className="text-4xl lg:text-6xl font-black tracking-tighter">{stat.value}</div>
+      <section className="relative z-20 py-10 px-6">
+        <div className="max-w-7xl mx-auto p-12 bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-3xl">
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 items-center">
+             {data.stats.map((stat, i) => (
+               <div key={i} className="text-center lg:text-left overflow-hidden">
+                  <div className="text-[10px] md:text-xs font-black text-[#F15A24] uppercase tracking-widest mb-2 opacity-60 truncate">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter break-words leading-tight">{stat.value}</div>
+               </div>
+             ))}
+             
+             {/* Accredited Badge - Auto fitted in grid */}
+             <div className="flex items-center justify-center lg:justify-end gap-4 col-span-2 md:col-span-1 pl-0 md:pl-8 border-t-2 md:border-t-0 md:border-l-2 border-white/5 pt-8 md:pt-0">
+                <div className="text-right hidden xl:block">
+                   <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Accredited by</div>
+                   <div className="text-xs font-black text-white">BAN-PT / LAM</div>
+                </div>
+                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl shrink-0">
+                   <RiIcons.RiShieldStarLine />
+                </div>
              </div>
-           ))}
-           <div className="hidden lg:block w-[1px] h-20 bg-white/10 self-center" />
-           <div className="flex-1 flex items-center justify-center lg:justify-end gap-6">
-              <div className="text-right hidden md:block">
-                 <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">Accredited by</div>
-                 <div className="text-sm font-black text-white">BAN-PT / LAM</div>
-              </div>
-              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-3xl">
-                 <RiIcons.RiShieldStarLine />
-              </div>
            </div>
         </div>
+      </section>
       </section>
 
       {/* 3. EXPERIENCE SECTION - Unique Horizontal Stack */}
@@ -178,9 +183,10 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
                   Explorasi <br /> <span className="text-[#F15A24]">Potensi</span> <br /> Anda
                 </h2>
                 <div className="w-20 h-2 bg-[#F15A24] rounded-full mb-10" />
-                <p className="text-gray-400 text-xl font-medium leading-relaxed">
-                   {data.longDescription}
-                </p>
+                <div 
+                   className="text-gray-400 text-xl font-medium leading-relaxed prose prose-invert max-w-none prose-p:my-4 prose-ul:ml-6 prose-ul:list-disc prose-li:text-gray-400"
+                   dangerouslySetInnerHTML={{ __html: data.longDescription }}
+                />
               </div>
             </div>
 
@@ -198,12 +204,15 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
                       <IconComp className="text-[12rem]" />
                     </div>
                     
-                    <div className="w-24 h-24 rounded-3xl bg-[#F15A24] text-white flex items-center justify-center text-5xl shadow-2xl shadow-[#F15A24]/30 relative z-10">
+                    <div className="w-24 h-24 rounded-3xl bg-[#F15A24] text-white flex items-center justify-center text-5xl shadow-2xl shadow-[#F15A24]/30 relative z-10 shrink-0">
                        <IconComp />
                     </div>
                     <div className="relative z-10 text-center md:text-left flex-1">
                        <h4 className="text-2xl font-black mb-4 group-hover:text-[#F15A24] transition-colors">{comp.title}</h4>
-                       <p className="text-gray-400 font-medium leading-relaxed">{comp.desc}</p>
+                       <div 
+                         className="text-gray-400 font-medium leading-relaxed prose prose-invert max-w-none text-sm md:text-base prose-p:my-2 prose-strong:text-white prose-ul:list-disc prose-ul:pl-4"
+                         dangerouslySetInnerHTML={{ __html: comp.desc }}
+                       />
                     </div>
                   </motion.div>
                 );
@@ -310,8 +319,14 @@ export default function ProgramDetailTemplate({ data }: { data: ProgramDetail })
                   <Link href="https://wa.me/6285199328825" className="w-full sm:w-auto bg-white text-[#0E1333] px-16 py-8 rounded-full font-black text-xs uppercase tracking-[0.3em] shadow-[0_20px_60px_rgba(255,255,255,0.1)] hover:scale-105 transition-all">
                     Register Now
                   </Link>
-                  <Link href="/facility-tour" className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-4 hover:gap-8 transition-all group">
-                     Virtual Tour <FiArrowRight className="text-[#F15A24] text-2xl" />
+                  <Link href="/facility-tour" className="group relative px-10 py-6 rounded-full border border-white/20 bg-white/5 backdrop-blur-md overflow-hidden hover:border-[#F15A24] hover:shadow-[0_0_40px_rgba(241,90,36,0.6)] transition-all duration-500">
+                     <div className="absolute inset-0 bg-gradient-to-r from-[#F15A24] to-[#FF8A00] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+                     <span className="relative z-10 text-white font-black text-xs uppercase tracking-[0.3em] flex items-center gap-4 group-hover:gap-6 transition-all duration-300">
+                        Virtual Tour 
+                        <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-[#F15A24] group-hover:-rotate-45 transition-all duration-500">
+                           <FiArrowRight className="text-lg" />
+                        </span>
+                     </span>
                   </Link>
                </div>
             </motion.div>

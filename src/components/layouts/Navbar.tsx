@@ -4,11 +4,68 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { RiArrowDownSLine, RiArrowRightSLine } from "react-icons/ri";
-import { MENU } from "@/data/menu";
-import { useState } from "react";
+import { MENU, MenuItem } from "@/data/menu";
+import { useState, useEffect } from "react";
+import { getAllProgramsMenu } from "@/actions/public";
 
 export default function Navbar() {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const [dynamicMenu, setDynamicMenu] = useState<MenuItem[]>(MENU);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      const programs = await getAllProgramsMenu();
+      
+      setDynamicMenu(prevMenu => {
+        return prevMenu.map(item => {
+          if (item.id === "akademik") {
+            const newSubgroups = [];
+            
+            // Map D3 Programs
+            if (programs.D3.length > 0) {
+              newSubgroups.push({
+                title: "Program D3",
+                items: programs.D3.map(p => ({
+                  label: p.title,
+                  url: `/program/${p.slug}`
+                }))
+              });
+            }
+            
+            // Map D4 Programs
+            if (programs.D4.length > 0) {
+              newSubgroups.push({
+                title: "Program D4",
+                items: programs.D4.map(p => ({
+                  label: p.title,
+                  url: `/program/${p.slug}`
+                }))
+              });
+            }
+
+            // Map S1 Programs (if any)
+            if (programs.S1.length > 0) {
+              newSubgroups.push({
+                title: "Program S1",
+                items: programs.S1.map(p => ({
+                  label: p.title,
+                  url: `/program/${p.slug}`
+                }))
+              });
+            }
+
+            return {
+              ...item,
+              subgroups: newSubgroups.length > 0 ? newSubgroups : item.subgroups
+            };
+          }
+          return item;
+        });
+      });
+    };
+
+    fetchPrograms();
+  }, []);
 
   return (
     <nav className="relative z-[100] px-6 lg:px-12 py-5 bg-transparent">
@@ -42,7 +99,7 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {MENU.map((menu) => (
+          {dynamicMenu.map((menu) => (
             <li 
               key={menu.id} 
               className="relative"

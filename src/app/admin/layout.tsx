@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme, ThemeProvider } from "@/components/ThemeProvider";
 import { 
   LayoutDashboard, 
   Newspaper, 
@@ -23,13 +22,15 @@ import {
   FileText,
   Globe,
   HelpCircle,
-  Plus
+  Plus,
+  AlertCircle
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { createClient } from "@/lib/supabase-browser";
 import { useRouter } from "next/navigation";
+import { getAdminProfile } from "@/actions/cms";
 
 const sidebarCategories = [
   {
@@ -54,18 +55,49 @@ const sidebarCategories = [
   }
 ];
 
+const pageTitles: Record<string, { title: string, subtitle: string }> = {
+  "/admin/dashboard": { title: "Dashboard Overview", subtitle: "Selamat datang kembali, Admin!" },
+  "/admin/news": { title: "News Management", subtitle: "Kelola informasi dan berita terbaru" },
+  "/admin/news/new": { title: "Buat Berita", subtitle: "Tulis warta baru untuk publik" },
+  "/admin/programs": { title: "Program Studies", subtitle: "Manajemen kurikulum prodi" },
+  "/admin/programs/new": { title: "Tambah Prodi", subtitle: "Konfigurasi program studi baru" },
+  "/admin/gallery": { title: "Media Gallery", subtitle: "Koleksi foto dan video kegiatan" },
+  "/admin/inbox": { title: "Inbox Messages", subtitle: "Pesan dari pengunjung website" },
+  "/admin/audit": { title: "Audit Logs", subtitle: "Rekam jejak aktivitas sistem" },
+  "/admin/settings": { title: "System Settings", subtitle: "Konfigurasi parameter aplikasi" },
+};
+
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  
+  // Get active title
+  const activePage = Object.entries(pageTitles).find(([route]) => pathname.startsWith(route));
+  const currentTitle = activePage ? activePage[1] : { title: "Admin Panel", subtitle: "Portal Management" };
+
   const [supabase, setSupabase] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [admin, setAdmin] = useState<any>(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
   const [openMenus, setOpenMenus] = useState<string[]>(["Akademik"]);
 
-  // Initialize Supabase client only on the client side
   useEffect(() => {
     setSupabase(createClient());
+    
+    // Fetch Admin Profile
+    const fetchProfile = async () => {
+      try {
+        const profile = await getAdminProfile();
+        setAdmin(profile);
+      } catch (err) {
+        console.error("Failed to fetch admin profile:", err);
+      } finally {
+        setLoadingProfile(false);
+      }
+    };
+    fetchProfile();
   }, []);
 
   const toggleMenu = (name: string) => {
@@ -263,8 +295,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                 <Menu size={20} />
              </button>
              <div>
-                <h1 className="text-xl font-bold text-slate-800 leading-none">Dashboard Overview</h1>
-                <p className="text-[10px] font-medium text-slate-400 mt-1">Selamat datang kembali, Admin!</p>
+                <h1 className="text-xl font-bold text-slate-800 leading-none">{currentTitle.title}</h1>
+                <p className="text-[10px] font-medium text-slate-400 mt-1">{currentTitle.subtitle}</p>
              </div>
           </div>
 
@@ -276,21 +308,41 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
              <div className="flex items-center gap-4 pl-4 border-l border-slate-100">
                 <div className="flex flex-col items-end">
-                   <span className="text-sm font-bold text-slate-900 leading-none">Super Admin</span>
-                   <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mt-1">SUPER ADMIN</span>
+                   <span className="text-sm font-bold text-slate-900 leading-none">
+                     {loadingProfile ? "Loading..." : (admin?.name || admin?.email?.split('@')[0] || "Guest")}
+                   </span>
+                   <span className={`text-[9px] font-black uppercase tracking-widest mt-1 ${admin?.role === 'SUPER_ADMIN' ? 'text-indigo-600' : 'text-slate-400'}`}>
+                     {loadingProfile ? "Checking role..." : (admin?.role || "GUEST ACCESS")}
+                   </span>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4338CA] via-indigo-600 to-orange-500 flex items-center justify-center font-black text-white shadow-lg shadow-indigo-500/20 text-sm">
-                   S
+                   {loadingProfile ? "?" : (admin?.name?.[0] || admin?.email?.[0] || "G").toUpperCase()}
                 </div>
              </div>
           </div>
         </header>
 
-        {/* Scrollable Workspace */}
-        <main className={`flex-1 overflow-y-auto px-10 py-6 custom-scrollbar bg-[#FDFDFD]`}>
-           <div className="max-w-[1600px] mx-auto">
-             {children}
-           </div>
+         <main className={`flex-1 overflow-y-auto px-10 py-6 custom-scrollbar bg-[#FDFDFD]`}>
+            <div className="max-w-[1600px] mx-auto">
+              {!loadingProfile && !admin && (
+                <div className="mb-8 p-6 bg-rose-50 border border-rose-100 rounded-[2rem] flex items-center gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+                   <div className="w-12 h-12 bg-rose-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-rose-500/20">
+                      <AlertCircle size={24} />
+                   </div>
+                   <div>
+                      <h4 className="text-sm font-black text-rose-900 uppercase tracking-tight">Akun Tidak Terdaftar</h4>
+                      <p className="text-xs font-bold text-rose-600/80">Email Anda tidak terdaftar sebagai admin. Anda hanya memiliki akses baca terbatas.</p>
+                   </div>
+                   <button 
+                     onClick={handleLogout}
+                     className="ml-auto px-4 py-2 bg-white text-rose-600 rounded-xl text-[10px] font-black uppercase tracking-widest border border-rose-100 hover:bg-rose-600 hover:text-white transition-all shadow-sm"
+                   >
+                     Ganti Akun
+                   </button>
+                </div>
+              )}
+              {children}
+            </div>
            
            {/* Footer Copyright */}
            <footer className={`mt-20 py-8 text-center text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em]`}>

@@ -133,10 +133,10 @@ interface ProgramInput {
   longDescription: string;
   heroImage: string;
   color?: string;
-  competencies: Prisma.InputJsonValue;
-  careers: Prisma.InputJsonValue;
-  tools: Prisma.InputJsonValue;
-  stats: Prisma.InputJsonValue;
+  competencies: any; // Relaxed type for array of objects
+  careers: any; // Relaxed type
+  tools: any; // Relaxed type
+  stats: any; // Relaxed type
 }
 
 export async function getPrograms() {
@@ -325,3 +325,13 @@ export async function deleteGallery(id: string) {
   }
 }
 
+// ADMIN PROFILE
+export async function getAdminProfile() {
+  try {
+    const admin = await getCurrentAdmin();
+    return admin;
+  } catch (error) {
+    console.error("Error fetching admin profile:", error);
+    return null;
+  }
+}
