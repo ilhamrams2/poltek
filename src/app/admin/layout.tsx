@@ -67,6 +67,9 @@ const pageTitles: Record<string, { title: string, subtitle: string }> = {
   "/admin/settings": { title: "System Settings", subtitle: "Konfigurasi parameter aplikasi" },
 };
 
+import { Notifications } from "@/components/admin/Notifications";
+import { UserDropdown } from "@/components/admin/UserDropdown";
+
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -77,11 +80,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
   const [supabase, setSupabase] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [admin, setAdmin] = useState<any>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
-  const [openMenus, setOpenMenus] = useState<string[]>(["Akademik"]);
 
   useEffect(() => {
     setSupabase(createClient());
@@ -100,20 +100,6 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     fetchProfile();
   }, []);
 
-  const toggleMenu = (name: string) => {
-    setOpenMenus(prev => 
-      prev.includes(name) ? prev.filter(m => m !== name) : [...prev, name]
-    );
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleLogout = async () => {
     if (!supabase) return;
     setIsLoggingOut(true);
@@ -125,6 +111,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       router.refresh();
     }, 400);
   };
+
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // Skip layout for login page
   if (pathname === "/admin/login") {
@@ -142,32 +130,6 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
           className="fixed inset-0 z-[9999] bg-[#0F172A]/90 backdrop-blur-sm flex flex-col items-center justify-center p-4"
         >
           <div className="relative">
-            {/* Unique Circular Progress Decoration */}
-            <svg className="w-32 h-32 transform -rotate-90">
-              <circle
-                cx="64"
-                cy="64"
-                r="60"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="transparent"
-                className="text-slate-800"
-              />
-              <motion.circle
-                cx="64"
-                cy="64"
-                r="60"
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="transparent"
-                strokeDasharray="377"
-                initial={{ strokeDashoffset: 377 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="text-orange-500"
-              />
-            </svg>
-            
             {/* Center Icon */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -289,36 +251,20 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         
         {/* Top Header */}
-        <header className={`h-20 px-10 flex items-center justify-between z-20 bg-white/50 backdrop-blur-md`}>
+        <header className={`h-22 px-10 flex items-center justify-between z-20 bg-white/70 backdrop-blur-xl border-b border-slate-50`}>
           <div className="flex items-center gap-4">
-             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-slate-100 rounded-lg text-slate-400">
+             <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-3 hover:bg-slate-100 rounded-2xl text-slate-400 transition-all flex items-center justify-center active:scale-90">
                 <Menu size={20} />
              </button>
              <div>
-                <h1 className="text-xl font-bold text-slate-800 leading-none">{currentTitle.title}</h1>
-                <p className="text-[10px] font-medium text-slate-400 mt-1">{currentTitle.subtitle}</p>
+                <h1 className="text-lg font-black text-slate-900 leading-none tracking-tight">{currentTitle.title}</h1>
+                <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter opacity-70">{currentTitle.subtitle}</p>
              </div>
           </div>
 
           <div className="flex items-center gap-6">
-             <button className="relative p-2.5 text-slate-400 hover:bg-slate-50 transition-all rounded-full border border-slate-100">
-                <Bell size={20} />
-                <span className="absolute top-2 right-2.5 w-2 h-2 bg-rose-500 border-2 border-white rounded-full" />
-             </button>
-
-             <div className="flex items-center gap-4 pl-4 border-l border-slate-100">
-                <div className="flex flex-col items-end">
-                   <span className="text-sm font-bold text-slate-900 leading-none">
-                     {loadingProfile ? "Loading..." : (admin?.name || admin?.email?.split('@')[0] || "Guest")}
-                   </span>
-                   <span className={`text-[9px] font-black uppercase tracking-widest mt-1 ${admin?.role === 'SUPER_ADMIN' ? 'text-indigo-600' : 'text-slate-400'}`}>
-                     {loadingProfile ? "Checking role..." : (admin?.role || "GUEST ACCESS")}
-                   </span>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4338CA] via-indigo-600 to-orange-500 flex items-center justify-center font-black text-white shadow-lg shadow-indigo-500/20 text-sm">
-                   {loadingProfile ? "?" : (admin?.name?.[0] || admin?.email?.[0] || "G").toUpperCase()}
-                </div>
-             </div>
+             <Notifications />
+             <UserDropdown admin={admin} onLogout={handleLogout} />
           </div>
         </header>
 

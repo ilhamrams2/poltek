@@ -379,3 +379,58 @@ export async function clearMessages() {
     return { success: false, error: "Gagal membersihkan kotak masuk" };
   }
 }
+
+export async function getUnreadMessagesCount() {
+  try {
+    const admin = await getCurrentAdmin();
+    if (!admin) return 0;
+    
+    return await prisma.contactMessage.count({
+      where: { isRead: false }
+    });
+  } catch (error) {
+    console.error("Error fetching unread count:", error);
+    return 0;
+  }
+}
+
+import { createClient as createServerClient } from "@/lib/supabase-server";
+
+export async function changeAdminPassword(data: { oldPassword: string, newPassword: string }) {
+  try {
+    const admin = await checkRole(["SUPER_ADMIN", "NEWS_EDITOR", "ACADEMIC_ADMIN"]);
+    const supabase = await createServerClient();
+
+    // Verify old password by attempting to sign in
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: admin.email,
+      password: data.oldPassword
+    });
+
+    if (signInError) {
+      throw new Error("Password lama salah");
+    }
+
+    // Update to new password
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: data.newPassword
+    });
+
+    if (updateError) {
+      throw new Error(updateError.message);
+    }
+
+    await createAuditLog({
+      adminId: admin.id,
+      action: "UPDATE",
+      entity: "Admin",
+      entityId: admin.id,
+      details: { action: "CHANGE_PASSWORD" }
+    });
+
+    return { success: true };
+  } catch (err: any) {
+    console.error("Error changing password:", err);
+    return { success: false, error: err.message || "Gagal mengganti password" };
+  }
+}
