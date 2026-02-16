@@ -16,37 +16,63 @@ jobs:
         with:
           node-version: '20'
       
-      # TAMBAHKAN INI: Create .env file
       - name: Create .env file
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
       
-      # TAMBAHKAN INI: Setup database
-      - name: Setup Database
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Setup Prisma
         run: |
-          npm install
           npx prisma generate
           npx prisma db push
       
-      - name: Build
+      - name: Build Next.js
         run: npm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       
       - name: Prepare deploy files
         run: |
-          mkdir deploy-files
+          mkdir -p deploy-files
+          
+          # Copy standalone
           cp -r .next/standalone/* deploy-files/
+          
+          # Copy static
           mkdir -p deploy-files/.next/static
           cp -r .next/static/* deploy-files/.next/static/
-          cp -r public deploy-files/public
-          cp -r prisma deploy-files/prisma
+          
+          # Copy public & prisma
+          cp -r public deploy-files/public/
+          mkdir -p deploy-files/prisma
+          cp prisma/schema.prisma deploy-files/prisma/
+          cp prisma/dev.db deploy-files/prisma/ 2>/dev/null || true
+          
+          # Copy .env
           cp .env deploy-files/.env
+          
+          # Debug
+          echo "=== Files in deploy-files ==="
+          ls -laR deploy-files/
+          
+          # Compress dengan tar (preserve hidden files)
+          cd deploy-files
+          tar -czf ../deploy.tar.gz .
+          cd ..
+          ls -lh deploy.tar.gz
       
-      - name: FTP Deploy
+      - name: Upload via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./deploy-files/
+          local-dir: ./
+          server-dir: /
+          include: deploy.tar.gz
+      
+      - name: Extract on server via SSH (if available)
+        # Ini butuh SSH access, skip jika tidak ada
+        run: echo "Manual extraction needed on server"
